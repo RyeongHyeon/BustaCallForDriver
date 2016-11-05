@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--영업지영-->
+    <string-array name="workArea">
+        <item>서울</item>
+        <item>수도권</item>
+        <item>충청권</item>
+        <item>강원권</item>
+        <item>영남권</item>
+        <item>호남권</item>
+    </string-array>
+
+    <!--계좌-->
+    <string-array name="bank">
+        <item>신한</item>
+        <item>국민</item>
+        <item>우리</item>
+        <item>농협</item>
+        <item>하나</item>
+    </string-array>
+
+    <!--차량종류-->
+    <string-array name="busType">
+        <item>대형차</item>
+        <item>중형차</item>
+        <item>소형차</item>
+        <item>농협</item>
+        <item>하나</item>
+        <item>기업</item>
+    </string-array>
+
+    <!--차량 연식-->
+    <string-array name="busAge">
+        <item>~1년</item>
+        <item>1~5년</item>
+        <item>6~10년</item>
+        <item>10~15년</item>
+        <item>15~20년</item>
+    </string-array>
+
+    <!--차량 경력-->
+    <string-array name="busCareer">
+        <item>~1년</item>
+        <item>1~5년</item>
+        <item>6~10년</item>
+        <item>10~15년</item>
+        <item>15~20년</item>
+    </string-array>
+</resources>

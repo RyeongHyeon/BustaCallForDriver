@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">BustaCallForDriver</string>
+
+    <string name="login">회원가입</string>
+    <string name="signin">버스타콜 기사 회원가입</string>
+
+    <string name="signin_user">정보 입력</string>
+    <string name="signin_bus">버스 정보 입력</string>
+    <string name="signin_license">자격증 등록</string>
+
+
+    <string name="requestfail">연결에 실패하였습니다.</string>
+    <string name="logout_content">로그아웃시 다시 회원가입을 해야 합니다.</string>
 </resources>
