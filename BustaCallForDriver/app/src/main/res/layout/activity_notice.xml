@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <RelativeLayout style="@style/Blue_TitleBar">
+
+        <ImageView
+            android:id="@+id/activity_notice_iv_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:onClick="onClick_backButton"
+            android:src="@drawable/white_back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/notice"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/titlesize"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        style="@style/Signin_SubTitleBar"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:orientation="horizontal"
+            android:textColor="@color/colorPrimary"
+            android:textSize="15sp"
+            android:text="알림 no / off"
+            />
+
+        <LinearLayout
+            android:id="@+id/activity_notice_notice_on"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/notice_on"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="켜기"
+                android:textColor="@color/AppColorWhite"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="끄기"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/activity_notice_notice_off"
+            android:layout_width="110dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/notice_off"
+            android:orientation="horizontal"
+            android:visibility="invisible">
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="켜기"
+                android:textColor="@color/colorPrimary"
+                android:textSize="15sp" />
+
+            <TextView
+                android:layout_width="55dp"
+                android:layout_height="30dp"
+                android:gravity="center"
+                android:text="끄기"
+                android:textColor="@color/AppColorWhite"
+                android:textSize="15sp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/activity_notice_noexist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true">
+
+            <ImageView
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_gravity="center"
+                android:src="@drawable/notice_noexist_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/AppColorLightGray"
+                android:textSize="20sp"
+                android:text="새로운 알림이 없습니다."/>
+        </LinearLayout>
+
+        <ListView
+            android:visibility="invisible"
+            android:id="@+id/activity_notice_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </RelativeLayout>
+</LinearLayout>
