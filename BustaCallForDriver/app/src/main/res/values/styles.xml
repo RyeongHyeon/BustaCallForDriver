@@ -58,7 +58,6 @@
     <style name="signintext">
         <item name="android:color">#000000</item>
         <item name="android:textSize">17sp</item>
-        <item name="android:layout_marginBottom">3dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
     </style>

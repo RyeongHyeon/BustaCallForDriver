@@ -36,6 +36,14 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
     TextView tv_btnBack, tv_btnNext; // 이전 버튼, 다음 버튼
     Bitmap bitmap_profile;
 
+    private static Fragment_Signin_User instnace;
+
+    public static Fragment_Signin_User getInstance () {
+        if ( instnace == null )
+            instnace = new Fragment_Signin_User();
+        return instnace;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_signin_user, null);

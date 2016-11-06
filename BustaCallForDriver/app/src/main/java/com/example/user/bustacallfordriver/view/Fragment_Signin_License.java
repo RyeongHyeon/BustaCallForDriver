@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -34,6 +33,13 @@ public class Fragment_Signin_License extends BaseFragment implements View.OnClic
 
     Bitmap bm_driverLicense, bm_deductionConfirm;
 
+    private static Fragment_Signin_License instnace;
+
+    public static Fragment_Signin_License getInstance () {
+        if ( instnace == null )
+            instnace = new Fragment_Signin_License();
+        return instnace;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -75,8 +81,7 @@ public class Fragment_Signin_License extends BaseFragment implements View.OnClic
                 startActivityForResult(intent, RESULT_LOAD_IMAGE_DEDUCTIONCONFIRM);
                 break;
             case R.id.activity_signin_license_btn_back:
-                FragmentManager fragmentManager = activitySignin.getSupportFragmentManager();
-                fragmentManager.popBackStack();
+                activitySignin.setFramelayout(R.layout.fragment_signin_bus);
                 break;
             case R.id.activity_signin_license_btn_next:
                 intent = new Intent(getActivity(), Activity_Main.class);

@@ -38,9 +38,8 @@ public class Activity_Signin extends BaseActivity {
     private void initFrameLayout() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction ft = fragmentManager.beginTransaction();
-        fragment = new Fragment_Signin_User();
+        fragment =  Fragment_Signin_User.getInstance();
         ft.add(R.id.activity_signin_framelayout, fragment);
-        ft.addToBackStack(null);
         ft.commit();
     }
 
@@ -54,18 +53,18 @@ public class Activity_Signin extends BaseActivity {
         fragment = null;
         String TAG = null;
         if (fragmentSignin == R.layout.fragment_signin_user) {
-            fragment = new Fragment_Signin_User();
+            fragment = Fragment_Signin_User.getInstance();
             TAG = "user";
         } else if (fragmentSignin == R.layout.fragment_signin_bus) {
-            fragment = new Fragment_Signin_Bus();
+            fragment = Fragment_Signin_Bus.getInstance();
             TAG = "bus";
         } else if (fragmentSignin == R.layout.fragment_signin_license) {
-            fragment = new Fragment_Signin_License();
+            fragment = Fragment_Signin_License.getInstance();
             TAG = "license";
         }
 
         ft.replace(R.id.activity_signin_framelayout, fragment, TAG);
-        ft.addToBackStack(TAG);
+//        ft.addToBackStack(TAG);
         ft.commit();
         setSubTitleBarTextColor(fragmentSignin);
     }

@@ -1,18 +1,19 @@
 package com.example.user.bustacallfordriver.view;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.dialog.Dialog_base_two_button;
 
-public class Activity_Main extends AppCompatActivity implements View.OnClickListener{
+public class Activity_Main extends BaseActivity implements View.OnClickListener{
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity__main);
+        setContentView(R.layout.activity_main);
     }
 
 

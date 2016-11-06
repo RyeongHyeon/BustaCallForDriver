@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout style="@style/White_TitleBar">
+
+        <ImageView
+            android:id="@+id/activity_main_iv_menu"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:onClick="onClick_menu"
+            android:src="@drawable/menu_icon" />
+
+        <ImageView
+            android:id="@+id/activity_main_iv_noti"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="26dp"
+            android:onClick="onClick_menu"
+            android:src="@drawable/noti_icon" />
+
+        <ImageView
+            android:layout_width="130dp"
+            android:layout_height="40dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/title_icon" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/AppColorLightGray" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:background="@drawable/signin_subtitle_box">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/whitetitlebar_main_tv_reservation_bus"
+                style="@style/signintext"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@drawable/activity_main_spinner_back" />
+
+            <LinearLayout
+                android:layout_width="10dp"
+                android:layout_height="30dp"></LinearLayout>
+
+            <TextView
+                android:id="@+id/whitetitlebar_main_tv_reservation_to"
+                style="@style/signintext"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:background="@drawable/activity_main_myworkarea_back"
+                android:gravity="center"
+                android:text="나의 영업 지역" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

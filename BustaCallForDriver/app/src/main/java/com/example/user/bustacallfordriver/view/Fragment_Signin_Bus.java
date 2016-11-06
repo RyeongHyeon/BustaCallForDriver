@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,6 +40,13 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
 
     Bitmap bm_busInner, bm_busOutter, bm_free1, bm_free2; // 차량사진
 
+    private static Fragment_Signin_Bus instnace;
+
+    public static Fragment_Signin_Bus getInstance () {
+        if ( instnace == null )
+            instnace = new Fragment_Signin_Bus();
+        return instnace;
+    }
 
 
     @Override
@@ -98,7 +104,6 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
     @Override
     public void onClick(View v) {
         Intent intent;
-        FragmentManager fragmentManager = activitySignin.getSupportFragmentManager();
         switch (v.getId()) {
             case R.id.activtiy_signin_bus_profile_inner:
                 intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -117,12 +122,10 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
                 startActivityForResult(intent, RESULT_LOAD_IMAGE_FREE2);
                 break;
             case R.id.activity_signin_bus_btn_back:
-
-                fragmentManager.popBackStack();
+                activitySignin.setFramelayout(R.layout.fragment_signin_user);
                 break;
             case R.id.activity_signin_bus_btn_next:
                 activitySignin.setFramelayout(R.layout.fragment_signin_license);
-                fragmentManager.popBackStack();
                 break;
         }
     }
