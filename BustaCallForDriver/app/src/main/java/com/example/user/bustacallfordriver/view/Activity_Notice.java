@@ -1,20 +1,31 @@
 package com.example.user.bustacallfordriver.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.user.bustacallfordriver.R;
+
 
 /**
  * 알림 페이지
  * Created by user on 2016-11-06.
  */
-public class Activity_Notice extends BaseActivity{
+public class Activity_Notice extends BaseActivity implements View.OnClickListener{
 
-    LinearLayout ll_notice_on, ll_notice_off, ll_notice_noexist; // 알림 켜기, 알림 끄기, 알림 없을때 표시해주는 바탕화면 아이콘
+    // 알림 설정여부 app에 저장할꺼면 AppControll에 저장한뒤 새로 생성될 때마다 가져오기
+    private static int NOTICE_ON_OFF = 0; // on == 0, off == 1 flag
+
+    RelativeLayout rl_notice_button; // 알림 투글버튼같은 역할
+    TextView tv_on, tv_off; // 켜기, 끄기 텍스트
+    LinearLayout ll_notice_noexist; // 알림 없을때 표시해주는 바탕화면 아이콘
     ListView listView; // 알림 리스트
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,9 +36,40 @@ public class Activity_Notice extends BaseActivity{
     }
 
     private void init() {
-        ll_notice_on = (LinearLayout)findViewById(R.id.activity_notice_notice_on);
-        ll_notice_off = (LinearLayout)findViewById(R.id.activity_notice_notice_off);
+        rl_notice_button = (RelativeLayout)findViewById(R.id.activity_notice_on_or_off_layout);
+        tv_on = (TextView)findViewById(R.id.acticity_notice_on_text);
+        tv_off = (TextView)findViewById(R.id.acticity_notice_off_text);
         ll_notice_noexist = (LinearLayout)findViewById(R.id.activity_notice_noexist);
         listView = (ListView)findViewById(R.id.activity_notice_listview);
+        rl_notice_button.setOnClickListener(this);
+
+        // 알림 설정 상태를 보고 처음 알림 켜기 끄기 셋팅
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case R.id.activity_notice_on_or_off_layout: // 알림 켜기, 끄기
+                setNoticeOnOff();
+                break;
+        }
+    }
+
+    /**알림 켜기 끄기 이미지 변경*/
+    private void setNoticeOnOff() {
+        switch (NOTICE_ON_OFF) {
+            case 0: // 켜기 -> 끄기
+                rl_notice_button.setBackgroundResource(R.drawable.notice_off);
+                tv_on.setTextColor(Color.parseColor("#2978B0"));
+                tv_off.setTextColor(Color.parseColor("#FFFFFF"));
+                NOTICE_ON_OFF=1; // 끄기 flag로 바꿔줌
+                break;
+            case 1: // 끄기 -> 켜기
+                rl_notice_button.setBackgroundResource(R.drawable.notice_on);
+                tv_on.setTextColor(Color.parseColor("#FFFFFF"));
+                tv_off.setTextColor(Color.parseColor("#2978B0"));
+                NOTICE_ON_OFF=0; // 켜기 flag로 바꿔줌
+                break;
+        }
     }
 }
