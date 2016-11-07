@@ -1,9 +1,5 @@
 [
     {
-        "merged": "C:\\Users\\user\\AndroidStudioProjects\\BustaCallForDriver\\SlidingMenuLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
-        "source": "C:\\Users\\user\\AndroidStudioProjects\\BustaCallForDriver\\SlidingMenuLibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
-    },
-    {
         "merged": "C:\\BusForDriver\\BustaCallForDriver\\SlidingMenuLibrary\\build\\intermediates\\res\\merged\\androidTest\\debug\\layout\\slidingmenumain.xml",
         "source": "C:\\BusForDriver\\BustaCallForDriver\\SlidingMenuLibrary\\build\\intermediates\\bundles\\debug\\res\\layout\\slidingmenumain.xml"
     }

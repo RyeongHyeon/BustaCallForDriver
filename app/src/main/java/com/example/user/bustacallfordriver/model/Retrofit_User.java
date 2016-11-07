@@ -20,9 +20,6 @@ public interface Retrofit_User {
     @GET("/login.php")
     Call<Void> request_login(@Query("nickname") String nickname,@Query("phonenum") String phonenum, @Query("certificationnum") String certificationnum);
 
-    // splash에서 자동 로그인
-    @GET("/mainlogin.php")
-    Call<User> request_mainlogin(@Query("nickname") String nickname);
 }
 
 //이게 레트로핏 쓸려면 기본
