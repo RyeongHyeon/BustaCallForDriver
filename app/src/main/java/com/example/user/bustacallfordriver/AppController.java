@@ -4,8 +4,7 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.SharedPreferences;
 
-import com.example.user.bustacallfordriver.model.Tender;
-import com.example.user.bustacallfordriver.model.User;
+import com.example.user.bustacallfordriver.model.Bus;
 
 /**
  * Created by user on 2016-10-31.
@@ -17,14 +16,16 @@ public class AppController extends Application {
     public static int HTTP_STATUSFAIL=400;
     public static int TENDER_COUNT=0;
     String pushToken;
-    User user;
     String request_num;
-    Tender tender = new Tender(); //
+    Bus bus = new Bus();
 
+    public Bus getBus() {
+        return bus;
+    }
 
-    public Tender getTender() {return tender;}
-
-    public void setTender(Tender tender) {this.tender = tender;}
+    public void setBus(Bus bus) {
+        this.bus = bus;
+    }
 
     public String getRequest_num() {
         return request_num;
@@ -32,14 +33,6 @@ public class AppController extends Application {
 
     public void setRequest_num(String request_num) {
         this.request_num = request_num;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 
     public String getSavedId(String key, String dftValue) {//앱에 저장된 아이디 가져오기
@@ -63,4 +56,14 @@ public class AppController extends Application {
     public void onCreate() {
         super.onCreate();
     }
+
+
+    public String getPushToken() {
+        return pushToken;
+    }
+
+    public void setPushToken(String pushToken) {
+        this.pushToken = pushToken;
+    }
+
 }

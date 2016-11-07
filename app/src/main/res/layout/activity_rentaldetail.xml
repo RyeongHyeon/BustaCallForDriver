@@ -41,10 +41,9 @@
         android:layout_alignParentBottom="true"
         android:background="@color/colorPrimary"
         android:gravity="center"
-        android:textColor="@color/AppColorWhite"
-        android:textSize="30sp"
         android:text="입찰 하기"
-        />
+        android:textColor="@color/AppColorWhite"
+        android:textSize="30sp" />
 
 
 </RelativeLayout>

@@ -6,7 +6,6 @@ import android.widget.Button;
 
 import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.R;
-import com.example.user.bustacallfordriver.model.User;
 import com.example.user.bustacallfordriver.presenter.Activity_Splash_Presenter;
 
 /**
@@ -16,7 +15,6 @@ import com.example.user.bustacallfordriver.presenter.Activity_Splash_Presenter;
 public class Activity_Splash extends BaseActivity implements View.OnClickListener{
     Button bt_login;
     AppController app;
-    User user;
     Activity_Splash_Presenter presenter;
 
     @Override
@@ -29,8 +27,6 @@ public class Activity_Splash extends BaseActivity implements View.OnClickListene
     }
 
     public void set_Values(){
-        user = new User();
-        app.setUser(user);
         presenter = new Activity_Splash_Presenter(this);
     }
 
@@ -41,7 +37,7 @@ public class Activity_Splash extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) { //통신이 필요하네. 로그인할때도
         if(v.getId()==R.id.activity_splash_bt_login){
-            presenter.checkLogin();
+
         }
     }
 

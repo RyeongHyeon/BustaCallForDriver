@@ -1,7 +1,15 @@
 package com.example.user.bustacallfordriver.model;
 
+import java.io.File;
+
+import javax.xml.transform.Result;
+
+import okhttp3.MultipartBody;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 /**
@@ -10,19 +18,16 @@ import retrofit2.http.Query;
 
 public interface Retrofit_User {
 
-    @GET("/smssend.php")
+    @GET("/smssend_bus.php")
     Call<Void> request_phonerequest(@Query("phonenum") String phonenum);
 
-    @GET("/overlapnickname.php")
-    Call<Void> request_overlapNickname(@Query("nickname") String nickname);
-
     // splash 말고 진짜 로그인해서 메인 넘어갈때 넘기는 부분
-    @GET("/login.php")
-    Call<Void> request_login(@Query("nickname") String nickname,@Query("phonenum") String phonenum, @Query("certificationnum") String certificationnum);
+    @GET("/login_bus.php")
+    Call<Void> request_login(@Query("phonenum") String phonenum, @Query("certificationnum") String certificationnum,@Query("token")String token);
 
-    // splash에서 자동 로그인
-    @GET("/mainlogin.php")
-    Call<User> request_mainlogin(@Query("nickname") String nickname);
+    @Multipart
+    @POST("/test.php")
+    Call<Void> request_test(@Part MultipartBody.Part[] image1);
 }
 
 //이게 레트로핏 쓸려면 기본
