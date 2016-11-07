@@ -6,9 +6,19 @@
     <include
         layout="@layout/activity_main_titlebar"/>
 
-    <ListView
-        android:id="@+id/activity_main_listview"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="@color/AppColorLightBlue">
+
+        <ListView
+            android:id="@+id/activity_main_listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/AppColorWhite"/>
+
+    </RelativeLayout>
+
 
 </LinearLayout>

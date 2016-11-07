@@ -18,7 +18,7 @@ import com.example.user.bustacallfordriver.R;
  */
 public class Activity_Notice extends BaseActivity implements View.OnClickListener{
 
-    // 알림 설정여부 app에 저장할꺼면 AppControll에 저장한뒤 새로 생성될 때마다 가져오기
+    // 알림 설정여부 통신으로 그때그때 반영해야된다!!
     private static int NOTICE_ON_OFF = 0; // on == 0, off == 1 flag
 
     RelativeLayout rl_notice_button; // 알림 투글버튼같은 역할

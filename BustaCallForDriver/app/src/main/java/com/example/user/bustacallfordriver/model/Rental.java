@@ -5,11 +5,27 @@ package com.example.user.bustacallfordriver.model;
  * Created by user on 2016-11-02.
  */
 public class Rental {
-    String start_point_one,start_point_two,end_point_one,end_point_two; //출발지, 도착지
-    String day_one,day_two,time_one,time_two; //날짜, 시간
-    String rental_reason; //목적
-    String user_count; //명수
-    String rental_money; //비용
+//    private int type; //왕복,편도,합승목적지,목적
+//    //1일때 왕복
+//    //2일때 편도
+    private int type; //왕복,편도,합승목적지,목적
+    // 1 : 왕복
+    // 2 : 왕복 & 같이타기
+    // 3 : 편도 &
+    // 4 : 편도
+    private String start_point_one,start_point_two,end_point_one,end_point_two; //출발지, 도착지
+    private String day_one,day_two,time_one,time_two; //날짜, 시간
+    private String rental_reason; //목적
+    private String user_count; //명수
+    private String rental_money; //비용
+    private String current_day;//예약한 날짜
+
+    private int bus_45;//45인승 대형
+    private int bus_35;//35인승 중형
+    private int bus_28;//28인승 리무진
+    private int bus_25;//25인승 소형
+
+    int type_two; //예약, 기사 선택 하기, 입금 전, 상세보기, 이용완료 1,2,3,4,5
 
     public String getCurrent_day() {
         return current_day;
@@ -18,8 +34,6 @@ public class Rental {
     public void setCurrent_day(String current_day) {
         this.current_day = current_day;
     }
-
-    String current_day;//예약한 날짜
 
     public int getBus_45() {
         return bus_45;
@@ -53,15 +67,7 @@ public class Rental {
         this.bus_25 = bus_25;
     }
 
-    int bus_45;//45인승 대형
-    int bus_35;//35인승 중형
-    int bus_28;//28인승 리무진
-    int bus_25;//25인승 소형
-    int type; //왕복,편도,합승목적지,목적
-    //1일때 왕복
-    //2일때 편도
 
-    int type_two; //예약, 기사 선택 하기, 입금 전, 상세보기, 이용완료 1,2,3,4,5
     public Rental(){}
 
     public Rental(String start_point_one, String start_point_two, String end_point_one,

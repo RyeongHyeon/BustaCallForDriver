@@ -4,6 +4,7 @@
     <string name="login">회원가입</string>
     <string name="signin">버스타콜 기사 회원가입</string>
     <string name="notice">알림 내역</string>
+    <string name="rental_detail">매물 상세 내역</string>
 
     <string name="signin_user">정보 입력</string>
     <string name="signin_bus">버스 정보 입력</string>

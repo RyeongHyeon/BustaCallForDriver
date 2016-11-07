@@ -42,7 +42,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="65dp"
         android:gravity="center"
         android:background="@drawable/signin_subtitle_box">
 
@@ -54,9 +54,9 @@
 
             <Spinner
                 android:id="@+id/whitetitlebar_main_tv_reservation_bus"
-                style="@style/signintext"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+                style="@style/mainSpinnertext"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
                 android:background="@drawable/activity_main_spinner_back" />
 
             <LinearLayout
@@ -65,9 +65,9 @@
 
             <TextView
                 android:id="@+id/whitetitlebar_main_tv_reservation_to"
-                style="@style/signintext"
-                android:layout_width="100dp"
-                android:layout_height="30dp"
+                style="@style/mainSpinnertext"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
                 android:background="@drawable/activity_main_myworkarea_back"
                 android:gravity="center"
                 android:text="나의 영업 지역" />

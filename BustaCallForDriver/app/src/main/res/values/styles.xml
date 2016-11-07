@@ -50,7 +50,7 @@
 
     <!--회원가입 입력 왼쪽 상단 명칭 부분-->
     <style name="logintext">
-        <item name="android:color">#9c9c9c</item>
+        <item name="android:color">@color/colorPrimaryGray</item>
         <item name="android:textSize">18sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
@@ -58,6 +58,13 @@
     <style name="signintext">
         <item name="android:color">#000000</item>
         <item name="android:textSize">17sp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="mainSpinnertext">
+        <item name="android:color">@color/colorPrimaryGray</item>
+        <item name="android:textSize">15sp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_width">wrap_content</item>
     </style>
@@ -117,5 +124,13 @@
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">25sp</item>
         <item name="android:textColor">@color/AppColorBlack</item>
+    </style>
+
+
+    <!--추가비용 이하 텍스트-->
+    <style name="detail_plus_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
     </style>
 </resources>

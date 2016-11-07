@@ -1,25 +1,40 @@
 package com.example.user.bustacallfordriver.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.dialog.Dialog_base_two_button;
 
 public class Activity_Main extends BaseActivity implements View.OnClickListener{
 
+    ImageView iv_notiIcon;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        init();
     }
 
+    private void init() {
+        iv_notiIcon = (ImageView)findViewById(R.id.activity_main_iv_noti);
+
+        iv_notiIcon.setOnClickListener(this);
+    }
 
     @Override
     public void onClick(View v) {
-
+        switch (v.getId()) {
+            case R.id.activity_main_iv_noti: // 알림 아이콘
+                Intent intent = new Intent(this, Activity_Notice.class);
+                startActivity(intent);
+                break;
+        }
     }
 
     @Override

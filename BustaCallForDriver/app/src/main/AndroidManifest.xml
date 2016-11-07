@@ -24,6 +24,7 @@
         </activity>
         <activity android:name=".view.Activity_Signin" />
         <activity android:name=".view.Activity_Main" />
+        <activity android:name=".view.Activity_Notice" />
     </application>
 
 

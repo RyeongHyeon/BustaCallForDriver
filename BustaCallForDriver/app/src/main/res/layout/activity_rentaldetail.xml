@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        style="@style/White_TitleBar">
+
+        <ImageView
+            android:id="@+id/activity_rentaldetail_iv_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:onClick="onClick_backButton"
+            android:src="@drawable/blue_back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/rental_detail"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/titlesize"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/activity_rentaldetail_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/activity_rentaldetail_tv_tender_button"
+        android:layout_below="@+id/top" />
+
+    <TextView
+        android:id="@+id/activity_rentaldetail_tv_tender_button"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textColor="@color/AppColorWhite"
+        android:textSize="30sp"
+        android:text="입찰 하기"
+        />
+
+
+</RelativeLayout>
