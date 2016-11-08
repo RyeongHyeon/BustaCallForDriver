@@ -11,9 +11,11 @@ import android.support.v4.app.NotificationCompat;
 import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.view.Activity_Main;
+import com.example.user.bustacallfordriver.view.Activity_Splash;
 import com.google.firebase.messaging.RemoteMessage;
 
 /**
+ * 푸쉬 알람 눌렀을 때, 인텐트 띄우기
  * Created by user on 2016-10-31.
  */
 public class MyFirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
@@ -56,7 +58,7 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
     }
-
+   ///////////////////////////////////////////////////////////////////푸쉬 리스트를 모아놔야되///////////////////
     private void sendNotification(String title, String messageBody) {
         Intent intent = null;
 
@@ -64,29 +66,11 @@ public class MyFirebaseMessagingService extends com.google.firebase.messaging.Fi
             intent = new Intent(this, Activity_Main.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             setIntent(intent, title, messageBody);
-
         } else {//앱 꺼졌을 때
-            intent = new Intent(this, Activity_Main.class);
+            intent = new Intent(this, Activity_Splash.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             setIntent(intent, title, messageBody);
-
         }
     }
-//    public static boolean isRunningProcess(Context context, String packageName) {
-//
-//        boolean isRunning = false;
-//
-//        ActivityManager actMng = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-//
-//        List<ActivityManager.RunningAppProcessInfo> list = actMng.getRunningAppProcesses();
-//
-//        for (ActivityManager.RunningAppProcessInfo rap : list) {
-//            if (rap.processName.equals(packageName)) {
-//                isRunning = true;
-//                break;
-//            }
-//        }
-//
-//        return isRunning;
-//    }
+    /////////////////////////////////////////////////////
 }

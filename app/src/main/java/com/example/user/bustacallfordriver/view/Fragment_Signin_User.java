@@ -9,10 +9,13 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -22,8 +25,9 @@ import android.widget.TextView;
 import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.BaseFragment;
 import com.example.user.bustacallfordriver.R;
-import com.example.user.bustacallfordriver.model.BitmapUtil;
+import com.example.user.bustacallfordriver.model.Bus;
 import com.example.user.bustacallfordriver.model.Retrofit_User;
+import com.example.user.bustacallfordriver.presenter.Fragment_Signin_User_Presenter;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
@@ -53,8 +57,6 @@ import static android.app.Activity.RESULT_OK;
 public class Fragment_Signin_User extends BaseFragment implements View.OnClickListener {
 
     public static int RESULT_LOAD_IMAGE = 1;
-    int count = 0;
-    String[] picturepathp = new String[5];
     Activity_Signin activitySignin;
     ImageView iv_profile; // 프로필 사진
     EditText et_name, et_birth, et_group, et_accountNum; // 이름, 생년월일, 계좌번호
@@ -62,6 +64,10 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
     TextView tv_btnBack, tv_btnNext; // 이전 버튼, 다음 버튼
     Bitmap bitmap_profile;
     AppController app;
+    Bus bus = new Bus();
+    String picturepath;
+    Fragment_Signin_User_Presenter presenter;
+    boolean is_profile,is_nickname,is_birthady,is_group,is_account_num;
 
     private static Fragment_Signin_User instnace;
 
@@ -76,6 +82,7 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
         View view = inflater.inflate(R.layout.fragment_signin_user, null);
         init(view);
         app = (AppController) getActivity().getApplicationContext();
+        presenter = new Fragment_Signin_User_Presenter(this);
         return view;
     }
 
@@ -93,6 +100,10 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
         iv_profile.setOnClickListener(this);
         tv_btnBack.setOnClickListener(this);
         tv_btnNext.setOnClickListener(this);
+        et_name.addTextChangedListener(tw_nickname);
+        et_birth.addTextChangedListener(tw_brithday);
+        et_group.addTextChangedListener(tw_group);
+        et_accountNum.addTextChangedListener(tw_account_num);
 
         if (bitmap_profile != null) {
             iv_profile.setImageBitmap(bitmap_profile);
@@ -102,9 +113,35 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
         workAreaAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp_workArea.setAdapter(workAreaAdapter);
 
+        sp_workArea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selItem= (String)sp_workArea.getSelectedItem();
+                app.getBus().setRegion(selItem);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         ArrayAdapter bankAdapter = ArrayAdapter.createFromResource(getContext(), R.array.bank, android.R.layout.simple_spinner_item);
         bankAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp_back.setAdapter(bankAdapter);
+
+        sp_back.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selItem= (String)sp_back.getSelectedItem();
+                bus.setAccount_bank(selItem);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
 
@@ -121,7 +158,7 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
                 activitySignin.finish();
                 break;
             case R.id.activity_signin_user_btn_next:
-                activitySignin.setFramelayout(R.layout.fragment_signin_bus);
+                CheckNextToPage();
                 break;
         }
     }
@@ -139,59 +176,20 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
             cursor.moveToFirst();
 
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-            //String picturePath = cursor.getString(columnIndex);
-            picturepathp[count] = cursor.getString(columnIndex);
+
+            picturepath = cursor.getString(columnIndex);
             cursor.close();
-            if (count <3) {
-                count++;
-                return;
-            } else {
-                count++;
-                //bitmap_profile = BitmapFactory.decodeFile(picturePath);
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 4;
-                Bitmap[] image = new Bitmap[5];
-                Bitmap[] resizeimage = new Bitmap[5];
-                for(int i=0;i<count;i++)
-                {
-                    image[i] = BitmapFactory.decodeFile(picturepathp[i],options);
-                    resizeimage[i] = Bitmap.createScaledBitmap(image[i],300,300,true);
-                }
+            BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inSampleSize = 4;
+            Bitmap image;
+            Bitmap resizeimage;
+            image = BitmapFactory.decodeFile(picturepath, options);
+            resizeimage = Bitmap.createScaledBitmap(image, 300, 300, true);
 
-                File[] file = new File[5];
-                try {
-                    for(int i=0;i<count;i++)
-                        file[i] = saveBitmapToJpeg(getContext(),resizeimage[i],"image+1");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                MultipartBody.Part[] body2 = new MultipartBody.Part[5];
-                for(int i=0;i<count;i++){
-                    RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file[i]);
-                    body2[i] = MultipartBody.Part.createFormData("uploaded_file"+String.valueOf(i+1), file[i].getName(), requestBody);
-                }
-                Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
-                Retrofit_User retrofit_user = retrofit.create(Retrofit_User.class);
-                Call<Void> retrofitinfo = retrofit_user.request_test(body2);
-                retrofitinfo.enqueue(new Callback<Void>() {
-                    @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
-                        if (response.isSuccessful()) {
-                            Log.d("test", "qt");
-                        } else {
-                            Log.d("test", "qt");
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<Void> call, Throwable t) {
-                        Log.d("test", "qt");
-                    }
-                });
-                iv_profile.setImageBitmap(resizeimage[0]);
-            }
+            iv_profile.setImageBitmap(resizeimage);
         }
     }
+
 
     PermissionListener permissionlistener = new PermissionListener() {
         @Override
@@ -203,24 +201,125 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
         @Override
         public void onPermissionDenied(ArrayList<String> deniedPermissions) {
         }
-
     };
 
-    public File saveBitmapToJpeg(Context context,Bitmap bitmap, String name) throws IOException {
+    public boolean is_profile() {
+        return is_profile;
+    }
 
-        File storage = context.getCacheDir(); // 이 부분이 임시파일 저장 경로
-        String fileName = name + ".jpg";  // 파일이름은 마음대로!
-        File tempFile = File.createTempFile(name,".jpg");
-        try{
-            tempFile.createNewFile();  // 파일을 생성해주고
-            FileOutputStream out = new FileOutputStream(tempFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , out);  // 넘거 받은 bitmap을 jpeg(손실압축)으로 저장해줌
-            out.close(); // 마무리로 닫아줍니다.
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void setIs_profile(boolean is_profile) {
+        this.is_profile = is_profile;
+    }
+
+    public boolean is_nickname() {
+        return is_nickname;
+    }
+
+    public void setIs_nickname(boolean is_nickname) {
+        this.is_nickname = is_nickname;
+    }
+
+    public boolean is_birthady() {
+        return is_birthady;
+    }
+
+    public void setIs_birthady(boolean is_birthady) {
+        this.is_birthady = is_birthady;
+    }
+
+    public boolean is_group() {
+        return is_group;
+    }
+
+    public void setIs_group(boolean is_group) {
+        this.is_group = is_group;
+    }
+
+    public boolean is_account_num() {
+        return is_account_num;
+    }
+
+    public void setIs_account_num(boolean is_account_num) {
+        this.is_account_num = is_account_num;
+    }
+
+    TextWatcher tw_nickname = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
         }
-        return tempFile; // 임시파일 저장경로를 리턴해주면 끝!
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            presenter.getis_Nickname(et_name.getText().toString());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    TextWatcher tw_brithday = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            presenter.getis_Brithday(et_birth.getText().toString());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    TextWatcher tw_group = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            presenter.getis_Group(et_group.getText().toString());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    TextWatcher tw_account_num = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            presenter.getis_Account_Num(et_accountNum.getText().toString());
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
+    public void CheckNextToPage(){
+        if(is_account_num==true&&is_birthady==true&&is_group==true&&is_nickname){
+            app.getBus().setNickname(et_name.getText().toString());
+            app.getBus().setGroup(et_group.getText().toString());
+            app.getBus().setAccount_num(et_accountNum.getText().toString());
+            app.getBus().setBirthday(et_birth.getText().toString());
+            app.getBus().getBus_url().add(picturepath);
+            Log.d("bus",app.toString());
+            activitySignin.setFramelayout(R.layout.fragment_signin_bus);
+        }
     }
 }

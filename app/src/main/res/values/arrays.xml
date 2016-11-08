@@ -22,12 +22,10 @@
 
     <!--차량종류-->
     <string-array name="busType">
-        <item>대형차</item>
-        <item>중형차</item>
-        <item>소형차</item>
-        <item>농협</item>
-        <item>하나</item>
-        <item>기업</item>
+        <item>45인승 대형</item>
+        <item>35인승 중형</item>
+        <item>28인승 리무진</item>
+        <item>25인승 소형</item>
     </string-array>
 
     <!--차량 연식-->

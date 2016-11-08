@@ -9,13 +9,14 @@ import java.util.ArrayList;
  */
 
 public class Bus {
-    ArrayList<File> bus_file = new ArrayList<>();//버스 넣을 사진
     String birthday;//생일
     String region;//지역
     String group;//소속
     String account_bank;//계좌 은행
     String account_num;//계좌 번호
     ArrayList<String> bus_url = new ArrayList<>(); //버스 사진
+    String bus_license;
+    String bus_confirm;
     String nickname; //닉네임
     String bus_career;//경력
     String bus_age;//연식
@@ -154,20 +155,27 @@ public class Bus {
         this.bus_age = bus_age;
     }
 
-    public ArrayList<File> getBus_file() {
-        return bus_file;
+    public String getBus_license() {
+        return bus_license;
     }
 
-    public void setBus_file(ArrayList<File> bus_file) {
-        this.bus_file = bus_file;
+    public void setBus_license(String bus_license) {
+        this.bus_license = bus_license;
     }
 
+    public String getBus_confirm() {
+        return bus_confirm;
+    }
+
+    public void setBus_confirm(String bus_confirm) {
+        this.bus_confirm = bus_confirm;
+    }
 
     public Bus(){}
     public Bus(ArrayList<String> busImageUrls, String nickname, String bus_type, String money,
                String bus_num, ArrayList<Integer> money_list,String bus_career,int account_flag,String phone_num,
-               String group,String birthday,String bus_age,String account_bank,String account_num,String region,
-               ArrayList<File> bus_file) {
+               String group,String birthday,String bus_age,String account_bank,String account_num,String region,String bus_license,String bus_confirm
+               ) {
         this.bus_url = busImageUrls;
         this.nickname = nickname;
         this.bus_type = bus_type;
@@ -183,7 +191,8 @@ public class Bus {
         this.account_bank = account_bank;
         this.account_num = account_num;
         this.region = region;
-        this.bus_file = bus_file;
+        this.bus_confirm = bus_confirm;
+        this.bus_license = bus_license;
         this.account_flag = 0;
     }
 }

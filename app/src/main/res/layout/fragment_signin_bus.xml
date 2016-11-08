@@ -84,15 +84,18 @@
                 <TextView
                     style="@style/signintext"
                     android:text="3.경력" />
-
-                <Spinner
-                    android:id="@+id/activtiy_signin_bus_spinner_buscareer"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/spinner_box">
+                    android:background="@drawable/white_rounded_rectangle"
+                    android:orientation="horizontal">
 
-                </Spinner>
+                    <EditText
+                        android:hint="~~년차"
+                        android:id="@+id/activtiy_signin_bus_et_career"
+                        style="@style/signineEditText"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -110,14 +113,18 @@
                     style="@style/signintext"
                     android:text="4.차량 연식" />
 
-                <Spinner
-                    android:id="@+id/activtiy_signin_bus_spinner_busage"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="5dp"
-                    android:background="@drawable/spinner_box">
+                    android:background="@drawable/white_rounded_rectangle"
+                    android:orientation="horizontal">
 
-                </Spinner>
+                    <EditText
+                        android:hint="~~년"
+                        android:id="@+id/activtiy_signin_bus_et_busage"
+                        style="@style/signineEditText"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -153,6 +160,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_centerInParent="true"
+                            android:scaleType="fitXY"
                             android:src="@drawable/signin_bus_profile" />
 
                         <TextView
@@ -182,6 +190,7 @@
                             android:layout_width="70dp"
                             android:layout_height="70dp"
                             android:layout_centerInParent="true"
+                            android:scaleType="fitXY"
                             android:src="@drawable/signin_bus_profile" />
 
                         <TextView
@@ -210,6 +219,7 @@
                             android:id="@+id/activtiy_signin_bus_profile_free1"
                             android:layout_width="70dp"
                             android:layout_height="70dp"
+                            android:scaleType="fitXY"
                             android:layout_centerInParent="true"
                             android:src="@drawable/signin_bus_profile" />
 
@@ -231,6 +241,7 @@
                         <ImageView
                             android:id="@+id/activtiy_signin_bus_profile_free2"
                             android:layout_width="70dp"
+                            android:scaleType="fitXY"
                             android:layout_height="70dp"
                             android:layout_centerInParent="true"
                             android:src="@drawable/signin_bus_profile" />

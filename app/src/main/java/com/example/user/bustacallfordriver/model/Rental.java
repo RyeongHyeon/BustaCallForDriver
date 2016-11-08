@@ -1,31 +1,64 @@
 package com.example.user.bustacallfordriver.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+
 /**
- * 사용자가 올린 렌탈 정보. 매물 정보
- * Created by user on 2016-11-02.
+ * Created by user on 2016-10-29.
  */
-public class Rental {
-//    private int type; //왕복,편도,합승목적지,목적
-//    //1일때 왕복
-//    //2일때 편도
-    private int type; //왕복,편도,합승목적지,목적
-    // 1 : 왕복
-    // 2 : 왕복 & 같이타기
-    // 3 : 편도 &
-    // 4 : 편도
-    private String start_point_one,start_point_two,end_point_one,end_point_two; //출발지, 도착지
-    private String day_one,day_two,time_one,time_two; //날짜, 시간
-    private String rental_reason; //목적
-    private String user_count; //명수
-    private String rental_money; //비용
-    private String current_day;//예약한 날짜
-
-    private int bus_45;//45인승 대형
-    private int bus_35;//35인승 중형
-    private int bus_28;//28인승 리무진
-    private int bus_25;//25인승 소형
-
+public class Rental implements Serializable {
+    String nickname; //임시 닉네임
+    String start_point_one,start_point_two,end_point_one,end_point_two; //출발지, 도착지
+    String day_one,day_two,time_one,time_two; //날짜, 시간
+    String rental_reason; //목적
+    String user_count; //명수
+    String user_max_count; //bus의 최종 명수
+    String rental_money; //비용
+    int bus_45;//45인승 대형
+    int bus_35;//35인승 중형
+    int bus_28;//28인승 리무진
+    int bus_25;//25인승 소형
+    int type; //왕복,편도
+    //1일때 왕복
+    //2일때 편도
     int type_two; //예약, 기사 선택 하기, 입금 전, 상세보기, 이용완료 1,2,3,4,5
+    int rental_num; //각각의 렌탈 고유 넘버
+    String current_day;//예약한 날짜
+    String end_day;//마감날짜
+    int account_flag; //결제 되었는지 안되었는지 안되어있으면 0, 되어있으면 1
+    Together together = new Together(); //합승 여부 클래스
+
+    public int getAccount_flag() {
+        return account_flag;
+    }
+
+    public void setAccount_flag(int account_flag) {
+        this.account_flag = account_flag;
+    }
+
+    public Together getTogether() {
+        return together;
+    }
+
+    public void setTogether(Together together) {
+        this.together = together;
+    }
+
+    public String getUser_max_count() {
+        return user_max_count;
+    }
+
+    public void setUser_max_count(String user_max_count) {
+        this.user_max_count = user_max_count;
+    }
+
+    public String getEnd_day() {
+        return end_day;
+    }
+
+    public void setEnd_day(String end_day) {
+        this.end_day = end_day;
+    }
 
     public String getCurrent_day() {
         return current_day;
@@ -33,6 +66,14 @@ public class Rental {
 
     public void setCurrent_day(String current_day) {
         this.current_day = current_day;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public int getBus_45() {
@@ -45,6 +86,14 @@ public class Rental {
 
     public int getBus_35() {
         return bus_35;
+    }
+
+    public int getRental_num() {
+        return rental_num;
+    }
+
+    public void setRental_num(int rental_num) {
+        this.rental_num = rental_num;
     }
 
     public void setBus_35(int bus_35) {
@@ -67,13 +116,14 @@ public class Rental {
         this.bus_25 = bus_25;
     }
 
-
     public Rental(){}
 
     public Rental(String start_point_one, String start_point_two, String end_point_one,
                   String end_point_two, String day_one, String day_two, String time_one, String time_two,
-                  String rental_reason, String user_count,int type,String rental_money,int type_two,
-                  String current_day,int bus_45,int bus_35, int bus_28, int bus_25) {
+                  String rental_reason, String user_count, int type, String rental_money, int type_two,
+                  String current_day, int bus_45, int bus_35, int bus_28, int bus_25,
+                  String nickname, int rental_num, String end_day, String user_max_count,
+                  Together to, int account_flag) {
         this.start_point_one = start_point_one;
         this.start_point_two = start_point_two;
         this.end_point_one = end_point_one;
@@ -92,6 +142,13 @@ public class Rental {
         this.bus_35 = bus_35;
         this.bus_28 = bus_28;
         this.bus_25 = bus_25;
+        this.nickname = nickname;
+        this.rental_num = rental_num;
+        this.end_day = end_day;
+        this.user_max_count=user_max_count;
+        this.together = to;
+        this.account_flag = account_flag;
+        this.account_flag = 0; //결제 안되어있는것
         this.type_two=0; //처음에 아무것도 안한상태.
     }
 
@@ -197,5 +254,4 @@ public class Rental {
     public void setType(int type) {
         this.type = type;
     }
-
 }

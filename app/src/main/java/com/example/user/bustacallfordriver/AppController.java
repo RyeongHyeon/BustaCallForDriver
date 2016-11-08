@@ -5,6 +5,11 @@ import android.app.Application;
 import android.content.SharedPreferences;
 
 import com.example.user.bustacallfordriver.model.Bus;
+import com.example.user.bustacallfordriver.model.Rental;
+import com.example.user.bustacallfordriver.model.Rental_List;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by user on 2016-10-31.
@@ -18,6 +23,34 @@ public class AppController extends Application {
     String pushToken;
     String request_num;
     Bus bus = new Bus();
+    String intent_flag;//자동 로그인 확인 0이면 안되있는거 1이면 모든 정보가 저장되있는거
+    Rental_List rental_list = new Rental_List();
+
+    public Rental_List getRental_list() {
+        return rental_list;
+    }
+
+    public void setRental_list(Rental_List rental_list) {
+        this.rental_list = rental_list;
+    }
+
+//    List<Rental> rental_list = new ArrayList<>();
+//
+//    public List<Rental> getRental_list() {
+//        return rental_list;
+//    }
+//
+//    public void setRental_list(List<Rental> rental_list) {
+//        this.rental_list = rental_list;
+//    }
+
+    public String getIntent_flag() {
+        return intent_flag;
+    }
+
+    public void setIntent_flag(String intent_flag) {
+        this.intent_flag = intent_flag;
+    }
 
     public Bus getBus() {
         return bus;
@@ -54,10 +87,11 @@ public class AppController extends Application {
 
     @Override
     public void onCreate() {
+//        pushToken = FirebaseInstanceId.getInstance().getToken();
+//        Log.d("pushTo",pushToken);
+
         super.onCreate();
     }
-
-
     public String getPushToken() {
         return pushToken;
     }

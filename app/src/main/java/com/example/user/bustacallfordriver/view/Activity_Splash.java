@@ -37,8 +37,7 @@ public class Activity_Splash extends BaseActivity implements View.OnClickListene
     @Override
     public void onClick(View v) { //통신이 필요하네. 로그인할때도
         if(v.getId()==R.id.activity_splash_bt_login){
-
+            presenter.checkLogin();
         }
     }
-
 }
