@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.dialog.Dialog_base_two_button;
@@ -12,6 +13,7 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener{
 
     ImageView iv_notiIcon;
 
+    TextView test_default, test_together; // 테스트용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,8 +25,27 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener{
 
     private void init() {
         iv_notiIcon = (ImageView)findViewById(R.id.activity_main_iv_noti);
-
         iv_notiIcon.setOnClickListener(this);
+
+//        테스트
+        test_default = (TextView)findViewById(R.id.test_default);
+        test_together = (TextView)findViewById(R.id.test_together);
+        test_default.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), Activity_RentalDetail.class);
+                intent.putExtra("defaultOrTogether", 0); // default
+                startActivity(intent);
+            }
+        });
+        test_together.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplication(), Activity_RentalDetail.class);
+                intent.putExtra("defaultOrTogether", 1); // together
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

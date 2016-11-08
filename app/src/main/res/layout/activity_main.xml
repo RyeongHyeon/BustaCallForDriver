@@ -1,22 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <include
-        layout="@layout/activity_main_titlebar"/>
+    <include layout="@layout/activity_main_titlebar" />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="10dp"
-        android:background="@color/AppColorLightBlue">
+        android:background="@color/AppColorLightBlue"
+        android:padding="10dp">
 
         <ListView
             android:id="@+id/activity_main_listview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/AppColorWhite"/>
+            android:background="@color/AppColorWhite" />
+
+
+        <!--테스트용-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/test_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimary"
+                android:text="매물상세-합승아님"
+                android:textColor="@color/AppColorWhite"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/test_together"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/AppColorWhite"
+                android:text="매물상세-합승!!"
+                android:textColor="@color/colorPrimary"
+                android:textSize="30dp" />
+        </LinearLayout>
+        <!--여기까지 테스트-->
 
     </RelativeLayout>
 
