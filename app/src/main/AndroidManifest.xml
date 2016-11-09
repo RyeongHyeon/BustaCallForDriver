@@ -20,15 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".view.Activity_Login">
-
-        </activity>
-        <activity android:name=".view.Activity_Signin">
-        </activity>
-        <activity android:name=".view.Activity_Main">
-
-        </activity>
+        <activity android:name=".view.Activity_Login"></activity>
+        <activity android:name=".view.Activity_Signin" />
+        <activity android:name=".view.Activity_Main"/>
         <activity android:name=".view.Activity_Notice" />
+        <activity android:name=".view.Activity_RentalDetail"/>
 
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
