@@ -6,6 +6,7 @@
 
     <RelativeLayout
         android:id="@+id/top"
+        android:background="@drawable/signin_subtitle_box"
         style="@style/White_TitleBar">
 
         <ImageView

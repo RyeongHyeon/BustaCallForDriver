@@ -7,21 +7,28 @@ import android.view.ViewGroup;
 
 import com.example.user.bustacallfordriver.BaseFragment;
 import com.example.user.bustacallfordriver.R;
+import com.example.user.bustacallfordriver.model.Rental;
 
 /**
- * 메물 상세 내역 - 합승 아닌것.
- * Created by user on 2016-11-08.
+ * 매물 상세 내역 - 왕복
+ * Created by user on 2016-11-10.
  */
-public class Fragment_RentalDetail_Default extends BaseFragment {
+
+public class Fragment_RentalDetail_TwoWay extends BaseFragment {
+
+    Rental rental;
+
+    public Fragment_RentalDetail_TwoWay(Rental rental) {
+        this.rental = rental;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rentaldetail_default, null);
+        View view = inflater.inflate(R.layout.fragment_rentaldetail_twoway, null);
         init(view);
         return view;
     }
 
-    private void init(View view) {
-
+    private void init(View v) {
     }
 }

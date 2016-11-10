@@ -19,13 +19,6 @@ import com.example.user.bustacallfordriver.AppController;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
-import java.io.IOException;
-
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-
 /**
  * Created by user on 2016-10-31.
  * //
@@ -47,6 +40,6 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService { //ì
     private void sendRegistrationToServer(String token) {
         // Add custom implementation, as needed.
         AppController app = (AppController)getApplicationContext();
-        app.setPushToken(token);
+        app.setSavedToken(token);
     }
 }

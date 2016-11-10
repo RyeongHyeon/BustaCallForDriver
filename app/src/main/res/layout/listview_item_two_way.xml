@@ -12,11 +12,12 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_margin="10dp"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
             android:src="@drawable/listview_two_way" />
 
         <TextView
@@ -24,7 +25,7 @@
             android:layout_height="wrap_content"
             android:text="왕복"
             android:textColor="@color/colorPrimaryGray"
-            android:textSize="20sp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -43,187 +44,70 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/listview_calender" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/listview_two_way_startDate"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/listviewText"
+                    android:text="2016년 6월 30일"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
+                    android:layout_height="20dp" />
 
-                    <TextView
-                        android:id="@+id/listview_two_way_startDate_year"
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="2016" />
-
-                    <TextView
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="년" />
-
-                    <TextView
-                        android:id="@+id/listview_two_way_startDate_month"
-                        style="@style/listviewText"
-                        android:layout_width="25dp"
-                        android:layout_height="20dp"
-                        android:text="12" />
-
-                    <TextView
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="월" />
-
-                    <TextView
-                        android:id="@+id/listview_two_way_startDate_day"
-                        style="@style/listviewText"
-                        android:layout_width="25dp"
-                        android:layout_height="20dp"
-                        android:text="30" />
-
-                    <TextView
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="일" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/listview_two_way_startTime"
+                    android:layout_marginLeft="10dp"
+                    style="@style/listviewText"
+                    android:text="오전 9시"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
-
-                    <TextView
-                        android:id="@+id/listview_two_way_startTime_amOrPm"
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="AM" />
-
-                    <TextView
-                        android:id="@+id/listview_two_way_startTime"
-                        style="@style/listviewText"
-                        android:layout_width="50dp"
-                        android:layout_height="20dp"
-                        android:text="14:00" />
-
-
-                </LinearLayout>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingBottom="5dp"
-                android:paddingTop="5dp">
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
                 <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/listview_wave" />
 
-                <LinearLayout
+                <TextView
+                    android:id="@+id/listview_two_way_endDate"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    style="@style/listviewText"
+                    android:text="2016년 6월 30일"
                     android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
+                    android:layout_height="20dp" />
 
-                    <TextView
-                        android:id="@+id/listview_two_way_endDate_year"
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="2016" />
-
-                    <TextView
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="년" />
-
-                    <TextView
-                        android:id="@+id/listview_two_way_endDate_month"
-                        style="@style/listviewText"
-                        android:layout_width="25dp"
-                        android:layout_height="20dp"
-                        android:text="12" />
-
-                    <TextView
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="월" />
-
-                    <TextView
-                        android:id="@+id/listview_two_way_endDate_day"
-                        style="@style/listviewText"
-                        android:layout_width="25dp"
-                        android:layout_height="20dp"
-                        android:text="30" />
-
-                    <TextView
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="일" />
-
-                </LinearLayout>
-
-
-                <LinearLayout
+                <TextView
+                    android:id="@+id/listview_two_way_endTime"
+                    android:layout_marginLeft="10dp"
+                    style="@style/listviewText"
+                    android:text="오전 9시"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:orientation="horizontal"
-                    android:paddingLeft="10dp"
-                    android:paddingRight="10dp">
-
-                    <TextView
-                        android:id="@+id/listview_two_way_endTime_amOrPm"
-                        style="@style/listviewText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="20dp"
-                        android:text="AM" />
-
-                    <TextView
-                        android:id="@+id/listview_two_way_endTime"
-                        style="@style/listviewText"
-                        android:layout_width="50dp"
-                        android:layout_height="20dp"
-                        android:text="14:00" />
-
-
-                </LinearLayout>
+                    android:layout_height="wrap_content" />
 
             </LinearLayout>
+
         </LinearLayout>
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="5dp"
             android:src="@drawable/dotline" />
 
         <LinearLayout

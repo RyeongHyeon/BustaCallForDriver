@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/AppColorWhite">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:paddingBottom="@dimen/activity_vertical_margin"
         android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:orientation="vertical">
+        android:paddingRight="@dimen/activity_horizontal_margin">
 
-        <FrameLayout
-            android:id="@+id/fragment_rentaldetail_together_layout"
-            android:layout_width="match_parent"
-            android:layout_height="145dp">
-            <!--임시로 넣어둠 레이아웃짤라고-->
-            <include layout="@layout/listview_item_one_way_together_top"></include>
-        </FrameLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <include layout="@layout/listview_item_one_way_together_top"/>
+        </RelativeLayout>
 
 
         <LinearLayout
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:text="금액"
                 android:textColor="@color/colorRed"
-                android:textSize="18sp" />
+                android:textSize="15sp" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -51,25 +51,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_alignParentRight="true"
-                    android:orientation="horizontal"
                     android:gravity="center"
+                    android:orientation="horizontal"
                     android:paddingRight="13dp">
 
                     <TextView
-                        android:id="@+id/fragment_rentaldetail_default_tv_tenderPrice"
+                        android:id="@+id/fragment_rentaldetail_oneway_together_tv_tenderPrice"
                         android:layout_width="200dp"
                         android:layout_height="wrap_content"
                         android:textAlignment="textEnd"
-                        android:textSize="20sp"
-                        android:textColor="@color/AppColorLightGray"/>
+                        android:textColor="@color/AppColorLightGray"
+                        android:textSize="20sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingLeft="13dp"
                         android:text="원"
-                        android:textSize="20sp"
-                        android:textColor="@color/AppColorLightGray"/>
+                        android:textColor="@color/AppColorLightGray"
+                        android:textSize="20sp" />
                 </LinearLayout>
 
             </RelativeLayout>
@@ -80,25 +80,25 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_alignParentBottom="true"
         android:padding="15dp"
-        >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
+            android:text="@string/rentaldetail_alert1"
             android:textColor="@color/colorRed"
-            android:textSize="18sp"
-            android:text="@string/rentaldetail_alert1"/>
+            android:textSize="14sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingBottom="5dp"
+            android:text="@string/rentaldetail_alert2"
             android:textColor="@color/colorRed"
-            android:textSize="18sp"
-            android:text="@string/rentaldetail_alert2"/>
+            android:textSize="14sp" />
 
     </LinearLayout>
 

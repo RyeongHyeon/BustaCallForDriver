@@ -1,9 +1,11 @@
 package com.example.user.bustacallfordriver.model;
 
+import java.io.Serializable;
+
 /**
  * Created by user on 2016-11-06.
  */
-public class Together {
+public class Together implements Serializable {
     int flag;//합승 여부 0 : 합승 안함, 1 : 합승 함
     String user_count;//몇명이 합승할것인지
     String money;//합승 가격.

@@ -7,6 +7,7 @@ import android.util.Log;
 
 import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.dialog.Dialog_Progress;
+import com.example.user.bustacallfordriver.model.Rental_List;
 import com.example.user.bustacallfordriver.model.Retrofit_User;
 import com.example.user.bustacallfordriver.view.Fragment_Signin_License;
 
@@ -30,9 +31,12 @@ import retrofit2.Retrofit;
 public class Fragment_Signin_License_Presenter {
     Fragment_Signin_License view;
     AppController app;
+    Dialog_Progress dialog_progress;
+
     public Fragment_Signin_License_Presenter(Fragment_Signin_License view){
         this.view = view;
         app = (AppController)view.getActivity().getApplicationContext();
+        dialog_progress = new Dialog_Progress(view.getActivity());
     }
 
     public void getis_Bus_license(String str){
@@ -83,8 +87,7 @@ public class Fragment_Signin_License_Presenter {
         RequestBody phonenum = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getPhone_num());
         RequestBody bus_career = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getBus_career());
         RequestBody bus_region = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getRegion());
-        final Dialog_Progress dialog_progress = new Dialog_Progress(view.getActivity());
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
+       Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
         Retrofit_User retrofit_user = retrofit.create(Retrofit_User.class);
         Call<Void> retrofitinfo = retrofit_user.request_mainlogin_bus(nickname,phonenum,bus_type,bus_num,bus_career,bus_region,body2);
         dialog_progress.show();
@@ -92,9 +95,8 @@ public class Fragment_Signin_License_Presenter {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()){
-                    view.goTonextPage();
                     app.setSavedId(app.getBus().getBus_num());
-                    dialog_progress.dismiss();
+                    request_get_rental();
                 }else{
                     Log.d("test",response.toString());
                 }
@@ -105,7 +107,29 @@ public class Fragment_Signin_License_Presenter {
             }
         });
     }
+    public void request_get_rental(){//
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit_User retrofit_user = retrofit.create(Retrofit_User.class);
+        Call<Rental_List> retrofitinfo = retrofit_user.request_get_rental();
+        retrofitinfo.enqueue(new Callback<Rental_List>() {
+            @Override
+            public void onResponse(Call<Rental_List> call, Response<Rental_List> response) {
+                if(response.isSuccessful()){
+                    app.setRental_list(response.body());
+                    Log.d("app",app.toString());
+                    view.goTonextPage();
+                }else{
 
+                }
+                dialog_progress.dismiss();
+            }
+
+            @Override
+            public void onFailure(Call<Rental_List> call, Throwable t) {
+                dialog_progress.dismiss();
+            }
+        });
+    }
     public File saveBitmapToJpeg(Context context, Bitmap bitmap, String name) throws IOException { //파일 명 새로지정하면서 이미지 비트맵을 임시로 생성.
         File storage = context.getCacheDir(); // 이 부분이 임시파일 저장 경로
         String fileName = name + ".jpg";  // 파일이름은 마음대로!

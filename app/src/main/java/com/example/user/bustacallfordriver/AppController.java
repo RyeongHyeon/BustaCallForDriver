@@ -8,18 +8,17 @@ import com.example.user.bustacallfordriver.model.Bus;
 import com.example.user.bustacallfordriver.model.Rental;
 import com.example.user.bustacallfordriver.model.Rental_List;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
 /**
  * Created by user on 2016-10-31.
  */
 
 public class AppController extends Application {
-    public final static String SERVERIP="http://203.252.166.242:8080";//서버
-    public static int HTTP_STATUSOK=200;
-    public static int HTTP_STATUSFAIL=400;
-    public static int TENDER_COUNT=0;
+    public final static String SERVERIP = "http://203.252.166.242:8080";//서버
+    public static int HTTP_STATUSOK = 200;
+    public static int HTTP_STATUSFAIL = 400;
+    public static int TENDER_COUNT = 0;
     String pushToken;
     String request_num;
     Bus bus = new Bus();
@@ -30,19 +29,17 @@ public class AppController extends Application {
         return rental_list;
     }
 
+    /**
+     * 결재 완료된 Rental은 삭제하고 셋팅
+     */
     public void setRental_list(Rental_List rental_list) {
+        Iterator<Rental> itr = rental_list.getRental_list().iterator();
+        while (itr.hasNext()) {
+            if (itr.next().getAccount_flag() == 1)
+                itr.remove();
+        }
         this.rental_list = rental_list;
     }
-
-//    List<Rental> rental_list = new ArrayList<>();
-//
-//    public List<Rental> getRental_list() {
-//        return rental_list;
-//    }
-//
-//    public void setRental_list(List<Rental> rental_list) {
-//        this.rental_list = rental_list;
-//    }
 
     public String getIntent_flag() {
         return intent_flag;
@@ -77,11 +74,33 @@ public class AppController extends Application {
         }
     }
 
-    public void setSavedId(String id){//앱에 아이디 저장하기
+    public String getPushToken() {
+        String push_temp = getSavedToken("token", "null");
+        return push_temp;
+    }
+
+    public String getSavedToken(String key, String dftValue) {
+        SharedPreferences pref = getSharedPreferences("token", Activity.MODE_PRIVATE);
+        try {
+            return pref.getString(key, dftValue);
+        } catch (Exception e) {
+            return dftValue;
+        }
+    }
+
+    public void setSavedToken(String token) {
+        SharedPreferences pref = getSharedPreferences("token", Activity.MODE_PRIVATE);
+        SharedPreferences.Editor editor = pref.edit();
+        //id에 첫번째 값 가져와서 집어넣기.
+        editor.putString("token", token);
+        editor.commit();
+    }
+
+    public void setSavedId(String id) {//앱에 아이디 저장하기
         SharedPreferences pref = getSharedPreferences("saveid", Activity.MODE_PRIVATE);
         SharedPreferences.Editor editor = pref.edit();
         //id에 첫번째 값 가져와서 집어넣기.
-        editor.putString("id",id);
+        editor.putString("id", id);
         editor.commit();
     }
 
@@ -91,9 +110,6 @@ public class AppController extends Application {
 //        Log.d("pushTo",pushToken);
 
         super.onCreate();
-    }
-    public String getPushToken() {
-        return pushToken;
     }
 
     public void setPushToken(String pushToken) {

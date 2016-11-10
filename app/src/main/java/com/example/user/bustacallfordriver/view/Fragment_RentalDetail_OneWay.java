@@ -7,22 +7,28 @@ import android.view.ViewGroup;
 
 import com.example.user.bustacallfordriver.BaseFragment;
 import com.example.user.bustacallfordriver.R;
+import com.example.user.bustacallfordriver.model.Rental;
 
 /**
- * 메물 상세 내역 - 합승
- * Created by user on 2016-11-08.
- * */
-public class Fragment_RentalDetail_Together extends BaseFragment {
+ * 매물 상세 내역 - 편도
+ * Created by user on 2016-11-10.
+ */
+public class Fragment_RentalDetail_OneWay  extends BaseFragment {
 
+    Rental rental;
+
+    public Fragment_RentalDetail_OneWay(Rental rental) {
+        this.rental = rental;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_rentaldetail_together, null);
+        View view = inflater.inflate(R.layout.fragment_rentaldetail_oneway, null);
         init(view);
         return view;
     }
 
-    private void init(View view) {
+    private void init(View v) {
 
     }
 }

@@ -1,14 +1,13 @@
 package com.example.user.bustacallfordriver.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 
 /**
  * Created by user on 2016-10-29.
  */
 public class Rental implements Serializable {
     String nickname; //임시 닉네임
-    String start_point_one,start_point_two,end_point_one,end_point_two; //출발지, 도착지
+    String start_point_one, end_point_one; //출발지, 도착지
     String day_one,day_two,time_one,time_two; //날짜, 시간
     String rental_reason; //목적
     String user_count; //명수
@@ -118,16 +117,14 @@ public class Rental implements Serializable {
 
     public Rental(){}
 
-    public Rental(String start_point_one, String start_point_two, String end_point_one,
-                  String end_point_two, String day_one, String day_two, String time_one, String time_two,
+    public Rental(String start_point_one, String end_point_one,
+                  String day_one, String day_two, String time_one, String time_two,
                   String rental_reason, String user_count, int type, String rental_money, int type_two,
                   String current_day, int bus_45, int bus_35, int bus_28, int bus_25,
                   String nickname, int rental_num, String end_day, String user_max_count,
                   Together to, int account_flag) {
         this.start_point_one = start_point_one;
-        this.start_point_two = start_point_two;
         this.end_point_one = end_point_one;
-        this.end_point_two = end_point_two;
         this.day_one = day_one;
         this.day_two = day_two;
         this.time_one = time_one;
@@ -183,28 +180,12 @@ public class Rental implements Serializable {
         this.start_point_one = start_point_one;
     }
 
-    public String getStart_point_two() {
-        return start_point_two;
-    }
-
-    public void setStart_point_two(String start_point_two) {
-        this.start_point_two = start_point_two;
-    }
-
     public String getEnd_point_one() {
         return end_point_one;
     }
 
     public void setEnd_point_one(String end_point_one) {
         this.end_point_one = end_point_one;
-    }
-
-    public String getEnd_point_two() {
-        return end_point_two;
-    }
-
-    public void setEnd_point_two(String end_point_two) {
-        this.end_point_two = end_point_two;
     }
 
     public String getDay_one() {

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/AppColorWhite">
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -12,25 +13,25 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <FrameLayout
-                android:id="@+id/fragment_rentaldetail_default_layout"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="195dp">
-
-            </FrameLayout>
+                android:layout_height="195dp"
+               >
+                <include layout="@layout/listview_item_two_way"/>
+            </RelativeLayout>
 
             <TextView
-                android:id="@+id/fragment_rentaldetail_default_tv_detailcontent"
+                android:id="@+id/fragment_rentaldetail_towway_tv_detailcontent"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:background="@drawable/detail_content_box"
                 android:gravity="center"
                 android:hint="상세 내역"
                 android:textColor="@color/AppColorLightGray"
-                android:textSize="30dp" />
+                android:textSize="30sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -68,7 +69,7 @@
                         android:paddingRight="13dp">
 
                         <EditText
-                            android:id="@+id/fragment_rentaldetail_default_et_tenderPrice"
+                            android:id="@+id/fragment_rentaldetail_towway_et_tenderPrice"
                             android:layout_width="200dp"
                             android:layout_height="wrap_content"
                             android:textAlignment="textEnd"
@@ -125,12 +126,12 @@
                         android:gravity="center_vertical"
                         android:orientation="horizontal">
                         <TextView
-                            android:id="@+id/fragment_rentaldetail_default_tv_toll_exclude"
+                            android:id="@+id/fragment_rentaldetail_towway_tv_toll_exclude"
                             style="@style/detail_plus_text"
                             android:textColor="@color/AppColorLightGray"
                             android:text="미포함"/>
                         <TextView
-                            android:id="@+id/fragment_rentaldetail_default_tv_toll_include"
+                            android:id="@+id/fragment_rentaldetail_towway_tv_toll_include"
                             style="@style/detail_plus_text"
                             android:layout_marginLeft="15dp"
                             android:textColor="@color/colorPrimary"

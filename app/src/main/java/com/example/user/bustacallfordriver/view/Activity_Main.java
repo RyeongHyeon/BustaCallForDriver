@@ -3,15 +3,22 @@ package com.example.user.bustacallfordriver.view;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.R;
+import com.example.user.bustacallfordriver.RentalAdapter;
 import com.example.user.bustacallfordriver.dialog.Dialog_base_two_button;
+import com.example.user.bustacallfordriver.model.Rental;
 
-public class Activity_Main extends BaseActivity implements View.OnClickListener{
+public class Activity_Main extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
 
+    AppController app;
     ImageView iv_notiIcon;
+    ListView listView;
 
     TextView test_default, test_together; // 테스트용
 
@@ -19,33 +26,18 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        app = (AppController)getApplicationContext();
         init();
     }
 
     private void init() {
         iv_notiIcon = (ImageView)findViewById(R.id.activity_main_iv_noti);
         iv_notiIcon.setOnClickListener(this);
+        listView = (ListView)findViewById(R.id.activity_main_listview);
+        RentalAdapter adapter= new RentalAdapter(app.getRental_list());
+        listView.setAdapter(adapter);
 
-//        테스트
-        test_default = (TextView)findViewById(R.id.test_default);
-        test_together = (TextView)findViewById(R.id.test_together);
-        test_default.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), Activity_RentalDetail.class);
-                intent.putExtra("defaultOrTogether", 0); // default
-                startActivity(intent);
-            }
-        });
-        test_together.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), Activity_RentalDetail.class);
-                intent.putExtra("defaultOrTogether", 1); // together
-                startActivity(intent);
-            }
-        });
+        listView.setOnItemClickListener(this);
     }
 
     @Override
@@ -78,4 +70,31 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener{
         });
     }
 
+    /**리스트뷰 클릭 시 매물 상세 페이지 이동*/
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getApplication(), Activity_RentalDetail.class);
+        switch (view.getId()) {
+            case R.layout.listview_item_one_way:
+                intent.putExtra("oneWayOrTwoWay", 0); // 편도
+                intent.putExtra("defaultOrTogether", 0); // 같이타기 아님. 기본
+                break;
+            case R.layout.listview_item_one_way_together:
+                intent.putExtra("oneWayOrTwoWay", 0); // 편도
+                intent.putExtra("defaultOrTogether", 1); // 같이타기
+                break;
+            case R.layout.listview_item_two_way:
+                intent.putExtra("oneWayOrTwoWay", 1); // 왕복
+                intent.putExtra("defaultOrTogether", 0); // 같이타기 아님. 기본
+                break;
+            case R.layout.listview_item_two_way_together:
+                intent.putExtra("oneWayOrTwoWay", 1); // 왕복
+                intent.putExtra("defaultOrTogether", 1); // 같이타기
+                break;
+        }
+        Rental rental =  app.getRental_list().getRental_list().get(position);
+        intent.putExtra("info", rental);
+
+        startActivity(intent);
+    }
 }

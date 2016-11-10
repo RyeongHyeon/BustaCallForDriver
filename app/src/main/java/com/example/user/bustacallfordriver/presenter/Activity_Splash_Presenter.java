@@ -8,15 +8,11 @@ import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.dialog.Dialog_Progress;
 import com.example.user.bustacallfordriver.dialog.Dialog_base;
 import com.example.user.bustacallfordriver.model.Bus;
-import com.example.user.bustacallfordriver.model.Rental;
 import com.example.user.bustacallfordriver.model.Rental_List;
 import com.example.user.bustacallfordriver.model.Retrofit_User;
 import com.example.user.bustacallfordriver.view.Activity_Login;
 import com.example.user.bustacallfordriver.view.Activity_Main;
 import com.example.user.bustacallfordriver.view.Activity_Splash;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
