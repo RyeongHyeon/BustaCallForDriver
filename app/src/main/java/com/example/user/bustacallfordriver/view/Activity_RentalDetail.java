@@ -37,35 +37,15 @@ public class Activity_RentalDetail extends BaseActivity implements View.OnClickL
 
     private void init() {
         backBtn = (ImageView) findViewById(R.id.activity_rentaldetail_iv_back);
-        tenderBtn = (TextView) findViewById(R.id.activity_rentaldetail_tv_tender_button);
         backBtn.setOnClickListener(this);
-        tenderBtn.setOnClickListener(this);
     }
 
     private void fragmentInit() {
         Intent intent = getIntent();
-        type = setType(intent.getIntExtra("oneWayOrTwoWay", -1), intent.getIntExtra("defaultOrTogether", -1));
-        setFramelayout(type);
+        type = intent.getIntExtra("type", -1);
         rental = (Rental)intent.getSerializableExtra("info");
+        setFramelayout(type);
     }
-
-    private int setType(int oneWayOrTwoWay, int defaultOrTogether) {
-        if (oneWayOrTwoWay == 0) {
-            if (defaultOrTogether == 0) {
-                type = 0; // 편도, 기본
-            } else {
-                type = 1; // 편도, 같이가기
-            }
-        } else {
-            if (defaultOrTogether == 0) {
-                type = 2; // 왕복, 기본
-            } else {
-                type = 3; // 왕복, 같이가기
-            }
-        }
-        return type;
-    }
-
 
     /***
      * FrameLayout에 넣을 fragment 셋팅
@@ -75,18 +55,19 @@ public class Activity_RentalDetail extends BaseActivity implements View.OnClickL
         FragmentTransaction ft = fragmentManager.beginTransaction();
 
         fragment = null;
+
         switch (type) {
-            case 0:
-                fragment = new Fragment_RentalDetail_OneWay(rental);
-                break;
             case 1:
-                fragment = new Fragment_RentalDetail_OneWay_Together(rental);
-                break;
-            case 2:
                 fragment = new Fragment_RentalDetail_TwoWay(rental);
                 break;
-            case 3:
+            case 2:
                 fragment = new Fragment_RentalDetail_TwoWay_Together(rental);
+                break;
+            case 3:
+                fragment = new Fragment_RentalDetail_OneWay(rental);
+                break;
+            case 4:
+                fragment = new Fragment_RentalDetail_OneWay_Together(rental);
                 break;
         }
 
@@ -99,8 +80,6 @@ public class Activity_RentalDetail extends BaseActivity implements View.OnClickL
         switch (v.getId()) {
             case R.id.activity_rentaldetail_iv_back:
                 finish();
-                break;
-            case R.id.activity_rentaldetail_tv_tender_button:
                 break;
         }
     }

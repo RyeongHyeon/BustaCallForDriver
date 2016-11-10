@@ -8,12 +8,12 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
 
         <LinearLayout
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -99,50 +99,269 @@
                     style="@style/signintext"
                     android:text="추가 비용"/>
 
-                <RelativeLayout
+                <LinearLayout
+                    android:layout_marginBottom="70dp"
+                    android:orientation="vertical"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="10dp">
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:gravity="center_vertical">
-                        <ImageView
-                            android:layout_width="15dp"
-                            android:layout_height="15dp"
-                            android:layout_marginRight="15dp"
-                            android:src="@drawable/noti_icon"/>
-                        <TextView
-                            style="@style/detail_plus_text"
-                            android:textColor="@color/colorPrimary"
-                            android:text="톨비"/>
+                        android:padding="10dp">
 
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="wrap_content"
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/toll_icon"/>
+                            <TextView
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/colorPrimary"
+                                android:text="톨비"/>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_toll_exclude"
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/AppColorLightGray"
+                                android:text="미포함"/>
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_toll_include"
+                                style="@style/detail_plus_text"
+                                android:layout_marginLeft="15dp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="포함"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:id="@+id/fragment_rentaldetail_oneway_tv_toll_exclude"
-                            style="@style/detail_plus_text"
-                            android:textColor="@color/AppColorLightGray"
-                            android:text="미포함"/>
-                        <TextView
-                            android:id="@+id/fragment_rentaldetail_oneway_tv_toll_include"
-                            style="@style/detail_plus_text"
-                            android:layout_marginLeft="15dp"
-                            android:textColor="@color/colorPrimary"
-                            android:text="포함"/>
-                    </LinearLayout>
+                        android:padding="10dp">
 
-                </RelativeLayout>
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/park_icon"/>
+                            <TextView
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/colorPrimary"
+                                android:text="주차비"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_park_exclude"
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/AppColorLightGray"
+                                android:text="미포함"/>
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_park_include"
+                                style="@style/detail_plus_text"
+                                android:layout_marginLeft="15dp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="포함"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/food_icon"/>
+                            <TextView
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/colorPrimary"
+                                android:text="식사비"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_food_exclude"
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/AppColorLightGray"
+                                android:text="미포함"/>
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_food_include"
+                                style="@style/detail_plus_text"
+                                android:layout_marginLeft="15dp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="포함"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/motel_icon"/>
+                            <TextView
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/colorPrimary"
+                                android:text="숙박비"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_motel_exclude"
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/AppColorLightGray"
+                                android:text="미포함"/>
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_motel_include"
+                                style="@style/detail_plus_text"
+                                android:layout_marginLeft="15dp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="포함"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/vol_icon"/>
+                            <TextView
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/colorPrimary"
+                                android:text="봉사료"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_vol_exclude"
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/AppColorLightGray"
+                                android:text="미포함"/>
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_vol_include"
+                                style="@style/detail_plus_text"
+                                android:layout_marginLeft="15dp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="포함"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical">
+                            <ImageView
+                                android:layout_width="15dp"
+                                android:layout_height="15dp"
+                                android:layout_marginRight="15dp"
+                                android:src="@drawable/tax_icon"/>
+                            <TextView
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/colorPrimary"
+                                android:text="부가세"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentRight="true"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_tax_exclude"
+                                style="@style/detail_plus_text"
+                                android:textColor="@color/AppColorLightGray"
+                                android:text="미포함"/>
+                            <TextView
+                                android:id="@+id/fragment_rentaldetail_oneway_tv_tax_include"
+                                style="@style/detail_plus_text"
+                                android:layout_marginLeft="15dp"
+                                android:textColor="@color/colorPrimary"
+                                android:text="포함"/>
+                        </LinearLayout>
+                    </RelativeLayout>
+                </LinearLayout>
 
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:id="@+id/fragment_rentaldetail_oneway_tv_enter"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="입찰 하기"
+            android:textColor="@color/AppColorWhite"
+            android:textSize="30sp" />
+    </RelativeLayout>
+
 </RelativeLayout>

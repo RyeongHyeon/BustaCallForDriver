@@ -74,25 +74,22 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getApplication(), Activity_RentalDetail.class);
-        switch (view.getId()) {
-            case R.layout.listview_item_one_way:
-                intent.putExtra("oneWayOrTwoWay", 0); // 편도
-                intent.putExtra("defaultOrTogether", 0); // 같이타기 아님. 기본
-                break;
-            case R.layout.listview_item_one_way_together:
-                intent.putExtra("oneWayOrTwoWay", 0); // 편도
-                intent.putExtra("defaultOrTogether", 1); // 같이타기
-                break;
-            case R.layout.listview_item_two_way:
-                intent.putExtra("oneWayOrTwoWay", 1); // 왕복
-                intent.putExtra("defaultOrTogether", 0); // 같이타기 아님. 기본
-                break;
-            case R.layout.listview_item_two_way_together:
-                intent.putExtra("oneWayOrTwoWay", 1); // 왕복
-                intent.putExtra("defaultOrTogether", 1); // 같이타기
-                break;
-        }
+
         Rental rental =  app.getRental_list().getRental_list().get(position);
+        int wayType = rental.getType(); // 1 : 왕복, 2: 편도
+        int togetherType =  rental.getTogether().getFlag(); // 0 : 기본, 1 : 합승
+        int type =0 ;
+        if(wayType == 1 && togetherType == 0) { // 왕복 & 기본
+            type =1;
+        }else if(wayType == 1 && togetherType == 1) { // 왕복 & 합승
+            type =2;
+        }else if(wayType == 2 && togetherType == 0) { // 편도 & 기본
+            type =3;
+        }else if(wayType == 2 && togetherType == 1) { // 편도 & 합승`
+            type = 4;
+        }
+
+        intent.putExtra("type",type);
         intent.putExtra("info", rental);
 
         startActivity(intent);

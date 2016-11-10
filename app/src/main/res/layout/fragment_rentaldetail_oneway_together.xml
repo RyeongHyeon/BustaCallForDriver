@@ -77,6 +77,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:layout_marginBottom="70dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -101,5 +102,19 @@
             android:textSize="14sp" />
 
     </LinearLayout>
-
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_alignParentEnd="true"
+            android:id="@+id/fragment_rentaldetail_oneway_together_stv_enter"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="입찰 하기"
+            android:textColor="@color/AppColorWhite"
+            android:textSize="30sp" />
+    </RelativeLayout>
 </RelativeLayout>

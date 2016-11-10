@@ -15,6 +15,4 @@ public class Activity_Main_Presenter {
         this.view = view;
         app = (AppController)view.getApplicationContext();
     }
-
-
 }

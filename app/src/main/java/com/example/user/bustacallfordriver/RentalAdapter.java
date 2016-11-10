@@ -33,8 +33,7 @@ public class RentalAdapter extends BaseAdapter {
         this.rentalList = rental_list;
     }
 
-    @Override
-    public int getItemViewType(int position) {
+    public int getItemViewType_view(int position) {
         int wayType = rentalList.getRental_list().get(position).getType(); // 1 : 왕복, 2: 편도
         int togetherType = rentalList.getRental_list().get(position).getTogether().getFlag(); // 0 : 기본, 1 : 합승
         int type =0 ;
@@ -44,10 +43,9 @@ public class RentalAdapter extends BaseAdapter {
             type =2;
         }else if(wayType == 2 && togetherType == 0) { // 편도 & 기본
             type =3;
-        }else if(wayType == 2 && togetherType == 1) { // 편도 & 합승
+        }else if(wayType == 2 && togetherType == 1) { // 편도 & 합승`
             type =4;
         }
-
         return type;
     }
 
@@ -56,7 +54,7 @@ public class RentalAdapter extends BaseAdapter {
         final int pos = position;
         final Context context = parent.getContext();
         View v = convertView;
-        int viewType = getItemViewType(pos);
+        int viewType = getItemViewType_view(pos);
         Rental rental = rentalList.getRental_list().get(pos);
         if (v == null) {
             LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
