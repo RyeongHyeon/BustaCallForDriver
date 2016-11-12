@@ -1,5 +1,6 @@
 package com.example.user.bustacallfordriver.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -29,6 +30,8 @@ public class Fragment_RentalDetail_TwoWay extends BaseFragment implements View.O
     TextView tv_toll_inc,tv_toll_out,tv_park_inc,tv_park_out; //총 6개의 money_list(톨비 등등)
     TextView tv_food_inc,tv_food_out,tv_motel_inc,tv_motel_out;
     TextView tv_vol_inc,tv_vol_out,tv_tax_inc,tv_tax_out;
+    int isExcludeToll=1, isExcludePark=1, isExcludeFood=1;// 톨비, 주차, 식사,
+    int isExcludeMotel=1, isExcludeVol=1, isExcludeTax=1; // 숙박, 봉사, 부가세
     ArrayList<Integer> money_list = new ArrayList<>();
 
     Rental rental;
@@ -74,6 +77,19 @@ public class Fragment_RentalDetail_TwoWay extends BaseFragment implements View.O
         tv_tax_inc = (TextView)v.findViewById(R.id.fragment_rentaldetail_twoway_tv_tax_include);
         tv_tax_out = (TextView)v.findViewById(R.id.fragment_rentaldetail_twoway_tv_tax_exclude);
 
+        tv_toll_inc.setOnClickListener(this);
+        tv_toll_out.setOnClickListener(this);
+        tv_park_inc.setOnClickListener(this);
+        tv_park_out.setOnClickListener(this);
+        tv_food_inc.setOnClickListener(this);
+        tv_food_out.setOnClickListener(this);
+        tv_motel_inc.setOnClickListener(this);
+        tv_motel_out.setOnClickListener(this);
+        tv_vol_inc.setOnClickListener(this);
+        tv_vol_out.setOnClickListener(this);
+        tv_tax_inc.setOnClickListener(this);
+        tv_tax_out.setOnClickListener(this);
+
         setEnableTextView(tv_enter,false);
         tv_enter.setOnClickListener(this);
         tv_day.setText(rental.getDay_one());
@@ -112,16 +128,78 @@ public class Fragment_RentalDetail_TwoWay extends BaseFragment implements View.O
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.fragment_rentaldetail_twoway_tv_enter){
-            //통신
-            //머니 리스트는 가정한다.
-            money_list.add(1);
-            money_list.add(1);
-            money_list.add(1);
-            money_list.add(1);
-            money_list.add(1);
-            money_list.add(1);
-            presenter.request_send_bus(rental.getRental_num(),app.getBus().getBus_num(),et_money.getText().toString(),money_list);
+        switch (v.getId()) {
+            case R.id.fragment_rentaldetail_oneway_tv_toll_include:
+                tv_toll_inc.setTextColor(Color.parseColor("#2978B0")); // 파랑
+                tv_toll_out.setTextColor(Color.parseColor("#dcdddd")); // 회색
+                isExcludeToll = 1;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_toll_exclude:
+                tv_toll_inc.setTextColor(Color.parseColor("#dcdddd"));
+                tv_toll_out.setTextColor(Color.parseColor("#cc5555"));
+                isExcludeToll = 0;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_park_include:
+                tv_park_inc.setTextColor(Color.parseColor("#2978B0"));
+                tv_park_out.setTextColor(Color.parseColor("#dcdddd"));
+                isExcludePark = 1;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_park_exclude:
+                tv_park_inc.setTextColor(Color.parseColor("#dcdddd"));
+                tv_park_out.setTextColor(Color.parseColor("#cc5555"));
+                isExcludePark = 0;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_food_include:
+                tv_food_inc.setTextColor(Color.parseColor("#2978B0"));
+                tv_food_out.setTextColor(Color.parseColor("#dcdddd"));
+                isExcludeFood = 1;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_food_exclude:
+                tv_food_inc.setTextColor(Color.parseColor("#dcdddd"));
+                tv_food_out.setTextColor(Color.parseColor("#cc5555"));
+                isExcludeFood = 0;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_motel_include:
+                tv_motel_inc.setTextColor(Color.parseColor("#2978B0"));
+                tv_motel_out.setTextColor(Color.parseColor("#dcdddd"));
+                isExcludeMotel = 1;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_motel_exclude:
+                tv_motel_inc.setTextColor(Color.parseColor("#dcdddd"));
+                tv_motel_out.setTextColor(Color.parseColor("#cc5555"));
+                isExcludeMotel = 0;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_vol_include:
+                tv_vol_inc.setTextColor(Color.parseColor("#2978B0"));
+                tv_vol_out.setTextColor(Color.parseColor("#dcdddd"));
+                isExcludeVol = 1;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_vol_exclude:
+                tv_vol_inc.setTextColor(Color.parseColor("#dcdddd"));
+                tv_vol_out.setTextColor(Color.parseColor("#cc5555"));
+                isExcludeVol = 0;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_tax_include:
+                tv_tax_inc.setTextColor(Color.parseColor("#2978B0"));
+                tv_tax_out.setTextColor(Color.parseColor("#dcdddd"));
+                isExcludeTax = 1;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_tax_exclude:
+                tv_tax_inc.setTextColor(Color.parseColor("#dcdddd"));
+                tv_tax_out.setTextColor(Color.parseColor("#cc5555"));
+                isExcludeTax = 0;
+                break;
+            case R.id.fragment_rentaldetail_oneway_tv_enter:
+                //통신
+                money_list.add(isExcludeToll);
+                money_list.add(isExcludePark);
+                money_list.add(isExcludeFood);
+                money_list.add(isExcludeMotel);
+                money_list.add(isExcludeVol);
+                money_list.add(isExcludeTax);
+                presenter.request_send_bus(rental.getRental_num(),app.getBus().getBus_num(),et_money.getText().toString(),money_list);
+                getActivity().finish();
+                break;
         }
     }
 }

@@ -10,7 +10,5 @@
 
         <include layout="@layout/listview_item_one_way_top" />
 
-        <include layout="@layout/listview_item_one_way_bottom" />
-
     </LinearLayout>
 </LinearLayout>

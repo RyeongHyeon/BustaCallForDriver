@@ -5,6 +5,14 @@
     <string name="signin">버스타콜 기사 회원가입</string>
     <string name="notice">알림 내역</string>
     <string name="rental_detail">매물 상세 내역</string>
+    <string name="tender">입찰 내역</string>
+    <string name="schedule">나의 스케줄</string>
+    <string name="myinfo">나의 정보</string>
+    <string name="schedule_button">나의 정보 수정</string>
+    <string name="mypoint">나의 포인트</string>
+    <string name="inquiry">문의하기</string>
+    <string name="nickname">닉네임</string>
+
 
     <string name="signin_user">정보 입력</string>
     <string name="signin_bus">버스 정보 입력</string>

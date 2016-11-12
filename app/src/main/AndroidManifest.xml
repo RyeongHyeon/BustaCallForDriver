@@ -26,6 +26,15 @@
         <activity android:name=".view.Activity_Notice" />
         <activity android:name=".view.Activity_RentalDetail"/>
 
+
+        <activity android:name=".view.Activity_Sliding_Tender"/>
+        <activity android:name=".view.Activity_Sliding_Schedule"/>
+        <activity android:name=".view.Activity_Sliding_MyInfo"/>
+        <activity android:name=".view.Activity_Sliding_MyPoint"/>
+        <activity android:name=".view.Activity_Sliding_Inquiry"/>
+        <activity android:name=".view.Activity_Sliding_Setting"/>
+
+
         <service android:name=".service.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

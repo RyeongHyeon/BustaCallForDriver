@@ -2,25 +2,25 @@ package com.example.user.bustacallfordriver.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.RentalAdapter;
 import com.example.user.bustacallfordriver.dialog.Dialog_base_two_button;
 import com.example.user.bustacallfordriver.model.Rental;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class Activity_Main extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
 
     AppController app;
-    ImageView iv_notiIcon;
+    SlidingMenu menu;
+    ImageView iv_menu, iv_notiIcon;
     ListView listView;
-
-    TextView test_default, test_together; // 테스트용
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,21 +28,42 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
         setContentView(R.layout.activity_main);
         app = (AppController)getApplicationContext();
         init();
+        setMenu();
     }
 
     private void init() {
+        iv_menu = (ImageView)findViewById(R.id.activity_main_iv_menu);
         iv_notiIcon = (ImageView)findViewById(R.id.activity_main_iv_noti);
+        iv_menu.setOnClickListener(this);
         iv_notiIcon.setOnClickListener(this);
         listView = (ListView)findViewById(R.id.activity_main_listview);
         RentalAdapter adapter= new RentalAdapter(app.getRental_list());
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener(this);
+    }
+
+    public void setMenu() {
+        menu = new SlidingMenu(this);
+        menu.setMode(SlidingMenu.LEFT);
+        menu.setTouchModeAbove(SlidingMenu.TOUCHMODE_FULLSCREEN);
+        menu.setShadowWidthRes(R.dimen.shadow_width);
+        menu.setShadowDrawable(R.drawable.shadow);
+        menu.setBehindOffsetRes(R.dimen.slidingmenu_offset);
+        menu.setFadeDegree(0.35f);
+        menu.attachToActivity(this, SlidingMenu.SLIDING_CONTENT);
+        menu.setMenu(R.layout.fragment_sliding_menu);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.sliding_menu_frame, SlidingMenuFragment.newInstance())
+                .commit();
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.activity_main_iv_menu:
+                goTomenu();
+                break;
             case R.id.activity_main_iv_noti: // 알림 아이콘
                 Intent intent = new Intent(this, Activity_Notice.class);
                 startActivity(intent);
@@ -85,13 +106,17 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
             type =2;
         }else if(wayType == 2 && togetherType == 0) { // 편도 & 기본
             type =3;
-        }else if(wayType == 2 && togetherType == 1) { // 편도 & 합승`
-            type = 4;
+        }else{
+            Log.d("error: ","없는 type");
         }
 
         intent.putExtra("type",type);
         intent.putExtra("info", rental);
 
         startActivity(intent);
+    }
+
+    public void goTomenu() {
+        menu.showMenu();
     }
 }

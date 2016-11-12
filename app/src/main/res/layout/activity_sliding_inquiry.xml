@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        style="@style/White_TitleBar"
+        android:background="@color/AppColorWhite">
+
+        <ImageView
+            android:id="@+id/activity_sliding_inquiry_iv_btnback"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:onClick="onClick_backButton"
+            android:src="@drawable/blue_back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/inquiry"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/titlesize"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:background="@color/AppColorLightGray"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"></LinearLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_above="@+id/activity_sliding_inqulry_tv_enter"
+            android:background="@drawable/rectangle_box"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/activity_sliding_inqulry_et_text"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@null"
+                android:gravity="top|left"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="문의 글을 써주세요"
+                android:textSize="22dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/activity_sliding_inqulry_tv_enter"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="전 송"
+            android:textColor="@color/AppColorWhite"
+            android:textSize="30sp" />
+    </RelativeLayout>
+</LinearLayout>

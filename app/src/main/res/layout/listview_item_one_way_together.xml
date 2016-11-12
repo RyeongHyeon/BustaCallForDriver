@@ -10,7 +10,7 @@
 
         <include layout="@layout/listview_item_one_way_together_top" />
 
-        <include layout="@layout/listview_item_one_way_bottom" />
+        <include layout="@layout/listview_item_one_way_together_bottom" />
 
     </LinearLayout>
 </LinearLayout>

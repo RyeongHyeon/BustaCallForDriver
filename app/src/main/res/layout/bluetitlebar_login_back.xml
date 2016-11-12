@@ -24,4 +24,6 @@
             android:textColor="#FFFFFF"
             android:textSize="@dimen/titlesize" />
     </RelativeLayout>
+
+
 </LinearLayout>

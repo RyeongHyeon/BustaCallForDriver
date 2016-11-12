@@ -61,12 +61,9 @@ public class Activity_RentalDetail extends BaseActivity implements View.OnClickL
                 fragment = new Fragment_RentalDetail_TwoWay(rental);
                 break;
             case 2:
-                fragment = new Fragment_RentalDetail_TwoWay_Together(rental);
-                break;
-            case 3:
                 fragment = new Fragment_RentalDetail_OneWay(rental);
                 break;
-            case 4:
+            case 3:
                 fragment = new Fragment_RentalDetail_OneWay_Together(rental);
                 break;
         }

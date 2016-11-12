@@ -1,19 +1,10 @@
 package com.example.user.bustacallfordriver.model;
 
-import android.content.Intent;
-
 import com.google.gson.JsonObject;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.xml.transform.Result;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Call;
-import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
@@ -49,4 +40,5 @@ public interface Retrofit_User {
     Call<JsonObject> request_send_bus(@Query("rental_num") int rental_num, @Query("bus_num")String bus_num, @Query("money")String money, @Query("money_one")int money_one,
                                       @Query("money_two")int money_two, @Query("money_three")int money_three, @Query("money_four")int money_four, @Query("money_five")int money_five,
                                       @Query("money_six")int money_six);
+
 }
