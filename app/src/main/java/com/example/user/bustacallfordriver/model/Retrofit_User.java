@@ -41,4 +41,18 @@ public interface Retrofit_User {
                                       @Query("money_two")int money_two, @Query("money_three")int money_three, @Query("money_four")int money_four, @Query("money_five")int money_five,
                                       @Query("money_six")int money_six);
 
+    @GET("/search_mytender.php")
+    Call<Rental_List> request_get_tender(@Query("bus_num")String bus_num);
+
+    @GET("/delete_mytender.php")
+    Call<Rental_List> request_delete_tender(@Query("bus_num")String bus_num, @Query("rental_num") int rental_num);
+
+    @GET("/notice_searchregion.php") // 영업지역에 해당하는 매물 찾아서 알림받기
+    Call<Rental_List> request_notice_region(@Query("region")String bus_workArea);
+
+    @GET("/send_notice_onoff.php") // 알림 켜기, 끄기 여부 보내기
+    Call<Void> request_send_notice_onoff(@Query("notice")int notice_onoff);
+
+    @GET("/get_rental_region.php") //지역 스피너
+    Call<Rental_List> request_get_rental_region(@Query("region")String region);
 }

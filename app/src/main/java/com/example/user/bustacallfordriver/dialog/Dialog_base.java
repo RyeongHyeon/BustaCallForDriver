@@ -39,7 +39,8 @@ public class Dialog_base extends Dialog implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         if(v.getId()==R.id.dialog_base_enter){
-            this.dismiss();
+                this.dismiss();
         }
     }
+
 }

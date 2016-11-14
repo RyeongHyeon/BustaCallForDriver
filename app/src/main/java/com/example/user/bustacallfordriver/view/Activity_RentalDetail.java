@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.user.bustacallfordriver.BaseFragment;
 import com.example.user.bustacallfordriver.R;
@@ -21,7 +20,6 @@ public class Activity_RentalDetail extends BaseActivity implements View.OnClickL
 
     BaseFragment fragment; // FrameLayout에 넣을 fragment
     ImageView backBtn;
-    TextView tenderBtn;
     Rental rental;
     int type;
 
@@ -80,4 +78,5 @@ public class Activity_RentalDetail extends BaseActivity implements View.OnClickL
                 break;
         }
     }
+
 }

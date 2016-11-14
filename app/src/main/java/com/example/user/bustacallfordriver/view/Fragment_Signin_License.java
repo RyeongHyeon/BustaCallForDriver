@@ -84,7 +84,6 @@ public class Fragment_Signin_License extends BaseFragment implements View.OnClic
 
     @Override
     public void onClick(View v) {
-        Intent intent;
         switch (v.getId()) {
             case R.id.activtiy_signin_license_driverlicense:
                 new TedPermission(getContext())
@@ -198,5 +197,4 @@ public class Fragment_Signin_License extends BaseFragment implements View.OnClic
         intent = new Intent(getActivity(), Activity_Main.class);
         startActivity(intent);
     }
-
 }

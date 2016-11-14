@@ -24,13 +24,11 @@ public class AppController extends Application {
     String request_num;
     Bus bus = new Bus();
     String intent_flag;//자동 로그인 확인 0이면 안되있는거 1이면 모든 정보가 저장되있는거
-    Rental_List rental_list = new Rental_List();
-    Rental_List tender_list = new Rental_List();
 
+    Rental_List rental_list = new Rental_List();
     public Rental_List getRental_list() {
         return rental_list;
     }
-
     /**
      * 결재 완료된 Rental은 삭제하고 셋팅
      */
@@ -40,22 +38,9 @@ public class AppController extends Application {
             if (itr.next().getAccount_flag() == 1)
                 itr.remove();
         }
+        // 3명이상 결제하면 자동으로 안띄워주니까 이제 결재여부 안걸러내도 됨
+        // 현재는 3명이상 못하니까 있는거임
         this.rental_list = rental_list;
-    }
-
-
-    public Rental_List getTender_list() {
-        return tender_list;
-    }
-
-    public void setTender_list(Rental_List tender_list) {
-        Iterator<Rental> itr = tender_list.getTender_list().iterator();
-        while (itr.hasNext()) {
-            if (itr.next().getAccount_flag() == 1)
-                itr.remove();
-        }
-        // 내 버스 번호로 렌탈 번호 가져온뒤 걸러내야됨
-        this.tender_list = tender_list;
     }
 
     public String getIntent_flag() {

@@ -49,6 +49,7 @@ public class Activity_Login extends BaseActivity implements View.OnClickListener
         tv_btnLogin.setOnClickListener(this);
         et_phoneNum.addTextChangedListener(tv_phoneNum);
         et_requestNum.addTextChangedListener(tv_requsetNum);
+        setEnableTextView(tv_btnLogin,false);
     }
 
 

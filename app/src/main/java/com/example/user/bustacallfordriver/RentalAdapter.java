@@ -19,10 +19,11 @@ public class RentalAdapter extends BaseAdapter {
 
     private Rental_List rentalList; //  렌탈리스트 가져오는 레트로핏 클래스
     ViewHoder viewHoder = null;
+    Context context;
 
-
-    public RentalAdapter(Rental_List rental_list) {
+    public RentalAdapter(Rental_List rental_list, Context context) {
         this.rentalList = rental_list;
+        this.context = context;
     }
 
     public int getItemViewType_view(Rental rental) {
@@ -44,32 +45,34 @@ public class RentalAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final int pos = position;
-        final Context context = parent.getContext();
         View v = convertView;
         Rental rental = rentalList.getRental_list().get(pos);
         int viewType = getItemViewType_view(rental);
+
         if (v == null) {
             viewHoder = new ViewHoder();
+            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            switch (viewType) {
+                case 1: // 왕복 & 기본
+                    v = vi.inflate(R.layout.listview_item_two_way, parent, false);
+                    twoWayInit(v);
+                    break;
+                case 2: // 편도 & 기본
+                    v = vi.inflate(R.layout.listview_item_one_way, parent, false);
+                    oneWayInit(v);
+                    break;
+                case 3: // 편도 & 같이타기
+                    v = vi.inflate(R.layout.listview_item_one_way_together, parent, false);
+                    oneWayTogetherInit(v);
+                    break;
+            }
+
+
+            v.setTag(viewHoder);
         } else {
             viewHoder = (ViewHoder) v.getTag();
         }
-        LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        switch (viewType) {
-            case 1: // 왕복 & 기본
-                v = vi.inflate(R.layout.listview_item_two_way, null);
-                twoWayInit(v);
-                break;
-            case 2: // 편도 & 기본
-                v = vi.inflate(R.layout.listview_item_one_way, null);
-                oneWayInit(v);
-                break;
-            case 3: // 편도 & 같이타기
-                v = vi.inflate(R.layout.listview_item_one_way_together, null);
-                oneWayTogetherInit(v);
-                break;
-        }
 
-        v.setTag(viewHoder);
 
 
         switch (viewType) {
@@ -151,6 +154,15 @@ public class RentalAdapter extends BaseAdapter {
         return position;
     }
 
+    @Override
+    public int getViewTypeCount() {
+        return getCount();
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     class ViewHoder {
         TextView oneway_startDate, oneway_startTime, oneway_together_startDate, oneway_together_startTime; // 출발날짜, 출발시간 (출발할때)

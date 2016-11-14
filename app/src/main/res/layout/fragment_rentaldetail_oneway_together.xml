@@ -109,7 +109,7 @@
         android:layout_height="match_parent">
         <TextView
             android:layout_alignParentEnd="true"
-            android:id="@+id/fragment_rentaldetail_oneway_together_stv_enter"
+            android:id="@+id/fragment_rentaldetail_oneway_together_tv_enter"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"

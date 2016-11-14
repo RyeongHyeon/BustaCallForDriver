@@ -1,9 +1,12 @@
 package com.example.user.bustacallfordriver;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.TextView;
 
+import com.example.user.bustacallfordriver.model.Rental;
 import com.example.user.bustacallfordriver.model.Rental_List;
 
 /**
@@ -13,6 +16,7 @@ import com.example.user.bustacallfordriver.model.Rental_List;
 public class ScheduleAdapter extends BaseAdapter {
 
     Rental_List scheduleList;
+    ViewHoder viewHoder;
 
     public ScheduleAdapter(Rental_List schedule_List) {
         this.scheduleList = schedule_List;
@@ -22,7 +26,17 @@ public class ScheduleAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        return null;
+        final int pos = position;
+        final Context context = parent.getContext();
+        View v = convertView;
+        Rental schedule = scheduleList.getRental_list().get(pos);
+        if (v == null) {
+            viewHoder = new ScheduleAdapter.ViewHoder();
+        } else {
+            viewHoder = (ScheduleAdapter.ViewHoder) v.getTag();
+        }
+
+        return v;
     }
 
 
@@ -41,4 +55,14 @@ public class ScheduleAdapter extends BaseAdapter {
         return position;
     }
 
+    class ViewHoder {
+        TextView oneway_startDate, oneway_startTime, oneway_together_startDate, oneway_together_startTime; // 출발날짜, 출발시간 (출발할때)
+        TextView twoway_startDate, twoway_startTime; // 출발날짜, 출발시간 (출발할때)
+        TextView twoway_endDate, twoway_endTime; // 출발날짜, 출발시간 (돌아올때)
+        TextView oneway_startPlace, oneway_endPlace, oneway_together_startPlace, oneway_together_endPlace; // 출발지, 도착지
+        TextView twoway_startPlace, twoway_endPlace; // 출발지, 도착지
+        TextView oneway_goal, oneway_together_goal, twoway_goal;// 목적
+        TextView oneway_userCnt, twoway_userCnt; // 탑승자수
+        TextView oneway_together_price; // 같이타기 가격
+    }
 }

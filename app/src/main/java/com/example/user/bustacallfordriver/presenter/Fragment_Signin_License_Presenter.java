@@ -87,7 +87,7 @@ public class Fragment_Signin_License_Presenter {
         RequestBody phonenum = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getPhone_num());
         RequestBody bus_career = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getBus_career());
         RequestBody bus_region = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getRegion());
-       Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
         Retrofit_User retrofit_user = retrofit.create(Retrofit_User.class);
         Call<Void> retrofitinfo = retrofit_user.request_mainlogin_bus(nickname,phonenum,bus_type,bus_num,bus_career,bus_region,body2);
         dialog_progress.show();

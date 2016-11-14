@@ -1,6 +1,5 @@
 package com.example.user.bustacallfordriver.model;
 
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -27,6 +26,8 @@ public class Bus {
     String phone_num;//핸드폰 번호
     ArrayList<Integer> money_list=new ArrayList<>();//톨비~부가세까지 포함 0, 미포함 1
     int account_flag; //결제 되었는지 안되었는지 안되어있으면 0, 되어있으면 1
+    Rental_List notice_list = new Rental_List(); // 알림 리스트 최대 10개 쌓아둠
+
 
     public String getPhone_num() {
         return phone_num;

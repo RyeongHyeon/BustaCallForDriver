@@ -5,14 +5,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.RentalAdapter;
 import com.example.user.bustacallfordriver.dialog.Dialog_base_two_button;
 import com.example.user.bustacallfordriver.model.Rental;
+import com.example.user.bustacallfordriver.model.Rental_List;
+import com.example.user.bustacallfordriver.presenter.Activity_Main_Presenter;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 public class Activity_Main extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
@@ -20,26 +26,60 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
     AppController app;
     SlidingMenu menu;
     ImageView iv_menu, iv_notiIcon;
+    Spinner sp_region; // 지역 선택 스피너
+    TextView tv_workArea; // 나의 영업지역 버튼
+    LinearLayout noExistLayer;
     ListView listView;
+//    RentalAdapter adapter;
+
+    Rental_List rentalList;
+
+    Activity_Main_Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         app = (AppController)getApplicationContext();
+        presenter = new Activity_Main_Presenter(this);
+//        presenter.request_get_rental();
         init();
         setMenu();
+//        setRentalList_SpinnerRegion();
     }
 
     private void init() {
         iv_menu = (ImageView)findViewById(R.id.activity_main_iv_menu);
         iv_notiIcon = (ImageView)findViewById(R.id.activity_main_iv_noti);
+        sp_region = (Spinner)findViewById(R.id.activity_main_sp_region);
+        tv_workArea = (TextView)findViewById(R.id.activity_main_tv_workArea);
+        listView = (ListView)findViewById(R.id.activity_main_listview);
+        noExistLayer = (LinearLayout) findViewById(R.id.activity_main_noexist);
         iv_menu.setOnClickListener(this);
         iv_notiIcon.setOnClickListener(this);
-        listView = (ListView)findViewById(R.id.activity_main_listview);
-        RentalAdapter adapter= new RentalAdapter(app.getRental_list());
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener(this);
+        tv_workArea.setOnClickListener(this);
+        presenter.request_get_rental();
+
+        if(app.getRental_list().getRental_list().size()>0) {
+            RentalAdapter adapter= new RentalAdapter(app.getRental_list(), this);
+            listView.setAdapter(adapter);
+            listView.setOnItemClickListener(this);
+        }
+        ArrayAdapter regionAdapter = ArrayAdapter.createFromResource(this, R.array.main_workArea, android.R.layout.simple_spinner_item);
+        regionAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
+        sp_region.setAdapter(regionAdapter);
+
+        sp_region.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                setRentalList_SpinnerRegion();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+//                setRentalList_SpinnerRegion();
+            }
+        });
     }
 
     public void setMenu() {
@@ -96,7 +136,7 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getApplication(), Activity_RentalDetail.class);
 
-        Rental rental =  app.getRental_list().getRental_list().get(position);
+        Rental rental = getRental_list().getRental_list().get(position);
         int wayType = rental.getType(); // 1 : 왕복, 2: 편도
         int togetherType =  rental.getTogether().getFlag(); // 0 : 기본, 2 : 같이타기
         int type =0 ;
@@ -118,5 +158,39 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
 
     public void goTomenu() {
         menu.showMenu();
+    }
+
+    public void setRenewalListView() {
+        Rental_List rentalList = getRental_list();
+        if(!rentalList.getRental_list().isEmpty()){
+            noExistLayer.setVisibility(View.INVISIBLE);
+            listView.setVisibility(View.VISIBLE);
+            if(app.getRental_list().getRental_list().size()>0) {
+                RentalAdapter adapter = new RentalAdapter(rentalList,this);
+                listView.setAdapter(adapter);
+            }
+
+        }else {
+            noExistLayer.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.INVISIBLE);
+        }
+    }
+
+    public Rental_List getRental_list() {
+        return rentalList;
+    }
+
+    public void setRental_list(Rental_List rentalList) {
+        this.rentalList = rentalList;
+    }
+
+    /**스피너에 등록된 지역으로 탐색*/
+    private void setRentalList_SpinnerRegion() {
+        String selItem= (String)sp_region.getSelectedItem();
+        if(!selItem.equals("전체")) {
+            presenter.request_get_rental_region(selItem);
+        }else {
+            presenter.request_get_rental();
+        }
     }
 }

@@ -58,6 +58,10 @@ public class Activity_Splash_Presenter {
                 if (response.isSuccessful()) {
                     app.setBus(response.body());
                     request_get_rental(); //통신을 한번 더, 렌탈에 대한 arraylist를 받아와
+
+//                    Log.d("app",app.toString());
+//                    Intent intent = new Intent(view, Activity_Main.class);
+//                    view.startActivity(intent);
                 }else{
                     Log.d("test",response.toString());
                 }

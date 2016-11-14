@@ -7,7 +7,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
 
         <RelativeLayout
@@ -44,17 +46,38 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/AppColorWhite"
-            android:padding="10dp"
->
+            android:padding="10dp">
+
+            <LinearLayout
+                android:id="@+id/activity_tender_noexist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_gravity="center"
+                    android:src="@drawable/notice_noexist_icon" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="입찰 내역이 없습니다."
+                    android:textColor="@color/AppColorLightGray"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <ListView
                 android:id="@+id/activity_tender_listview"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:dividerHeight="10dp"
-                android:scrollbars="none"
                 android:divider="@color/AppColorWhite"
-                />
+                android:dividerHeight="10dp"
+                android:visibility="invisible"
+                android:scrollbars="none" />
         </RelativeLayout>
     </LinearLayout>
 

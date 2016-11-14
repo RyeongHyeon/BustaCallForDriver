@@ -13,6 +13,7 @@ import android.widget.TextView;
 import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.dialog.Dialog_base_two_button;
+import com.example.user.bustacallfordriver.presenter.SlidingMenuFragment_Presenter;
 
 /**
  * Created by user on 2016-11-12.
@@ -22,6 +23,8 @@ public class SlidingMenuFragment extends Fragment implements View.OnClickListene
     TextView tv_nickname;
     ViewGroup ll_tender,ll_schedule, ll_myInfo, ll_myPoint,ll_inqulry,ll_setting,ll_logout;
     AppController app;
+
+    SlidingMenuFragment_Presenter presenter;
 
     public SlidingMenuFragment(){}
 
@@ -33,18 +36,23 @@ public class SlidingMenuFragment extends Fragment implements View.OnClickListene
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_sliding_menu, container, false);
-
         app = (AppController)getActivity().getApplicationContext();
-        // Instantiate image view object of the user avatar and attaching onClick listener to it.
-        tv_nickname = (TextView)rootView.findViewById(R.id.sliding_menu_tv_name);
+        presenter = new SlidingMenuFragment_Presenter(this);
+        init(rootView);
+        return rootView;
+    }
 
-        ll_tender = (LinearLayout)rootView.findViewById(R.id.sliding_menu_ll_tender);
-        ll_schedule = (LinearLayout)rootView.findViewById(R.id.sliding_menu_ll_schedule);
-        ll_myInfo = (LinearLayout)rootView.findViewById(R.id.sliding_menu_ll_myinfo);
-        ll_myPoint = (LinearLayout)rootView.findViewById(R.id.sliding_menu_ll_mypoint);
-        ll_inqulry = (LinearLayout)rootView.findViewById(R.id.sliding_menu_ll_inqulry);
-        ll_setting = (LinearLayout)rootView.findViewById(R.id.sliding_menu_ll_setting);
-        ll_logout = (LinearLayout)rootView.findViewById(R.id.sliding_menu_ll_logout);
+    private void init(View v) {
+
+                // Instantiate image view object of the user avatar and attaching onClick listener to it.
+        tv_nickname = (TextView)v.findViewById(R.id.sliding_menu_tv_name);
+        ll_tender = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_tender);
+        ll_schedule = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_schedule);
+        ll_myInfo = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_myinfo);
+        ll_myPoint = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_mypoint);
+        ll_inqulry = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_inqulry);
+        ll_setting = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_setting);
+        ll_logout = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_logout);
         ll_tender.setOnClickListener(this);
         ll_schedule.setOnClickListener(this);
         ll_myInfo.setOnClickListener(this);
@@ -54,8 +62,6 @@ public class SlidingMenuFragment extends Fragment implements View.OnClickListene
         ll_logout.setOnClickListener(this);
 
         tv_nickname.setText(app.getBus().getNickname());
-
-        return rootView;
     }
 
     @Override
@@ -78,7 +84,7 @@ public class SlidingMenuFragment extends Fragment implements View.OnClickListene
     }
 
     public void goToTender(){
-        Intent intent = new Intent(getContext(),Activity_Sliding_Tender.class);
+        Intent intent = new Intent(getContext(), Activity_Sliding_Tender.class);
         startActivity(intent);
     }
     public void goToSchedule() {

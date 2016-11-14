@@ -21,6 +21,7 @@ import retrofit2.Retrofit;
  */
 public class Fragment_RentalDetail_OneWay_Presenter {
     Fragment_RentalDetail_OneWay view;
+
     public Fragment_RentalDetail_OneWay_Presenter(Fragment_RentalDetail_OneWay view){
         this.view = view;
     }
