@@ -23,6 +23,7 @@
     </string-array>
     <!--영업지역-->
     <string-array name="main_workArea">
+        <item>전체</item>
         <item>서울</item>
         <item>세종</item>
         <item>부산</item>

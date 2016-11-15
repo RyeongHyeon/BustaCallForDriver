@@ -32,21 +32,17 @@ public class NoticeAdapter extends BaseAdapter {
         Rental notice = noticeList.getRental_list().get(pos);
 
         if (v == null) {
-            viewHoder = new NoticeAdapter.ViewHoder();
+            viewHoder = new ViewHoder();
+            LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            v = vi.inflate(R.layout.listview_item_notice, parent, false);
+            init(v);
+            v.setTag(viewHoder);
         } else {
-            viewHoder = (NoticeAdapter.ViewHoder) v.getTag();
+            viewHoder = (ViewHoder) v.getTag();
         }
 
-
-        v.setTag(viewHoder);
-
-
-        LayoutInflater vi = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
-        init(v);
-
         viewHoder.tv_region.setText(notice.getStart_point_one());
-        viewHoder.tv_rental_num.setText(notice.getRental_num());
+        viewHoder.tv_rental_num.setText(String.valueOf(notice.getRental_num()));
 
         return v;
     }

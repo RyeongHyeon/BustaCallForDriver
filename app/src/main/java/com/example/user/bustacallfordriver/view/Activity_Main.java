@@ -30,7 +30,7 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
     TextView tv_workArea; // 나의 영업지역 버튼
     LinearLayout noExistLayer;
     ListView listView;
-//    RentalAdapter adapter;
+    RentalAdapter adapter;
 
     Rental_List rentalList;
 
@@ -42,10 +42,8 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
         setContentView(R.layout.activity_main);
         app = (AppController)getApplicationContext();
         presenter = new Activity_Main_Presenter(this);
-//        presenter.request_get_rental();
         init();
         setMenu();
-//        setRentalList_SpinnerRegion();
     }
 
     private void init() {
@@ -61,10 +59,11 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
         presenter.request_get_rental();
 
         if(app.getRental_list().getRental_list().size()>0) {
-            RentalAdapter adapter= new RentalAdapter(app.getRental_list(), this);
+             adapter= new RentalAdapter(app.getRental_list(), this);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
         }
+
         ArrayAdapter regionAdapter = ArrayAdapter.createFromResource(this, R.array.main_workArea, android.R.layout.simple_spinner_item);
         regionAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp_region.setAdapter(regionAdapter);
@@ -77,7 +76,6 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-//                setRentalList_SpinnerRegion();
             }
         });
     }
@@ -107,6 +105,12 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
             case R.id.activity_main_iv_noti: // 알림 아이콘
                 Intent intent = new Intent(this, Activity_Notice.class);
                 startActivity(intent);
+                break;
+            case R.id.activity_main_tv_workArea:
+                presenter.request_get_rental_region(app.getBus().getRegion());
+                ArrayAdapter myAdap = (ArrayAdapter) sp_region.getAdapter();
+                int spinnerPosition = myAdap.getPosition(app.getBus().getRegion());
+                sp_region.setSelection(spinnerPosition);
                 break;
         }
     }
@@ -166,8 +170,9 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
             noExistLayer.setVisibility(View.INVISIBLE);
             listView.setVisibility(View.VISIBLE);
             if(app.getRental_list().getRental_list().size()>0) {
-                RentalAdapter adapter = new RentalAdapter(rentalList,this);
-                listView.setAdapter(adapter);
+                adapter.clearRentalList();
+                adapter.addRentalList(rentalList);
+                adapter.notifyDataSetChanged();
             }
 
         }else {

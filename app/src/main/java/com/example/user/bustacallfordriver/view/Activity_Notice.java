@@ -27,7 +27,7 @@ public class Activity_Notice extends BaseActivity implements View.OnClickListene
 
     RelativeLayout rl_notice_button; // 알림 투글버튼같은 역할
     TextView tv_on, tv_off; // 켜기, 끄기 텍스트
-    LinearLayout ll_notice_noexist; // 알림 없을때 표시해주는 바탕화면 아이콘
+    LinearLayout noExistLayer; // 알림 없을때 표시해주는 바탕화면 아이콘
     ListView listView; // 알림 리스트
     Activity_Notice_Presenter presenter;
     NoticeAdapter adapter;
@@ -48,23 +48,23 @@ public class Activity_Notice extends BaseActivity implements View.OnClickListene
         rl_notice_button = (RelativeLayout) findViewById(R.id.activity_notice_on_or_off_layout);
         tv_on = (TextView) findViewById(R.id.acticity_notice_on_text);
         tv_off = (TextView) findViewById(R.id.acticity_notice_off_text);
-        ll_notice_noexist = (LinearLayout) findViewById(R.id.activity_notice_noexist);
+        noExistLayer = (LinearLayout) findViewById(R.id.activity_notice_noexist);
         listView = (ListView) findViewById(R.id.activity_notice_listview);
         rl_notice_button.setOnClickListener(this);
 
-
+        presenter.request_notice_region(app.getBus().getRegion());
 
         // 알림 설정 상태를 보고 처음 알림 켜기 끄기 셋팅
     }
 
-    public void setRenewalListView() {
+    public void setlListView() {
         if (!getNoticeList().getRental_list().isEmpty()) {
-            ll_notice_noexist.setVisibility(View.INVISIBLE);
+            noExistLayer.setVisibility(View.INVISIBLE);
             listView.setVisibility(View.VISIBLE);
             adapter = new NoticeAdapter(getNoticeList());
             listView.setAdapter(adapter);
         } else {
-            ll_notice_noexist.setVisibility(View.VISIBLE);
+            noExistLayer.setVisibility(View.VISIBLE);
             listView.setVisibility(View.INVISIBLE);
         }
     }

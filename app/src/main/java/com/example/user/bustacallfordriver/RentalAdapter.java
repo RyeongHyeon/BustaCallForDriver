@@ -1,6 +1,8 @@
 package com.example.user.bustacallfordriver;
 
 import android.content.Context;
+import android.database.DataSetObservable;
+import android.database.DataSetObserver;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +22,8 @@ public class RentalAdapter extends BaseAdapter {
     private Rental_List rentalList; //  렌탈리스트 가져오는 레트로핏 클래스
     ViewHoder viewHoder = null;
     Context context;
+    DataSetObservable mDataSetObservable = new DataSetObservable();
+
 
     public RentalAdapter(Rental_List rental_list, Context context) {
         this.rentalList = rental_list;
@@ -72,7 +76,6 @@ public class RentalAdapter extends BaseAdapter {
         } else {
             viewHoder = (ViewHoder) v.getTag();
         }
-
 
 
         switch (viewType) {
@@ -173,5 +176,28 @@ public class RentalAdapter extends BaseAdapter {
         TextView oneway_goal, oneway_together_goal, twoway_goal;// 목적
         TextView oneway_userCnt, twoway_userCnt; // 탑승자수
         TextView oneway_together_price; // 같이타기 가격
+    }
+
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer){ // DataSetObserver의 등록(연결)
+        mDataSetObservable.registerObserver(observer);
+    }
+
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer){ // DataSetObserver의 해제
+        mDataSetObservable.unregisterObserver(observer);
+    }
+
+    @Override
+    public void notifyDataSetChanged(){ // 위에서 연결된 DataSetObserver를 통한 변경 확인
+        mDataSetObservable.notifyChanged();
+    }
+
+    public void clearRentalList(){
+        this.rentalList = null;
+    }
+
+    public void addRentalList(Rental_List rental_list) {
+        this.rentalList = rental_list;
     }
 }
