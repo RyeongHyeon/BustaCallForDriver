@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/top"
+        android:background="@drawable/signin_subtitle_box"
+        style="@style/White_TitleBar">
+
+        <ImageView
+            android:id="@+id/activity_booked_userinfo_iv_back"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="26dp"
+            android:onClick="onClick_backButton"
+            android:src="@drawable/blue_back_button" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/booked_userinfo"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/titlesize"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/AppColorLightGrayTwo"/>
+
+
+    <FrameLayout
+        android:id="@+id/activity_booked_userinfo_frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

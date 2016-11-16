@@ -6,6 +6,7 @@ import android.widget.Button;
 
 import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.R;
+import com.example.user.bustacallfordriver.dialog.Dialog_base_two_button;
 import com.example.user.bustacallfordriver.presenter.Activity_Splash_Presenter;
 
 /**
@@ -40,4 +41,25 @@ public class Activity_Splash extends BaseActivity implements View.OnClickListene
             presenter.checkLogin();
         }
     }
+
+    @Override
+    public void onBackPressed() {//종료 버튼
+        final Dialog_base_two_button dialog_base_two_button = new Dialog_base_two_button(this, "앱을 종료하시겠습니까?");
+        dialog_base_two_button.show();
+        dialog_base_two_button.getTv_enter().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                moveTaskToBack(true);
+                finish();
+                android.os.Process.killProcess(android.os.Process.myPid());
+            }
+        });
+        dialog_base_two_button.getTv_cancel().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog_base_two_button.dismiss();
+            }
+        });
+    }
+
 }

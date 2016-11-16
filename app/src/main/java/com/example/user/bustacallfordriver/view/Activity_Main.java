@@ -21,7 +21,7 @@ import com.example.user.bustacallfordriver.model.Rental_List;
 import com.example.user.bustacallfordriver.presenter.Activity_Main_Presenter;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
-public class Activity_Main extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener{
+public class Activity_Main extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     AppController app;
     SlidingMenu menu;
@@ -40,26 +40,26 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        app = (AppController)getApplicationContext();
+        app = (AppController) getApplicationContext();
         presenter = new Activity_Main_Presenter(this);
         init();
         setMenu();
     }
 
     private void init() {
-        iv_menu = (ImageView)findViewById(R.id.activity_main_iv_menu);
-        iv_notiIcon = (ImageView)findViewById(R.id.activity_main_iv_noti);
-        sp_region = (Spinner)findViewById(R.id.activity_main_sp_region);
-        tv_workArea = (TextView)findViewById(R.id.activity_main_tv_workArea);
-        listView = (ListView)findViewById(R.id.activity_main_listview);
+        iv_menu = (ImageView) findViewById(R.id.activity_main_iv_menu);
+        iv_notiIcon = (ImageView) findViewById(R.id.activity_main_iv_noti);
+        sp_region = (Spinner) findViewById(R.id.activity_main_sp_region);
+        tv_workArea = (TextView) findViewById(R.id.activity_main_tv_workArea);
+        listView = (ListView) findViewById(R.id.activity_main_listview);
         noExistLayer = (LinearLayout) findViewById(R.id.activity_main_noexist);
         iv_menu.setOnClickListener(this);
         iv_notiIcon.setOnClickListener(this);
         tv_workArea.setOnClickListener(this);
         presenter.request_get_rental();
 
-        if(app.getRental_list().getRental_list().size()>0) {
-             adapter= new RentalAdapter(app.getRental_list(), this);
+        if (app.getRental_list().getRental_list().size() > 0) {
+            adapter = new RentalAdapter(app.getRental_list(), this);
             listView.setAdapter(adapter);
             listView.setOnItemClickListener(this);
         }
@@ -107,7 +107,7 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
                 startActivity(intent);
                 break;
             case R.id.activity_main_tv_workArea:
-                presenter.request_get_rental_region(app.getBus().getRegion());
+//                presenter.request_get_rental_region(app.getBus().getRegion());
                 ArrayAdapter myAdap = (ArrayAdapter) sp_region.getAdapter();
                 int spinnerPosition = myAdap.getPosition(app.getBus().getRegion());
                 sp_region.setSelection(spinnerPosition);
@@ -135,26 +135,28 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
         });
     }
 
-    /**리스트뷰 클릭 시 매물 상세 페이지 이동*/
+    /**
+     * 리스트뷰 클릭 시 매물 상세 페이지 이동
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Intent intent = new Intent(getApplication(), Activity_RentalDetail.class);
 
         Rental rental = getRental_list().getRental_list().get(position);
         int wayType = rental.getType(); // 1 : 왕복, 2: 편도
-        int togetherType =  rental.getTogether().getFlag(); // 0 : 기본, 2 : 같이타기
-        int type =0 ;
-        if(wayType == 1 && togetherType == 0) { // 왕복 & 기본
-            type =1;
-        }else if(wayType == 2 && togetherType == 0) { // 편도 & 기본
-            type =2;
-        }else if(wayType == 2 && togetherType == 2) { // 편도 & 같이타기
-            type =3;
-        }else{
-            Log.d("error: ","없는 type");
+        int togetherType = rental.getTogether().getFlag(); // 0 : 기본, 2 : 같이타기
+        int type = 0;
+        if (wayType == 1 && togetherType == 0) { // 왕복 & 기본
+            type = 1;
+        } else if (wayType == 2 && togetherType == 0) { // 편도 & 기본
+            type = 2;
+        } else if (wayType == 2 && togetherType == 2) { // 편도 & 같이타기
+            type = 3;
+        } else {
+            Log.d("error: ", "없는 type");
         }
 
-        intent.putExtra("type",type);
+        intent.putExtra("type", type);
         intent.putExtra("info", rental);
 
         startActivity(intent);
@@ -164,18 +166,18 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
         menu.showMenu();
     }
 
+    // 지금부터 고친다
     public void setRenewalListView() {
         Rental_List rentalList = getRental_list();
-        if(!rentalList.getRental_list().isEmpty()){
+        if (!rentalList.getRental_list().isEmpty()) {
             noExistLayer.setVisibility(View.INVISIBLE);
             listView.setVisibility(View.VISIBLE);
-            if(app.getRental_list().getRental_list().size()>0) {
+            if (app.getRental_list().getRental_list().size() > 0) {
                 adapter.clearRentalList();
                 adapter.addRentalList(rentalList);
                 adapter.notifyDataSetChanged();
             }
-
-        }else {
+        } else {
             noExistLayer.setVisibility(View.VISIBLE);
             listView.setVisibility(View.INVISIBLE);
         }
@@ -189,12 +191,14 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
         this.rentalList = rentalList;
     }
 
-    /**스피너에 등록된 지역으로 탐색*/
+    /**
+     * 스피너에 등록된 지역으로 탐색
+     */
     private void setRentalList_SpinnerRegion() {
-        String selItem= (String)sp_region.getSelectedItem();
-        if(!selItem.equals("전체")) {
+        String selItem = (String) sp_region.getSelectedItem();
+        if (!selItem.equals("전체")) {
             presenter.request_get_rental_region(selItem);
-        }else {
+        } else {
             presenter.request_get_rental();
         }
     }

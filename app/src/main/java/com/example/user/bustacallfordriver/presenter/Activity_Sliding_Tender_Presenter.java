@@ -41,6 +41,7 @@ public class Activity_Sliding_Tender_Presenter {
             @Override
             public void onResponse(Call<Rental_List> call, Response<Rental_List> response) {
                 if (response.isSuccessful()) {
+                    //여기서 종민찡이 아무것도 없을떄도 반환해줘야됨
 //                    app.setTender_list(response.body());
                     view.setTenderList(response.body());
                     view.setRenewalListView();

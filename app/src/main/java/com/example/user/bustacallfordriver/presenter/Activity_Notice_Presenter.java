@@ -61,8 +61,6 @@ public class Activity_Notice_Presenter {
             @Override
             public void onResponse(Call<Rental_List> call, Response<Rental_List> response) {
                 if (response.isSuccessful()) {
-//                    app.setRental_list(response.body());
-//                    Log.d("app",app.toString());
                     view.setNoticeList(response.body());
                     view.setlListView();
                 } else {

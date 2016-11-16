@@ -55,4 +55,11 @@ public interface Retrofit_User {
 
     @GET("/get_rental_region.php") //지역 스피너
     Call<Rental_List> request_get_rental_region(@Query("region")String region);
+
+    @GET("/get_schedule.php") // 스캐케줄 내역
+    Call<Rental_List> request_get_schedule(@Query("bus_num")String bus_num);
+
+    @GET("/get_booked_userinfo.php") // 예약된 유저 번호 가져오기
+    Call<JsonObject> request_get_booked_userinfo(@Query("nickname") String nickname);
+
 }

@@ -12,7 +12,8 @@
     <string name="mypoint">나의 포인트</string>
     <string name="inquiry">문의하기</string>
     <string name="nickname">닉네임</string>
-
+    <string name="booked_userinfo">예약 된 손님 정보</string>
+    <string name="booked_userinfo_btn_Call">손님에게 연락하기</string>
 
     <string name="signin_user">정보 입력</string>
     <string name="signin_bus">버스 정보 입력</string>

@@ -11,6 +11,7 @@ import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.ScheduleAdapter;
 import com.example.user.bustacallfordriver.model.Rental_List;
+import com.example.user.bustacallfordriver.presenter.Activity_Sliding_Schedule_Presenter;
 
 /**
  * 사이드 메뉴 > 나의 스케줄
@@ -21,44 +22,40 @@ public class Activity_Sliding_Schedule extends BaseActivity implements View.OnCl
     AppController app;
     ImageView iv_backBtn;
     ListView listView;
-    LinearLayout ll_noExistLayer;
+    LinearLayout noExistLayer;
     ScheduleAdapter adapter;
-
-    public Rental_List getSchduleList() {
-        return schduleList;
-    }
-
-    public void setSchduleList(Rental_List schduleList) {
-        this.schduleList = schduleList;
-    }
-
-    Rental_List schduleList;
+   Rental_List scheduleList;
+    Activity_Sliding_Schedule_Presenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sliding_schedule);
         app = (AppController) getApplicationContext();
+        presenter = new Activity_Sliding_Schedule_Presenter(this);
+        presenter.request_get_schedule(app.getBus().getBus_num());
         init();
     }
 
     private void init() {
         iv_backBtn = (ImageView) findViewById(R.id.activity_schedule_iv_back);
         listView = (ListView) findViewById(R.id.activity_schedule_listview);
-        ll_noExistLayer = (LinearLayout) findViewById(R.id.activity_schedule_noexist);
+        noExistLayer = (LinearLayout) findViewById(R.id.activity_schedule_noexist);
         iv_backBtn.setOnClickListener(this);
-        ScheduleAdapter adapter = new ScheduleAdapter(getSchduleList());
-        listView.setAdapter(adapter);
-//
-//        if(!app.getTender_list().getRental_list().isEmpty()){
-//            ll_noExistLayer.setVisibility(View.INVISIBLE);
-//            listView.setVisibility(View.VISIBLE);
-////            adapter = new ScheduleAdapter(app.getNotice_list(), this);
-////            listView.setAdapter(adapter);
-//        }else {
-//            ll_noExistLayer.setVisibility(View.VISIBLE);
-//            listView.setVisibility(View.INVISIBLE);
-//        }
+    }
+
+
+    public void setlListView() {
+        Rental_List mScheduleList = getScheduleList();
+        if (!mScheduleList.getRental_list().isEmpty()) {
+            noExistLayer.setVisibility(View.INVISIBLE);
+            listView.setVisibility(View.VISIBLE);
+            adapter = new ScheduleAdapter(mScheduleList);
+            listView.setAdapter(adapter);
+        } else {
+            noExistLayer.setVisibility(View.VISIBLE);
+            listView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -69,4 +66,13 @@ public class Activity_Sliding_Schedule extends BaseActivity implements View.OnCl
                 break;
         }
     }
+    
+    public Rental_List getScheduleList() {
+        return scheduleList;
+    }
+
+    public void setScheduleList(Rental_List scheduleList) {
+        this.scheduleList = scheduleList;
+    }
+    
 }

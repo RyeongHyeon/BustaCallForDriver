@@ -4,31 +4,12 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="20dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:src="@drawable/listview_two_way" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="왕복"
-            android:textColor="@color/colorPrimaryGray"
-            android:textSize="15sp" />
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:orientation="vertical">
+        android:layout_height="220dp"
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:id="@+id/toplayer"
@@ -44,7 +25,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:gravity="center_vertical"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                >
 
                 <ImageView
                     android:layout_width="20dp"
@@ -154,7 +136,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -172,6 +153,15 @@
                         android:textSize="17sp" />
 
                     <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="1dp"
+                        android:text="원"
+                        android:textColor="@color/colorPrimaryGray"
+                        android:textSize="17sp" />
+
+                    <TextView
                         android:id="@+id/listview_schedule_two_way_price"
                         style="@style/listviewText"
                         android:layout_width="wrap_content"
@@ -179,14 +169,6 @@
                         android:layout_weight="1"
                         android:text="750,000"
                         android:textColor="@color/textRed" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="원"
-                        android:textColor="@color/colorPrimaryGray"
-                        android:textSize="17sp" />
 
                 </LinearLayout>
 
@@ -202,13 +184,13 @@
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_weight="1" />
+                        android:layout_weight="5" />
 
                     <LinearLayout
-                        android:id="@+id/listview_schedule_two_way_cancelBtn"
+                        android:id="@+id/listview_schedule_two_way_btn_showUser"
                         android:layout_width="match_parent"
                         android:layout_height="50dp"
-                        android:layout_weight="1"
+                        android:layout_weight="4"
                         android:background="@drawable/schedule_btninfo"
                         android:gravity="center"
                         android:orientation="vertical"
@@ -221,7 +203,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="30dp"
             android:layout_margin="5dp"
             android:background="@drawable/schedule_state_back">
 
@@ -233,7 +215,27 @@
                 android:textColor="@color/AppColorWhite"
                 android:textSize="15sp" />
         </RelativeLayout>
-
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:layout_margin="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:src="@drawable/listview_two_way" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="왕복"
+            android:textColor="@color/colorPrimaryGray"
+            android:textSize="15sp" />
+    </LinearLayout>
 </RelativeLayout>

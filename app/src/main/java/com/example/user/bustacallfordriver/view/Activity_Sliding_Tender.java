@@ -40,27 +40,34 @@ public class Activity_Sliding_Tender extends BaseActivity implements View.OnClic
 
     private void init() {
         backBtn = (ImageView) findViewById(R.id.activity_tender_iv_back);
-        noExistLayer = (LinearLayout)findViewById(R.id.activity_tender_noexist);
+        noExistLayer = (LinearLayout) findViewById(R.id.activity_tender_noexist);
         listView = (ListView) findViewById(R.id.activity_tender_listview);
         backBtn.setOnClickListener(this);
-
-
     }
 
     public void setRenewalListView() {
-        if(!getTenderList().getRental_list().isEmpty()){
+        Rental_List tenderList = getTenderList();
+        if (!tenderList.getRental_list().isEmpty()) {
             noExistLayer.setVisibility(View.INVISIBLE);
             listView.setVisibility(View.VISIBLE);
-            adapter = new TenderAdapter(getTenderList(), this);
-            listView.setAdapter(adapter);
-        }else {
+            if (adapter == null) {
+                adapter = new TenderAdapter(tenderList, this);
+                listView.setAdapter(adapter);
+            } else {
+                if (tenderList.getRental_list().size() > 0) {
+                    adapter.clearTenderList();
+                    adapter.addTenderList(tenderList);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        } else {
             noExistLayer.setVisibility(View.VISIBLE);
             listView.setVisibility(View.INVISIBLE);
         }
     }
 
-    public void showDialog() {
-        adapter.showDialog(presenter);
+    public void deleteTender(int rentalNum) {
+        presenter.request_delete_tender(app.getBus().getBus_num(), rentalNum);
     }
 
     @Override

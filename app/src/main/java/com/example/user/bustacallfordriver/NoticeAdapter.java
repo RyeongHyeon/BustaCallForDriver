@@ -54,18 +54,28 @@ public class NoticeAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return 0;
+        return noticeList.getRental_list().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return noticeList.getRental_list().get(position);
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return position;
     }
+
+//    @Override
+//    public int getViewTypeCount() {
+//        return getCount();
+//    }
+//
+//    @Override
+//    public int getItemViewType(int position) {
+//        return position;
+//    }
 
 
     class ViewHoder {
