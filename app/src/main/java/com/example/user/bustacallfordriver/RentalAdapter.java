@@ -71,7 +71,6 @@ public class RentalAdapter extends BaseAdapter {
                     break;
             }
 
-
             v.setTag(viewHoder);
         } else {
             viewHoder = (ViewHoder) v.getTag();
@@ -80,6 +79,7 @@ public class RentalAdapter extends BaseAdapter {
 
         switch (viewType) {
             case 1: // 왕복 & 기본
+                v.setBackgroundResource(R.drawable.listview_default_back_file);
                 viewHoder.twoway_startDate.setText(rental.getDay_one());
                 viewHoder.twoway_startTime.setText(rental.getTime_one());
                 viewHoder.twoway_endDate.setText(rental.getDay_two());
@@ -88,7 +88,6 @@ public class RentalAdapter extends BaseAdapter {
                 viewHoder.twoway_endPlace.setText(rental.getEnd_point_one());
                 viewHoder.twoway_goal.setText(rental.getRental_reason());
                 viewHoder.twoway_userCnt.setText(rental.getUser_count());
-                v.setBackgroundResource(R.drawable.listview_default_back_file);
 
                 break;
             case 2: // 편도 & 기본
@@ -110,6 +109,7 @@ public class RentalAdapter extends BaseAdapter {
                 viewHoder.oneway_together_price.setText(rental.getTogether().getMoney());
                 break;
         }
+
         return v;
     }
 
@@ -192,6 +192,7 @@ public class RentalAdapter extends BaseAdapter {
     public void notifyDataSetChanged(){ // 위에서 연결된 DataSetObserver를 통한 변경 확인
         mDataSetObservable.notifyChanged();
     }
+
 
     public void clearRentalList(){
         this.rentalList = null;

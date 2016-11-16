@@ -53,45 +53,11 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-                <TextView
-                    style="@style/logintext"
-                    android:text="이름"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/white_rounded_rectangle"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/activity_sliding_setting_et_nickname"
-                        style="@style/signineEditText"
-                        android:layout_width="170dp"
-                        android:layout_alignParentStart="true"
-                        android:layout_centerVertical="true"
-                        android:hint="@string/nickname"
-                        android:imeOptions="actionDone" />
-
-
-                    <ImageView
-                        android:id="@+id/activity_sliding_setting_iv_btn_overwap_confirm"
-                        android:layout_width="100dp"
-                        android:layout_height="35dp"
-                        android:layout_alignParentEnd="true"
-                        android:layout_centerVertical="true"
-                        android:layout_marginRight="10dp"
-                        android:src="@drawable/overwrap_confirm" />
-
-
-                </RelativeLayout>
-
-                <LinearLayout
+            <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginTop="30dp"
                     android:orientation="vertical"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp">

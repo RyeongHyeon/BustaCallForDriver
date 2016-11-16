@@ -56,13 +56,16 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
         iv_menu.setOnClickListener(this);
         iv_notiIcon.setOnClickListener(this);
         tv_workArea.setOnClickListener(this);
+        listView.setOnItemClickListener(this);
+
         presenter.request_get_rental();
 
-        if (app.getRental_list().getRental_list().size() > 0) {
-            adapter = new RentalAdapter(app.getRental_list(), this);
-            listView.setAdapter(adapter);
-            listView.setOnItemClickListener(this);
-        }
+//
+//        if (app.getRental_list().getRental_list().size() > 0) {
+//            adapter = new RentalAdapter(app.getRental_list(), this);
+//            listView.setAdapter(adapter);
+//            listView.setOnItemClickListener(this);
+//        }
 
         ArrayAdapter regionAdapter = ArrayAdapter.createFromResource(this, R.array.main_workArea, android.R.layout.simple_spinner_item);
         regionAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
@@ -172,11 +175,14 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
         if (!rentalList.getRental_list().isEmpty()) {
             noExistLayer.setVisibility(View.INVISIBLE);
             listView.setVisibility(View.VISIBLE);
-            if (app.getRental_list().getRental_list().size() > 0) {
+            if (adapter == null) {
+                adapter = new RentalAdapter(rentalList, this);
+            } else {
                 adapter.clearRentalList();
                 adapter.addRentalList(rentalList);
                 adapter.notifyDataSetChanged();
             }
+            listView.setAdapter(adapter);
         } else {
             noExistLayer.setVisibility(View.VISIBLE);
             listView.setVisibility(View.INVISIBLE);

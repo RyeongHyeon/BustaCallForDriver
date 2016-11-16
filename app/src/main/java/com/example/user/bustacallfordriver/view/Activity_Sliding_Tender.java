@@ -54,11 +54,9 @@ public class Activity_Sliding_Tender extends BaseActivity implements View.OnClic
                 adapter = new TenderAdapter(tenderList, this);
                 listView.setAdapter(adapter);
             } else {
-                if (tenderList.getRental_list().size() > 0) {
                     adapter.clearTenderList();
                     adapter.addTenderList(tenderList);
                     adapter.notifyDataSetChanged();
-                }
             }
         } else {
             noExistLayer.setVisibility(View.VISIBLE);
