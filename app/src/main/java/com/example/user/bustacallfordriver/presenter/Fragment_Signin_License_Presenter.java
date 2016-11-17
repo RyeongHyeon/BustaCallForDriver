@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -33,92 +34,119 @@ public class Fragment_Signin_License_Presenter {
     AppController app;
     Dialog_Progress dialog_progress;
 
-    public Fragment_Signin_License_Presenter(Fragment_Signin_License view){
+    public Fragment_Signin_License_Presenter(Fragment_Signin_License view) {
         this.view = view;
-        app = (AppController)view.getActivity().getApplicationContext();
+        app = (AppController) view.getActivity().getApplicationContext();
         dialog_progress = new Dialog_Progress(view.getActivity());
     }
 
-    public void getis_Bus_license(String str){
-        if(str.equals("")){
+    public void getis_Bus_license(String str) {
+        if (str.equals("")) {
             view.setIs_buslicense(false);
-        }else{
+        } else {
             view.setIs_buslicense(true);
         }
     }
 
-    public void getis_Bus_confirm(String str){
-        if(str.equals("")){
+    public void getis_Bus_confirm(String str) {
+        if (str.equals("")) {
             view.setIs_deductionconfirm(false);
-        }else{
+        } else {
             view.setIs_deductionconfirm(true);
         }
     }
 
-    public void request_mainlogin_bus(){
-        int count=app.getBus().getBus_url().size();
+    private MultipartBody.Part[] chageImageToFile(ArrayList<String> bodyList) {
+        int count = bodyList.size();
         String[] picturepathp = new String[count];
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 4;
         Bitmap[] image = new Bitmap[count];
         final Bitmap[] resizeimage = new Bitmap[count];
 
-        for(int i=0;i<count;i++)
-        {
-            picturepathp[i] = app.getBus().getBus_url().get(i);
-            image[i] = BitmapFactory.decodeFile(picturepathp[i],options);
-            resizeimage[i] = Bitmap.createScaledBitmap(image[i],300,300,true); //비트맵 리사이즈
+        for (int i = 0; i < count; i++) {
+            picturepathp[i] = bodyList.get(i);
+            image[i] = BitmapFactory.decodeFile(picturepathp[i], options);
+            resizeimage[i] = Bitmap.createScaledBitmap(image[i], 300, 300, true); //비트맵 리사이즈
         }
+
         File[] file = new File[count]; //file
         try {
-            for(int i=0;i<count;i++)
-                file[i] = saveBitmapToJpeg(view.getActivity(),resizeimage[i],"image+1"); //file형태로 변환
+            for (int i = 0; i < count; i++)
+                file[i] = saveBitmapToJpeg(view.getActivity(), resizeimage[i], "image+1"); //file형태로 변환
         } catch (IOException e) {
             e.printStackTrace();
         }
-        MultipartBody.Part[] body2 = new MultipartBody.Part[count]; //multipart 배열
-        for(int i=0;i<count;i++){
+        MultipartBody.Part[] body = new MultipartBody.Part[count]; //multipart 배열
+        for (int i = 0; i < count; i++) {
             RequestBody requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file[i]);
-            body2[i] = MultipartBody.Part.createFormData("uploaded_file"+String.valueOf(i+1), file[i].getName(), requestBody);
+            body[i] = MultipartBody.Part.createFormData("uploaded_file" + String.valueOf(i + 1), file[i].getName(), requestBody);
         }
-        RequestBody nickname = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getNickname()); //
-        RequestBody bus_type = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getBus_type());
-        RequestBody bus_num = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getBus_num());
-        RequestBody phonenum = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getPhone_num());
-        RequestBody bus_career = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getBus_career());
-        RequestBody bus_region = RequestBody.create(MediaType.parse("text/plain"),app.getBus().getRegion());
+
+        return body;
+    }
+
+    public void request_mainlogin_bus() {
+        int user_bus_imagesCnt = app.getBus().getBus_url().size();
+        int bus_license_confirm_imagesCnt = app.getBus().getBus_license_confirm_url().size();
+
+        ArrayList<String> bodyList = new ArrayList<>();
+        for (int i = 0; i < user_bus_imagesCnt; i++) {
+            bodyList.add(app.getBus().getBus_url().get(i));
+        }
+        for (int i = 0; i < bus_license_confirm_imagesCnt; i++) {
+            bodyList.add(app.getBus().getBus_license_confirm_url().get(i));
+        }
+
+        MultipartBody.Part[] body =  chageImageToFile(bodyList);
+
+        RequestBody nickname = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getNickname()); //
+        RequestBody phonenum = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getPhone_num());
+        RequestBody birthday = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBirthday());
+        RequestBody bus_region = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getRegion());
+        RequestBody bus_group = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getGroup());
+        RequestBody bank = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getAccount_bank());
+        RequestBody accountNum = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getAccount_num());
+        RequestBody bus_num = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBus_num());
+        RequestBody bus_type = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBus_type());
+        RequestBody bus_career = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBus_career());
+        RequestBody bus_age = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBus_age());
+
         Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
         Retrofit_User retrofit_user = retrofit.create(Retrofit_User.class);
-        Call<Void> retrofitinfo = retrofit_user.request_mainlogin_bus(nickname,phonenum,bus_type,bus_num,bus_career,bus_region,body2);
+        Call<Void> retrofitinfo = retrofit_user.request_mainlogin_bus(nickname, phonenum, birthday, bus_region,
+                bus_group, bank, accountNum, bus_num, bus_type, bus_career, bus_age, body);
         dialog_progress.show();
         retrofitinfo.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     app.setSavedId(app.getBus().getBus_num());
                     request_get_rental();
-                }else{
-                    Log.d("test",response.toString());
+                } else {
+                    Log.d("test", response.toString());
                 }
             }
+
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Log.d("Test",t.toString());
+                Log.d("Test", t.toString());
             }
         });
     }
-    public void request_get_rental(){//
+
+    public void request_get_rental() {//
         Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
         Retrofit_User retrofit_user = retrofit.create(Retrofit_User.class);
         Call<Rental_List> retrofitinfo = retrofit_user.request_get_rental();
         retrofitinfo.enqueue(new Callback<Rental_List>() {
             @Override
             public void onResponse(Call<Rental_List> call, Response<Rental_List> response) {
-                if(response.isSuccessful()){
+                if (response.isSuccessful()) {
                     app.setRental_list(response.body());
-                    Log.d("app",app.toString());
+                    Log.d("app", app.toString());
                     view.goTonextPage();
-                }else{
+                } else {
 
                 }
                 dialog_progress.dismiss();
@@ -130,15 +158,16 @@ public class Fragment_Signin_License_Presenter {
             }
         });
     }
+
     public File saveBitmapToJpeg(Context context, Bitmap bitmap, String name) throws IOException { //파일 명 새로지정하면서 이미지 비트맵을 임시로 생성.
         File storage = context.getCacheDir(); // 이 부분이 임시파일 저장 경로
         String fileName = name + ".jpg";  // 파일이름은 마음대로!
-        File tempFile = File.createTempFile(name,".jpg");
+        File tempFile = File.createTempFile(name, ".jpg");
 
-        try{
+        try {
             tempFile.createNewFile();  // 파일을 생성해주고
             FileOutputStream out = new FileOutputStream(tempFile);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 100 , out);  // 넘거 받은 bitmap을 jpeg(손실압축)으로 저장해줌
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out);  // 넘거 받은 bitmap을 jpeg(손실압축)으로 저장해줌
             out.close(); // 마무리로 닫아줍니다.
 
         } catch (FileNotFoundException e) {

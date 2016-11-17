@@ -125,8 +125,7 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selItem= (String)sp_busType.getSelectedItem();
-                app.getBus().setBus_type(selItem);
-                presenter.getis_Bustype(selItem);
+                presenter.setis_Bustype(selItem);
             }
 
             @Override
@@ -138,7 +137,6 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        Intent intent;
         switch (v.getId()) {
             case R.id.activtiy_signin_bus_profile_inner:
                 new TedPermission(getContext())
@@ -202,12 +200,12 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
                 case 1:
                     bus_url_one.add(picturePath);
                     iv_busInner.setImageBitmap(resizeimage);
-                    presenter.getis_Busprofile1(picturePath);
+                    presenter.setis_Busprofile1(picturePath);
                     break;
                 case 2:
                     bus_url_two.add(picturePath);
                     iv_busOutter.setImageBitmap(resizeimage);
-                    presenter.getis_Busprofile2(picturePath);
+                    presenter.setis_Busprofile2(picturePath);
                     break;
                 case 3:
                     bus_url_three.add(picturePath);
@@ -275,7 +273,7 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            presenter.getis_Busnum(et_busNum.getText().toString());
+            presenter.setis_Busnum(et_busNum.getText().toString());
         }
 
         @Override
@@ -291,7 +289,7 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            presenter.getis_Buscareer(et_buscareer.getText().toString());
+            presenter.setis_Buscareer(et_buscareer.getText().toString());
         }
 
         @Override
@@ -308,7 +306,7 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            presenter.getis_Busage(et_busage.getText().toString());
+            presenter.setis_Busage(et_busage.getText().toString());
         }
 
         @Override
@@ -379,6 +377,7 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
             }
             /////////////////////////////////////////////////////////
             app.getBus().setBus_num(et_busNum.getText().toString());
+            app.getBus().setBus_type(sp_busType.getSelectedItem().toString().trim());
             app.getBus().setBus_career(et_buscareer.getText().toString());
             app.getBus().setBus_age(et_busage.getText().toString());
         }

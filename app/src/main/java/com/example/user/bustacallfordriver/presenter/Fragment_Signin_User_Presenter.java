@@ -13,7 +13,7 @@ public class Fragment_Signin_User_Presenter {
         this.view = view;
     }
 
-    public void getis_Nickname(String str){
+    public void setis_Nickname(String str){
         if(str.equals("")){
             view.setIs_nickname(false);
         }else{
@@ -21,7 +21,7 @@ public class Fragment_Signin_User_Presenter {
         }
     }
 
-    public void getis_Brithday(String str){
+    public void setis_Brithday(String str){
         if(str.equals("")){
             view.setIs_birthady(false);
         }else{
@@ -29,21 +29,21 @@ public class Fragment_Signin_User_Presenter {
         }
     }
 
-    public void getis_Group(String str){
+    public void setis_Group(String str){
         if(str.equals("")){
             view.setIs_group(false);
         }else{
             view.setIs_group(true);
         }
     }
-    public void getis_Account_Num(String str){
+    public void setis_Account_Num(String str){
         if(str.equals("")){
             view.setIs_account_num(false);
         }else{
             view.setIs_account_num(true);
         }
     }
-    public void getis_Profile(String str){
+    public void setis_Profile(String str){
         if(str.equals("")){
             view.setIs_profile(false);
         }else{

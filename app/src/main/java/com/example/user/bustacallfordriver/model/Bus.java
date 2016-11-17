@@ -14,19 +14,28 @@ public class Bus {
     String account_bank;//계좌 은행
     String account_num;//계좌 번호
     ArrayList<String> bus_url = new ArrayList<>(); //버스 사진
-    String bus_license;
-    String bus_confirm;
+    ArrayList<String> bus_license_confirm_url = new ArrayList<>(); //버스 운전 자격증, 공제 가입 확인서
+
     String nickname; //닉네임
     String bus_career;//경력
     String bus_age;//연식
     String bus_type;//버스 타입
-    String money;//돈
+    String money;// 돈
     String bus_num;//차 번호
     String user_count;//예약 인원
     String phone_num;//핸드폰 번호
+
+    public String getPoint() {
+        return point;
+    }
+
+    public void setPoint(String point) {
+        this.point = point;
+    }
+
+    String point; // 포인트
     ArrayList<Integer> money_list=new ArrayList<>();//톨비~부가세까지 포함 0, 미포함 1
     int account_flag; //결제 되었는지 안되었는지 안되어있으면 0, 되어있으면 1
-    Rental_List notice_list = new Rental_List(); // 알림 리스트 최대 10개 쌓아둠
 
 
     public String getPhone_num() {
@@ -59,6 +68,14 @@ public class Bus {
 
     public void setBus_url(ArrayList<String> bus_url) {
         this.bus_url = bus_url;
+    }
+
+    public ArrayList<String> getBus_license_confirm_url() {
+        return bus_license_confirm_url;
+    }
+
+    public void setBus_license_confirm_url(ArrayList<String> bus_license_confirm_url) {
+        this.bus_license_confirm_url = bus_license_confirm_url;
     }
 
     public String getBus_career() {
@@ -156,26 +173,10 @@ public class Bus {
         this.bus_age = bus_age;
     }
 
-    public String getBus_license() {
-        return bus_license;
-    }
-
-    public void setBus_license(String bus_license) {
-        this.bus_license = bus_license;
-    }
-
-    public String getBus_confirm() {
-        return bus_confirm;
-    }
-
-    public void setBus_confirm(String bus_confirm) {
-        this.bus_confirm = bus_confirm;
-    }
-
     public Bus(){}
-    public Bus(ArrayList<String> busImageUrls, String nickname, String bus_type, String money,
+    public Bus(ArrayList<String> busImageUrls, ArrayList<String> busImageUrls2, String nickname, String bus_type, String money,
                String bus_num, ArrayList<Integer> money_list,String bus_career,int account_flag,String phone_num,
-               String group,String birthday,String bus_age,String account_bank,String account_num,String region,String bus_license,String bus_confirm
+               String group,String birthday,String bus_age,String account_bank,String account_num,String region
                ) {
         this.bus_url = busImageUrls;
         this.nickname = nickname;
@@ -192,8 +193,7 @@ public class Bus {
         this.account_bank = account_bank;
         this.account_num = account_num;
         this.region = region;
-        this.bus_confirm = bus_confirm;
-        this.bus_license = bus_license;
+        this.bus_license_confirm_url = busImageUrls2;
         this.account_flag = 0;
     }
 }

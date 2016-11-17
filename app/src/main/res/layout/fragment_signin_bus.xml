@@ -94,6 +94,7 @@
 
                     <EditText
                         android:hint="~~년차"
+                        android:inputType="number"
                         android:id="@+id/activtiy_signin_bus_et_career"
                         style="@style/signineEditText"/>
                 </LinearLayout>
@@ -124,6 +125,7 @@
                     <EditText
                         android:hint="~~년"
                         android:id="@+id/activtiy_signin_bus_et_busage"
+                        android:inputType="number"
                         style="@style/signineEditText"/>
                 </LinearLayout>
             </LinearLayout>
@@ -141,7 +143,7 @@
 
                 <TextView
                     style="@style/signintext"
-                    android:text="4.차량 사진" />
+                    android:text="5.차량 사진" />
 
 
                 <LinearLayout

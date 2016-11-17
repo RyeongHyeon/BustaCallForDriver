@@ -135,12 +135,14 @@ public class Fragment_Signin_License extends BaseFragment implements View.OnClic
                 case 1:
                     iv_driverLicense.setImageBitmap(resizeimage);
                     presenter.getis_Bus_license(picturePath);
-                    app.getBus().setBus_license(picturePath);
+                    bus_url_one.add(picturePath);
+                    app.getBus().getBus_license_confirm_url().add(bus_url_one.get(bus_url_one.size()-1));
                     break;
                 case 2:
                     iv_deductionConfirm.setImageBitmap(resizeimage);
                     presenter.getis_Bus_confirm(picturePath);
-                    app.getBus().setBus_confirm(picturePath);
+                    bus_url_two.add(picturePath);
+                    app.getBus().getBus_license_confirm_url().add(bus_url_two.get(bus_url_two.size()-1));
                     break;
             }
         }
@@ -188,6 +190,7 @@ public class Fragment_Signin_License extends BaseFragment implements View.OnClic
 
     public void checkPermission() {
         if (is_buslicense == true && is_deductionconfirm == true) {
+
             //여기서 통신
             presenter.request_mainlogin_bus();
         }

@@ -1,7 +1,6 @@
 package com.example.user.bustacallfordriver.view;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -15,7 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,27 +24,11 @@ import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.BaseFragment;
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.model.Bus;
-import com.example.user.bustacallfordriver.model.Retrofit_User;
 import com.example.user.bustacallfordriver.presenter.Fragment_Signin_User_Presenter;
 import com.gun0912.tedpermission.PermissionListener;
 import com.gun0912.tedpermission.TedPermission;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.xml.transform.Result;
-
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.GsonConverterFactory;
-import retrofit2.Response;
-import retrofit2.Retrofit;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -60,14 +42,18 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
     Activity_Signin activitySignin;
     ImageView iv_profile; // 프로필 사진
     EditText et_name, et_birth, et_group, et_accountNum; // 이름, 생년월일, 계좌번호
-    Spinner sp_workArea, sp_back; // 영업 지역, 계좌 은행
+    Spinner sp_workArea, sp_bank; // 영업 지역, 계좌 은행
     TextView tv_btnBack, tv_btnNext; // 이전 버튼, 다음 버튼
     Bitmap bitmap_profile;
     AppController app;
     Bus bus = new Bus();
     String picturepath;
     Fragment_Signin_User_Presenter presenter;
-    boolean is_profile,is_nickname,is_birthady,is_group,is_account_num;
+    boolean is_profile;
+    boolean is_nickname;
+    boolean is_birthady;
+    boolean is_group;
+    boolean is_account_num;
 
     private static Fragment_Signin_User instnace;
 
@@ -94,7 +80,7 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
         et_group = (EditText) view.findViewById(R.id.activtiy_signin_user_et_group);
         et_accountNum = (EditText) view.findViewById(R.id.activtiy_signin_user_et_accountnum);
         sp_workArea = (Spinner) view.findViewById(R.id.activtiy_signin_user_spinner_workarea);
-        sp_back = (Spinner) view.findViewById(R.id.activtiy_signin_user_spinner_bank);
+        sp_bank = (Spinner) view.findViewById(R.id.activtiy_signin_user_spinner_bank);
         tv_btnBack = (TextView) view.findViewById(R.id.activity_signin_user_btn_back);
         tv_btnNext = (TextView) view.findViewById(R.id.activity_signin_user_btn_next);
         iv_profile.setOnClickListener(this);
@@ -112,36 +98,36 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
         ArrayAdapter workAreaAdapter = ArrayAdapter.createFromResource(getContext(), R.array.workArea, android.R.layout.simple_spinner_item);
         workAreaAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp_workArea.setAdapter(workAreaAdapter);
-
-        sp_workArea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selItem= (String)sp_workArea.getSelectedItem();
-                app.getBus().setRegion(selItem);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+//
+//        sp_workArea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String selItem= (String)sp_workArea.getSelectedItem();
+//                presenter.setis_Region(selItem);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
 
         ArrayAdapter bankAdapter = ArrayAdapter.createFromResource(getContext(), R.array.bank, android.R.layout.simple_spinner_item);
         bankAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
-        sp_back.setAdapter(bankAdapter);
-
-        sp_back.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selItem= (String)sp_back.getSelectedItem();
-                bus.setAccount_bank(selItem);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        sp_bank.setAdapter(bankAdapter);
+//
+//        sp_bank.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+//            @Override
+//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//                String selItem= (String)sp_bank.getSelectedItem();
+//                presenter.setis_Bank(selItem);
+//            }
+//
+//            @Override
+//            public void onNothingSelected(AdapterView<?> parent) {
+//
+//            }
+//        });
     }
 
 
@@ -168,7 +154,6 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
-            System.out.println("령현 :" + selectedImage);
             String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
             Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn,
@@ -187,6 +172,7 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
             resizeimage = Bitmap.createScaledBitmap(image, 300, 300, true);
 
             iv_profile.setImageBitmap(resizeimage);
+            presenter.setis_Profile("성공");
         }
     }
 
@@ -203,42 +189,16 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
         }
     };
 
-    public boolean is_profile() {
-        return is_profile;
-    }
-
     public void setIs_profile(boolean is_profile) {
         this.is_profile = is_profile;
     }
-
-    public boolean is_nickname() {
-        return is_nickname;
-    }
-
     public void setIs_nickname(boolean is_nickname) {
         this.is_nickname = is_nickname;
     }
-
-    public boolean is_birthady() {
-        return is_birthady;
-    }
-
     public void setIs_birthady(boolean is_birthady) {
         this.is_birthady = is_birthady;
     }
-
-    public boolean is_group() {
-        return is_group;
-    }
-
-    public void setIs_group(boolean is_group) {
-        this.is_group = is_group;
-    }
-
-    public boolean is_account_num() {
-        return is_account_num;
-    }
-
+    public void setIs_group(boolean is_group) {this.is_group = is_group;}
     public void setIs_account_num(boolean is_account_num) {
         this.is_account_num = is_account_num;
     }
@@ -251,7 +211,7 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            presenter.getis_Nickname(et_name.getText().toString());
+            presenter.setis_Nickname(et_name.getText().toString());
         }
 
         @Override
@@ -268,7 +228,7 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            presenter.getis_Brithday(et_birth.getText().toString());
+            presenter.setis_Brithday(et_birth.getText().toString());
         }
 
         @Override
@@ -285,7 +245,7 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            presenter.getis_Group(et_group.getText().toString());
+            presenter.setis_Group(et_group.getText().toString());
         }
 
         @Override
@@ -302,7 +262,7 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
 
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
-            presenter.getis_Account_Num(et_accountNum.getText().toString());
+            presenter.setis_Account_Num(et_accountNum.getText().toString());
         }
 
         @Override
@@ -312,11 +272,13 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
     };
 
     public void CheckNextToPage(){
-        if(is_account_num==true&&is_birthady==true&&is_group==true&&is_nickname){
+        if(is_account_num&&is_birthady&&is_group&&is_nickname&&is_profile){
             app.getBus().setNickname(et_name.getText().toString());
-            app.getBus().setGroup(et_group.getText().toString());
-            app.getBus().setAccount_num(et_accountNum.getText().toString());
             app.getBus().setBirthday(et_birth.getText().toString());
+            app.getBus().setRegion(sp_workArea.getSelectedItem().toString().trim());
+            app.getBus().setGroup(et_group.getText().toString());
+            app.getBus().setAccount_bank(sp_bank.getSelectedItem().toString().trim());
+            app.getBus().setAccount_num(et_accountNum.getText().toString());
             app.getBus().getBus_url().add(picturepath);
             Log.d("bus",app.toString());
             activitySignin.setFramelayout(R.layout.fragment_signin_bus);

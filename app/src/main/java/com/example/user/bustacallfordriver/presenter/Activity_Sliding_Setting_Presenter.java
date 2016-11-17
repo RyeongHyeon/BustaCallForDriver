@@ -7,8 +7,8 @@ import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.dialog.Dialog_Progress;
 import com.example.user.bustacallfordriver.dialog.Dialog_base;
 import com.example.user.bustacallfordriver.model.Retrofit_User;
+import com.example.user.bustacallfordriver.view.Activity_Sliding_Setting;
 import com.example.user.bustacallfordriver.view.Activity_Splash;
-import com.example.user.bustacallfordriver.view.SlidingMenuFragment;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -17,19 +17,19 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 /**
- * Created by user on 2016-11-13.
+ * Created by user on 2016-11-17.
  */
 
-public class SlidingMenuFragment_Presenter {
+public class Activity_Sliding_Setting_Presenter {
 
-    SlidingMenuFragment view;
-    AppController app;
+    Activity_Sliding_Setting view;
     Dialog_Progress dialog_progress;
+    AppController app;
 
-    public SlidingMenuFragment_Presenter(SlidingMenuFragment view) {
+    public Activity_Sliding_Setting_Presenter(Activity_Sliding_Setting view) {
         this.view = view;
-        app = (AppController) view.getActivity().getApplicationContext();
-        dialog_progress = new Dialog_Progress(view.getContext());
+        app = (AppController) view.getApplicationContext();
+        dialog_progress = new Dialog_Progress(view);
     }
 
     public void request_logout(String bus_num){
@@ -41,14 +41,14 @@ public class SlidingMenuFragment_Presenter {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(response.isSuccessful()){
-                    Intent intent = new Intent(view.getActivity(), Activity_Splash.class);
+                    Intent intent = new Intent(view, Activity_Splash.class);
                     view.startActivity(intent);
                 }else{
                 }
             }
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                final Dialog_base dialog_base = new Dialog_base(view.getContext() ,"엥..? 로그아웃 안됨ㅋ");
+                final Dialog_base dialog_base = new Dialog_base(view,"엥..? 로그아웃 안됨ㅋ");
                 dialog_base.show();
             }
         });

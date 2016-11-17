@@ -122,8 +122,7 @@ public class SlidingMenuFragment extends Fragment implements View.OnClickListene
             public void onClick(View v) {
                 //로그아웃
                 app.setSavedId("0");
-                Intent intent = new Intent(getContext(), Activity_Splash.class);
-                startActivity(intent);
+                presenter.request_logout(app.getBus().getBus_num());
                 //TODO 통신
             }
         });

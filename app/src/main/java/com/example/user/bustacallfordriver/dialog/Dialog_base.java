@@ -14,7 +14,11 @@ import com.example.user.bustacallfordriver.R;
  */
 public class Dialog_base extends Dialog implements View.OnClickListener{
     Context context;
-    TextView tv_title,tv_button;
+    TextView tv_title;
+
+
+
+    TextView tv_button;
     public String str_text;
 
     public Dialog_base(Context context,String str_text) {
@@ -42,5 +46,4 @@ public class Dialog_base extends Dialog implements View.OnClickListener{
                 this.dismiss();
         }
     }
-
 }

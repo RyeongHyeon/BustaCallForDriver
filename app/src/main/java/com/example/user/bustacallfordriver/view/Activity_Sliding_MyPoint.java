@@ -11,6 +11,7 @@ import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.R;
 import com.example.user.bustacallfordriver.dialog.Dialog_base;
 import com.example.user.bustacallfordriver.dialog.Dialog_base_two_button;
+import com.example.user.bustacallfordriver.presenter.Activity_Sliding_MyPoint_Presenter;
 
 /**
  * 사이드 메뉴 > 나의 포인트
@@ -21,14 +22,16 @@ public class Activity_Sliding_MyPoint extends BaseActivity implements View.OnCli
 
     AppController app;
     ImageView iv_back;
-    EditText et_chanePoint;
+    EditText et_exchange;
     TextView tv_point, tv_enter;
+    Activity_Sliding_MyPoint_Presenter presenter;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sliding_mypoint);
         app = (AppController) getApplicationContext();
+        presenter = new Activity_Sliding_MyPoint_Presenter(this);
         init();
     }
 
@@ -36,9 +39,11 @@ public class Activity_Sliding_MyPoint extends BaseActivity implements View.OnCli
         iv_back = (ImageView) findViewById(R.id.activity_sliding_mypoint_iv_back);
         tv_point = (TextView) findViewById(R.id.activity_sliding_mypoint_tv_point);
         tv_enter = (TextView) findViewById(R.id.activity_sliding_mypoint_tv_enter);
-        et_chanePoint = (EditText) findViewById(R.id.activity_sliding_mypoint_et_changePoint);
+        et_exchange = (EditText) findViewById(R.id.activity_sliding_mypoint_et_changePoint);
         iv_back.setOnClickListener(this);
         tv_enter.setOnClickListener(this);
+
+        tv_point.setText(app.getBus().getPoint());
     }
 
     @Override
@@ -55,7 +60,9 @@ public class Activity_Sliding_MyPoint extends BaseActivity implements View.OnCli
                         @Override
                         public void onClick(final View v) {
                             //환전 서버에 보내고 남은 포인트 셋팅
-                            setPoint();
+                            int exchangeInt = Integer.valueOf(et_exchange.getText().toString().trim());
+                            presenter.request_send_exchange(app.getBus().getNickname(), app.getBus().getBus_num(),exchangeInt*1000);
+                            setPoint(exchangeInt*1000);
                             dialog.dismiss();
                         }
                     });
@@ -76,8 +83,12 @@ public class Activity_Sliding_MyPoint extends BaseActivity implements View.OnCli
 
     /**
      * 남은 포인트 셋팅, 서버에도 저장
+     * @param exchange 환전 금액
      */
-    private void setPoint() {
+    private void setPoint(int exchange) {
+        int point = Integer.valueOf(tv_point.getText().toString().trim());
+        String remainPointStr = String.valueOf(point - exchange);
+        tv_point.setText(remainPointStr);
     }
 
     /**
@@ -86,7 +97,7 @@ public class Activity_Sliding_MyPoint extends BaseActivity implements View.OnCli
     private boolean checkMyPoint() {
         int point = Integer.valueOf(tv_point.getText().toString().trim());
         int changePoint = 0;
-        String changePointStr= et_chanePoint.getText().toString().trim();
+        String changePointStr= et_exchange.getText().toString().trim();
         if(!"".equals(changePointStr)){
             changePoint = Integer.valueOf(changePointStr) * 1000;
         }
