@@ -12,8 +12,9 @@ import android.widget.TextView;
 import com.example.user.bustacallfordriver.AppController;
 import com.example.user.bustacallfordriver.NoticeAdapter;
 import com.example.user.bustacallfordriver.R;
-import com.example.user.bustacallfordriver.model.Rental_List;
 import com.example.user.bustacallfordriver.presenter.Activity_Notice_Presenter;
+
+import java.util.ArrayList;
 
 
 /**
@@ -32,7 +33,7 @@ public class Activity_Notice extends BaseActivity implements View.OnClickListene
     Activity_Notice_Presenter presenter;
     NoticeAdapter adapter;
     AppController app;
-    Rental_List noticeList;
+    ArrayList<String> noticeList;
 
 
     @Override
@@ -52,13 +53,13 @@ public class Activity_Notice extends BaseActivity implements View.OnClickListene
         listView = (ListView) findViewById(R.id.activity_notice_listview);
         rl_notice_button.setOnClickListener(this);
 
-        presenter.request_notice_region(app.getBus().getRegion());
+        presenter.request_notice_region(app.getBus().getBus_num(), app.getBus().getRegion());
 
         // 알림 설정 상태를 보고 처음 알림 켜기 끄기 셋팅
     }
 
     public void setlListView() {
-        if (!getNoticeList().getRental_list().isEmpty()) {
+        if (!getNoticeList().isEmpty()) {
             noExistLayer.setVisibility(View.INVISIBLE);
             listView.setVisibility(View.VISIBLE);
             adapter = new NoticeAdapter(getNoticeList());
@@ -97,15 +98,15 @@ public class Activity_Notice extends BaseActivity implements View.OnClickListene
                 break;
         }
 
-        presenter.request_send_notice_onoff(NOTICE_ON_OFF); // 0: 끄기, 1: 켜기
+        presenter.request_send_notice_onoff(app.getBus().getBus_num(), NOTICE_ON_OFF); // 0: 끄기, 1: 켜기
     }
 
 
-    public Rental_List getNoticeList() {
+    public ArrayList<String> getNoticeList() {
         return noticeList;
     }
 
-    public void setNoticeList(Rental_List noticeList) {
+    public void setNoticeList(ArrayList<String> noticeList) {
         this.noticeList = noticeList;
     }
 

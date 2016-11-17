@@ -60,7 +60,7 @@ public class Activity_Booked_UserInfo extends BaseActivity implements View.OnCli
                 fragment = new Fragment_Booked_UserInfo_Default(rental);
                 break;
             case 2:
-                fragment = new Fragment_RentalDetail_OneWay(rental);
+                fragment = new Fragment_Booked_UserInfo_Together(rental);
                 break;
         }
 

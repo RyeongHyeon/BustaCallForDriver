@@ -109,7 +109,7 @@ public class Fragment_Signin_License_Presenter {
         RequestBody accountNum = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getAccount_num());
         RequestBody bus_num = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBus_num());
         RequestBody bus_type = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBus_type());
-        RequestBody bus_career = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBus_career());
+        RequestBody bus_career = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBus_career()+"년차");
         RequestBody bus_age = RequestBody.create(MediaType.parse("text/plain"), app.getBus().getBus_age());
 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
