@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:272461160847:android:73007091d8599d00",
         "android_client_info": {
-          "package_name": "com.example.user.bustacall"
+          "package_name": "com.bustacallfordriver.user.bustacall"
         }
       },
       "oauth_client": [
@@ -41,7 +41,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:272461160847:android:fa3f95f5b136df04",
         "android_client_info": {
-          "package_name": "com.example.user.bustacallfordriver"
+          "package_name": "com.bustacallfordriver.user.bustacallfordriver"
         }
       },
       "oauth_client": [

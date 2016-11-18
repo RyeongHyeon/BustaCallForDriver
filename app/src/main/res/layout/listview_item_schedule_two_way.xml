@@ -153,15 +153,6 @@
                         android:textSize="17sp" />
 
                     <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:layout_marginRight="1dp"
-                        android:text="원"
-                        android:textColor="@color/colorPrimaryGray"
-                        android:textSize="17sp" />
-
-                    <TextView
                         android:id="@+id/listview_schedule_two_way_price"
                         style="@style/listviewText"
                         android:layout_width="wrap_content"
@@ -169,6 +160,15 @@
                         android:layout_weight="1"
                         android:text="750,000"
                         android:textColor="@color/textRed" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="3dp"
+                        android:layout_marginRight="1dp"
+                        android:text="원"
+                        android:textColor="@color/colorPrimaryGray"
+                        android:textSize="17sp" />
 
                 </LinearLayout>
 

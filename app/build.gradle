@@ -4,11 +4,14 @@ android {
     compileSdkVersion 24
     buildToolsVersion "24.0.2"
     defaultConfig {
-        applicationId "com.example.user.bustacallfordriver"
+        applicationId "com.bustacallfordriver.user.bustacallfordriver"
         minSdkVersion 19
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+    }
+    lintOptions {
+        checkReleaseBuilds false
     }
     buildTypes {
         release {

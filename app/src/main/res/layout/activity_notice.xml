@@ -83,7 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/AppColorLightGray"
-        android:padding="10dp">
+        android:padding="3dp">
 
         <LinearLayout
             android:id="@+id/activity_notice_noexist"
@@ -113,7 +113,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:divider="@color/AppColorLightGray"
-            android:dividerHeight="10dp"
+            android:dividerHeight="2dp"
             android:scrollbars="none"/>
 
     </RelativeLayout>
