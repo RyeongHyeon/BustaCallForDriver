@@ -26,6 +26,15 @@ public class Rental implements Serializable {
     String end_day;//마감날짜
     int account_flag; //결제 되었는지 안되었는지 안되어있으면 0, 되어있으면 1
     Together together = new Together(); //합승 여부 클래스
+    String lent_money;
+
+    public String getLent_money() {
+        return lent_money;
+    }
+
+    public void setLent_money(String lent_money) {
+        this.lent_money = lent_money;
+    }
 
     public int getAccount_flag() {
         return account_flag;

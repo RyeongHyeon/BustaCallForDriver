@@ -37,7 +37,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by user on 2016-11-03.
  */
 
-public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickListener{
+public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickListener {
 
     public static int RESULT_LOAD_IMAGE_INNER = 1;
     public static int RESULT_LOAD_IMAGE_OUTTER = 2;
@@ -51,10 +51,11 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
 
     AppController app;
     Activity_Signin activitySignin;
-    EditText et_busNum,et_buscareer,et_busage; // 차량번호
+    EditText et_busNum, et_buscareer, et_busage; // 차량번호
     Spinner sp_busType; // 차량 종류, 차량 연식
     ImageView iv_busInner, iv_busOutter, iv_free1, iv_free2; // 차량사진
     TextView tv_btnBack, tv_btnNext; // 이전 버튼, 다음 버튼
+    TextView tv_btnOverlap; // 버스 번호 중복확인 버튼
 
     Bitmap bm_busInner, bm_busOutter, bm_free1, bm_free2; // 차량사진
 
@@ -64,12 +65,13 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
     boolean is_bustype;
     boolean is_busprofile1;
     boolean is_busprofile2;
+    boolean is_overlap = false;
     Fragment_Signin_Bus_Presenter presenter;
     private static Fragment_Signin_Bus instnace;
     Intent intent;
 
-    public static Fragment_Signin_Bus getInstance () {
-        if ( instnace == null )
+    public static Fragment_Signin_Bus getInstance() {
+        if (instnace == null)
             instnace = new Fragment_Signin_Bus();
         return instnace;
     }
@@ -79,23 +81,26 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_signin_bus, null);
         init(view);
-        app = (AppController)getActivity().getApplicationContext();
+        app = (AppController) getActivity().getApplicationContext();
         presenter = new Fragment_Signin_Bus_Presenter(this);
         return view;
     }
 
     private void init(View view) {
-        activitySignin = (Activity_Signin)getActivity();
-        et_busNum = (EditText)view.findViewById(R.id.activtiy_signin_bus_et_busnum);
-        et_busage = (EditText)view.findViewById(R.id.activtiy_signin_bus_et_busage);
-        et_buscareer = (EditText)view.findViewById(R.id.activtiy_signin_bus_et_career);
-        sp_busType = (Spinner)view.findViewById(R.id.activtiy_signin_bus_spinner_bustype);
-        iv_busInner = (ImageView)view.findViewById(R.id.activtiy_signin_bus_profile_inner);
-        iv_busOutter = (ImageView)view.findViewById(R.id.activtiy_signin_bus_profile_outter);
-        iv_free1 = (ImageView)view.findViewById(R.id.activtiy_signin_bus_profile_free1);
-        iv_free2 = (ImageView)view.findViewById(R.id.activtiy_signin_bus_profile_free2);
-        tv_btnBack = (TextView)view.findViewById(R.id.activity_signin_bus_btn_back);
-        tv_btnNext = (TextView)view.findViewById(R.id.activity_signin_bus_btn_next);
+        activitySignin = (Activity_Signin) getActivity();
+        et_busNum = (EditText) view.findViewById(R.id.activtiy_signin_bus_et_busnum);
+        et_busage = (EditText) view.findViewById(R.id.activtiy_signin_bus_et_busage);
+        et_buscareer = (EditText) view.findViewById(R.id.activtiy_signin_bus_et_career);
+        sp_busType = (Spinner) view.findViewById(R.id.activtiy_signin_bus_spinner_bustype);
+        iv_busInner = (ImageView) view.findViewById(R.id.activtiy_signin_bus_profile_inner);
+        iv_busOutter = (ImageView) view.findViewById(R.id.activtiy_signin_bus_profile_outter);
+        iv_free1 = (ImageView) view.findViewById(R.id.activtiy_signin_bus_profile_free1);
+        iv_free2 = (ImageView) view.findViewById(R.id.activtiy_signin_bus_profile_free2);
+        tv_btnBack = (TextView) view.findViewById(R.id.activity_signin_bus_btn_back);
+        tv_btnNext = (TextView) view.findViewById(R.id.activity_signin_bus_btn_next);
+        tv_btnOverlap = (TextView) view.findViewById(R.id.activtiy_signin_bus_tv_overlap);
+
+        tv_btnOverlap.setOnClickListener(this);
         tv_btnBack.setOnClickListener(this);
         tv_btnNext.setOnClickListener(this);
         iv_busInner.setOnClickListener(this);
@@ -106,26 +111,26 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
         et_buscareer.addTextChangedListener(tw_buscareer);
         et_busage.addTextChangedListener(tw_busage);
 
-        if(bm_busInner != null) {
+        if (bm_busInner != null) {
             iv_busInner.setImageBitmap(bm_busInner);
         }
-        if(bm_busOutter != null) {
+        if (bm_busOutter != null) {
             iv_busOutter.setImageBitmap(bm_busOutter);
         }
-        if(bm_free1 != null) {
+        if (bm_free1 != null) {
             iv_free1.setImageBitmap(bm_free1);
         }
-        if(bm_free2 != null) {
+        if (bm_free2 != null) {
             iv_free2.setImageBitmap(bm_free2);
         }
 
-       ArrayAdapter busTypeAdapter = ArrayAdapter.createFromResource(getContext(), R.array.busType, android.R.layout.simple_spinner_item);
+        ArrayAdapter busTypeAdapter = ArrayAdapter.createFromResource(getContext(), R.array.busType, android.R.layout.simple_spinner_item);
         busTypeAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp_busType.setAdapter(busTypeAdapter);
         sp_busType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selItem= (String)sp_busType.getSelectedItem();
+                String selItem = (String) sp_busType.getSelectedItem();
                 presenter.setis_Bustype(selItem);
             }
 
@@ -168,19 +173,35 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
                 break;
             case R.id.activity_signin_bus_btn_next:
                 checkTonextPage();
-                Log.d("Test",app.toString());
+                Log.d("Test", app.toString());
                 break;
+            case R.id.activtiy_signin_bus_tv_overlap:
+                String busNumStr = et_busNum.getText().toString().trim();
+                if (!busNumStr.equals("")) {
+                    checkOverlap(busNumStr);
+                }
+
+                break;
+
         }
+    }
+
+    private void checkOverlap(String busNumStr) {
+        presenter.request_get_overlap_confirm(busNumStr);
+    }
+
+    public void set_busNumEmpty() {
+        et_busNum.setText("");
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if ((requestCode == RESULT_LOAD_IMAGE_INNER || requestCode == RESULT_LOAD_IMAGE_OUTTER
-        || requestCode == RESULT_LOAD_IMAGE_FREE1 || requestCode == RESULT_LOAD_IMAGE_FREE2 )
-                && resultCode == RESULT_OK && null != data){
+                || requestCode == RESULT_LOAD_IMAGE_FREE1 || requestCode == RESULT_LOAD_IMAGE_FREE2)
+                && resultCode == RESULT_OK && null != data) {
             Uri selectedImage = data.getData();
-            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            String[] filePathColumn = {MediaStore.Images.Media.DATA};
 
             Cursor cursor = getActivity().getContentResolver().query(selectedImage, filePathColumn,
                     null, null, null);
@@ -219,6 +240,7 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
             }
         }
     }
+
     ////////////////////////////////////////////////////////////////////
     PermissionListener permissionlistener_inner = new PermissionListener() {
         @Override
@@ -316,72 +338,53 @@ public class Fragment_Signin_Bus extends BaseFragment implements View.OnClickLis
         }
     };
 
-    public boolean is_busnum() {
-        return is_busnum;
-    }
-
     public void setIs_busnum(boolean is_busnum) {
         this.is_busnum = is_busnum;
-    }
-
-    public boolean is_buscareer() {
-        return is_buscareer;
     }
 
     public void setIs_buscareer(boolean is_buscareer) {
         this.is_buscareer = is_buscareer;
     }
 
-    public boolean is_busage() {
-        return is_busage;
-    }
-
     public void setIs_busage(boolean is_busage) {
         this.is_busage = is_busage;
-    }
-
-    public boolean is_busprofile1() {
-        return is_busprofile1;
     }
 
     public void setIs_busprofile1(boolean is_busprofile1) {
         this.is_busprofile1 = is_busprofile1;
     }
 
-    public boolean is_busprofile2() {
-        return is_busprofile2;
-    }
-
     public void setIs_busprofile2(boolean is_busprofile2) {
         this.is_busprofile2 = is_busprofile2;
-    }
-
-    public boolean is_bustype() {
-        return is_bustype;
     }
 
     public void setIs_bustype(boolean is_bustype) {
         this.is_bustype = is_bustype;
     }
 
-    public void checkTonextPage(){
-        if(is_busage==true&&is_buscareer==true&&is_busnum==true&&is_busprofile1==true&&is_busprofile2==true){
+    public void setIs_overlap(boolean is_overlap) {this.is_overlap = is_overlap;}
+
+    public void checkTonextPage() {
+        if (is_busage == true && is_buscareer == true && is_busnum == true && is_busprofile1 == true && is_busprofile2 == true &&is_overlap == true) {
             activitySignin.setFramelayout(R.layout.fragment_signin_license);
             /////////////////////////////////////////////////////////
-            app.getBus().getBus_url().add(bus_url_one.get(bus_url_one.size()-1));
-            app.getBus().getBus_url().add(bus_url_two.get(bus_url_two.size()-1));
-            if(bus_url_three.size() != 0){
-                app.getBus().getBus_url().add(bus_url_three.get(bus_url_three.size()-1));
+            app.getBus().getBus_url().add(bus_url_one.get(bus_url_one.size() - 1));
+            app.getBus().getBus_url().add(bus_url_two.get(bus_url_two.size() - 1));
+            if (bus_url_three.size() != 0) {
+                app.getBus().getBus_url().add(bus_url_three.get(bus_url_three.size() - 1));
             }
-            if(bus_url_four.size() != 0 ){
-                app.getBus().getBus_url().add(bus_url_four.get(bus_url_four.size()-1));
+            if (bus_url_four.size() != 0) {
+                app.getBus().getBus_url().add(bus_url_four.get(bus_url_four.size() - 1));
             }
             /////////////////////////////////////////////////////////
             app.getBus().setBus_num(et_busNum.getText().toString());
             app.getBus().setBus_type(sp_busType.getSelectedItem().toString().trim());
             app.getBus().setBus_career(et_buscareer.getText().toString());
             app.getBus().setBus_age(et_busage.getText().toString());
-        }else {
+        } else if(is_overlap == false){
+            Dialog_base dialog_base = new Dialog_base(this.getContext(), "차량번호 중복 확인해주세요");
+            dialog_base.show();
+        } else {
             Dialog_base dialog_base = new Dialog_base(this.getContext(), "제대로 입력했는지 다시 확인해주세요.");
             dialog_base.show();
         }

@@ -33,7 +33,7 @@
                     style="@style/signintext"
                     android:text="1.차량 번호" />
 
-                <LinearLayout
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="5dp"
@@ -42,8 +42,26 @@
 
                     <EditText
                         android:id="@+id/activtiy_signin_bus_et_busnum"
-                        style="@style/signineEditText"/>
-                </LinearLayout>
+                        style="@style/signineEditText"
+                        android:layout_alignParentLeft="true"/>
+
+
+                    <LinearLayout
+                        android:layout_marginRight="10dp"
+                        android:gravity="right"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/activtiy_signin_bus_tv_overlap"
+                            android:text="중복확인"
+                            style="@style/overlap"/>
+
+                    </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
 
             <LinearLayout

@@ -2,6 +2,8 @@ package com.bustacallfordriver.user.bustacallfordriver.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -42,8 +44,11 @@ public class Activity_Sliding_MyPoint extends BaseActivity implements View.OnCli
         et_exchange = (EditText) findViewById(R.id.activity_sliding_mypoint_et_changePoint);
         iv_back.setOnClickListener(this);
         tv_enter.setOnClickListener(this);
+        et_exchange.addTextChangedListener(tw_exchange);
 
         tv_point.setText(app.getBus().getPoint());
+        setEnableTextView_Rect(tv_enter,false);
+
     }
 
     @Override
@@ -110,4 +115,27 @@ public class Activity_Sliding_MyPoint extends BaseActivity implements View.OnCli
         }
         return true;
     }
+
+
+    TextWatcher tw_exchange = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String str = et_exchange.getText().toString();
+            if(!str.equals("")){
+                setEnableTextView_Rect(tv_enter,true);
+            }else{
+                setEnableTextView_Rect(tv_enter,false);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 }

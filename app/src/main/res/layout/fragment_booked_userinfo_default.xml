@@ -30,7 +30,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="김손님"
                 android:textAlignment="center"
                 android:textColor="@color/AppColorBlack"
                 android:textSize="20sp" />
@@ -67,7 +66,6 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="10dp"
-                    android:text="35"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
@@ -131,7 +129,6 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_marginRight="10dp"
-                android:text="680000"
                 android:textAlignment="textEnd"
                 android:textColor="@color/AppColorBlack"
                 android:textSize="20sp" />
@@ -166,7 +163,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="010 - 1234 - 5678"
             android:textAlignment="center"
             android:textColor="@color/AppColorBlack"
             android:textSize="20sp" />

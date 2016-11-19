@@ -12,9 +12,8 @@ import android.widget.TextView;
 import com.bustacallfordriver.user.bustacallfordriver.AppController;
 import com.bustacallfordriver.user.bustacallfordriver.NoticeAdapter;
 import com.bustacallfordriver.user.bustacallfordriver.R;
+import com.bustacallfordriver.user.bustacallfordriver.model.Notice_List;
 import com.bustacallfordriver.user.bustacallfordriver.presenter.Activity_Notice_Presenter;
-
-import java.util.ArrayList;
 
 
 /**
@@ -33,7 +32,7 @@ public class Activity_Notice extends BaseActivity implements View.OnClickListene
     Activity_Notice_Presenter presenter;
     NoticeAdapter adapter;
     AppController app;
-    ArrayList<String> noticeList;
+    Notice_List noticeList;
 
 
     @Override
@@ -53,16 +52,18 @@ public class Activity_Notice extends BaseActivity implements View.OnClickListene
         listView = (ListView) findViewById(R.id.activity_notice_listview);
         rl_notice_button.setOnClickListener(this);
 
+        presenter.request_get_notice_onoff(app.getBus().getBus_num());
         presenter.request_notice_region(app.getBus().getBus_num(), app.getBus().getRegion());
 
         // 알림 설정 상태를 보고 처음 알림 켜기 끄기 셋팅
     }
 
     public void setlListView() {
-        if (!getNoticeList().isEmpty()) {
+        Notice_List notice_list = getNoticeList();
+        if (!notice_list.getNotice_list().isEmpty()) {
             noExistLayer.setVisibility(View.INVISIBLE);
             listView.setVisibility(View.VISIBLE);
-            adapter = new NoticeAdapter(getNoticeList());
+            adapter = new NoticeAdapter(notice_list);
             listView.setAdapter(adapter);
         } else {
             noExistLayer.setVisibility(View.VISIBLE);
@@ -101,14 +102,28 @@ public class Activity_Notice extends BaseActivity implements View.OnClickListene
         presenter.request_send_notice_onoff(app.getBus().getBus_num(), NOTICE_ON_OFF); // 0: 끄기, 1: 켜기
     }
 
-
-    public ArrayList<String> getNoticeList() {
+    public Notice_List getNoticeList() {
         return noticeList;
     }
 
-    public void setNoticeList(ArrayList<String> noticeList) {
+    public void setNoticeList(Notice_List noticeList) {
         this.noticeList = noticeList;
     }
 
+    public void setInitNotice(int noticeOnOff) {
+        this.NOTICE_ON_OFF = noticeOnOff;
+        switch (NOTICE_ON_OFF) {
+            case 0: // 켜기
+                rl_notice_button.setBackgroundResource(R.drawable.notice_on);
+                tv_on.setTextColor(Color.parseColor("#FFFFFF"));
+                tv_off.setTextColor(Color.parseColor("#2978B0"));
+                break;
+            case 1: // 끄기
+                rl_notice_button.setBackgroundResource(R.drawable.notice_off);
+                tv_on.setTextColor(Color.parseColor("#2978B0"));
+                tv_off.setTextColor(Color.parseColor("#FFFFFF"));
+                break;
+        }
+    }
 
 }

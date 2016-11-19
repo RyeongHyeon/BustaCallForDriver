@@ -20,6 +20,7 @@ import com.bustacallfordriver.user.bustacallfordriver.presenter.Fragment_RentalD
 public class Fragment_RentalDetail_OneWay_Together  extends BaseFragment implements View.OnClickListener {
 
     TextView tv_money, tv_enter;
+    TextView tv_day, tv_time, tv_start_point, tv_end_point, tv_goal;
 
     Rental rental;
     AppController app;
@@ -41,7 +42,18 @@ public class Fragment_RentalDetail_OneWay_Together  extends BaseFragment impleme
         presenter = new Fragment_RentalDetail_OneWay_Together_Presenter(this);
         tv_money = (TextView)v.findViewById(R.id.fragment_rentaldetail_oneway_together_tv_tenderPrice);
         tv_enter = (TextView)v.findViewById(R.id.fragment_rentaldetail_oneway_together_tv_enter);
-        tv_money.setText(rental.getTogether().getMoney());
+        tv_day = (TextView)v.findViewById(R.id.listview_one_way_together_top_startDate);
+        tv_time =(TextView)v.findViewById(R.id.listview_one_way_together_top_startTime);
+        tv_start_point = (TextView)v.findViewById(R.id.listview_one_way_together_top_startPlace);
+        tv_end_point = (TextView)v.findViewById(R.id.listview_one_way_together_top_endPlace);
+        tv_goal = (TextView)v.findViewById(R.id.listview_one_way_together_top_goal);
+
+        tv_money.setText(rental.getRental_money());
+        tv_day.setText(rental.getDay_one());
+        tv_time.setText(rental.getTime_one());
+        tv_start_point.setText(rental.getStart_point_one());
+        tv_end_point.setText(rental.getEnd_point_one());
+        tv_goal.setText(rental.getRental_reason());
         tv_enter.setOnClickListener(this);
     }
 
@@ -49,7 +61,7 @@ public class Fragment_RentalDetail_OneWay_Together  extends BaseFragment impleme
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.fragment_rentaldetail_oneway_together_tv_enter:
-                presenter.request_send_bus(rental.getRental_num(), app.getBus().getBus_num(), rental.getTogether().getMoney());
+                presenter.request_send_bus(rental.getRental_num(), app.getBus().getBus_num(), rental.getRental_money());
                 break;
         }
     }

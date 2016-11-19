@@ -99,36 +99,11 @@ public class Fragment_Signin_User extends BaseFragment implements View.OnClickLi
         ArrayAdapter workAreaAdapter = ArrayAdapter.createFromResource(getContext(), R.array.workArea, android.R.layout.simple_spinner_item);
         workAreaAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp_workArea.setAdapter(workAreaAdapter);
-//
-//        sp_workArea.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String selItem= (String)sp_workArea.getSelectedItem();
-//                presenter.setis_Region(selItem);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
 
         ArrayAdapter bankAdapter = ArrayAdapter.createFromResource(getContext(), R.array.bank, android.R.layout.simple_spinner_item);
         bankAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp_bank.setAdapter(bankAdapter);
-//
-//        sp_bank.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-//            @Override
-//            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-//                String selItem= (String)sp_bank.getSelectedItem();
-//                presenter.setis_Bank(selItem);
-//            }
-//
-//            @Override
-//            public void onNothingSelected(AdapterView<?> parent) {
-//
-//            }
-//        });
+
     }
 
 

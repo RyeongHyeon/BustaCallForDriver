@@ -55,7 +55,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     style="@style/listviewText"
-                    android:text="2016년 6월 30일"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" />
 
@@ -63,7 +62,6 @@
                     android:id="@+id/listview_one_way_together_top_startTime"
                     android:layout_marginLeft="10dp"
                     style="@style/listviewText"
-                    android:text="오전 9시"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -103,8 +101,7 @@
                     android:id="@+id/listview_one_way_together_top_startPlace"
                     style="@style/listviewPlaceText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ERROR" />
+                    android:layout_height="wrap_content" />
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -114,8 +111,7 @@
                     android:id="@+id/listview_one_way_together_top_endPlace"
                     style="@style/listviewPlaceText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ERROR" />
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
 
@@ -123,7 +119,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
@@ -144,8 +140,7 @@
                         style="@style/listviewText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="ERROR" />
+                        android:layout_weight="1"/>
 
                 </LinearLayout>
 

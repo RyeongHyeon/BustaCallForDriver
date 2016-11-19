@@ -57,7 +57,7 @@ public class Fragment_Booked_UserInfo_Default extends BaseFragment implements Vi
     public void set_Info(String phoneNum) {
         tv_name.setText(rental.getNickname());
         tv_userCnt.setText(rental.getUser_count());
-        String depositStr = String.valueOf(Integer.valueOf(rental.getRental_money())/10);
+        String depositStr = String.valueOf(Integer.valueOf(rental.getLent_money())/10);
         tv_deposit.setText(depositStr);
 
         tv_phoneNum.setText(phoneNum);

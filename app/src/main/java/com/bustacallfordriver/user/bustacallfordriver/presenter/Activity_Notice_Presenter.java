@@ -4,12 +4,10 @@ import android.util.Log;
 
 import com.bustacallfordriver.user.bustacallfordriver.AppController;
 import com.bustacallfordriver.user.bustacallfordriver.dialog.Dialog_Progress;
+import com.bustacallfordriver.user.bustacallfordriver.model.Notice_List;
 import com.bustacallfordriver.user.bustacallfordriver.model.Retrofit_User;
 import com.bustacallfordriver.user.bustacallfordriver.view.Activity_Notice;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-
-import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +26,29 @@ public class Activity_Notice_Presenter {
     public Activity_Notice_Presenter(Activity_Notice view) {
         this.view = view;
         dialog_progress = new Dialog_Progress(view);
+    }
+
+
+    public void request_get_notice_onoff(String busNum) {
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit_User retrofit_user = retrofit.create(Retrofit_User.class);
+        Call<JsonObject> retrofitinfo = retrofit_user.request_get_notice_onoff(busNum);
+        retrofitinfo.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                if (response.isSuccessful()) {
+                    int notice = response.body().get("onoff").getAsInt();
+                    view.setInitNotice(notice);
+                } else {
+                    Log.d("test", response.toString());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+                Log.d("Test", t.toString());
+            }
+        });
     }
 
     /**
@@ -58,29 +79,14 @@ public class Activity_Notice_Presenter {
     public void request_notice_region(String bus_num, String region) {//
         Retrofit retrofit = new Retrofit.Builder().baseUrl(AppController.SERVERIP).addConverterFactory(GsonConverterFactory.create()).build();
         Retrofit_User retrofit_user = retrofit.create(Retrofit_User.class);
-        Call<JsonObject> retrofitinfo = retrofit_user.request_notice_region(bus_num, region);
+        Call<Notice_List> retrofitinfo = retrofit_user.request_notice_region(bus_num, region);
         dialog_progress.show();
-        retrofitinfo.enqueue(new Callback<JsonObject>() {
+        retrofitinfo.enqueue(new Callback<Notice_List>() {
             @Override
-            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+            public void onResponse(Call<Notice_List> call, Response<Notice_List> response) {
                 if (response.isSuccessful()) {
-
-                    JsonObject jsonObject = response.body();
-                    ArrayList<String> list = new ArrayList<String>();
-                    if(jsonObject.has("message_list")){
-                        JsonArray jsonArray = jsonObject.getAsJsonArray("message_list");
-
-                        for(int i=0;i<jsonArray.size();i++)
-                        {
-                            JsonObject jsonObject1 = (JsonObject)jsonArray.get(i);
-                            list.add(jsonObject1.get("message").getAsString());
-                        }
-                        view.setNoticeList(list);
-                        view.setlListView();
-                    }else{
-                        view.setNoticeList(list);
-                        view.setlListView();
-                    }
+                    view.setNoticeList(response.body());
+                    view.setlListView();
                 } else {
 
                 }
@@ -88,7 +94,7 @@ public class Activity_Notice_Presenter {
             }
 
             @Override
-            public void onFailure(Call<JsonObject> call, Throwable t) {
+            public void onFailure(Call<Notice_List> call, Throwable t) {
                 dialog_progress.dismiss();
             }
         });

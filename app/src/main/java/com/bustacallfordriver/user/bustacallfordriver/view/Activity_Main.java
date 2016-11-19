@@ -60,13 +60,6 @@ public class Activity_Main extends BaseActivity implements View.OnClickListener,
 
         presenter.request_get_rental();
 
-//
-//        if (app.getRental_list().getRental_list().size() > 0) {
-//            adapter = new RentalAdapter(app.getRental_list(), this);
-//            listView.setAdapter(adapter);
-//            listView.setOnItemClickListener(this);
-//        }
-
         ArrayAdapter regionAdapter = ArrayAdapter.createFromResource(this, R.array.main_workArea, android.R.layout.simple_spinner_item);
         regionAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp_region.setAdapter(regionAdapter);

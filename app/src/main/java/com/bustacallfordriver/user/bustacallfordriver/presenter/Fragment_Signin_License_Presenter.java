@@ -148,7 +148,7 @@ public class Fragment_Signin_License_Presenter {
                     Log.d("app", app.toString());
                     view.goTonextPage();
                 } else {
-
+                    Log.d("app", app.toString());
                 }
                 dialog_progress.dismiss();
             }

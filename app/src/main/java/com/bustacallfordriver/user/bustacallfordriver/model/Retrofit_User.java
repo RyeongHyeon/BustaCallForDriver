@@ -21,7 +21,11 @@ public interface Retrofit_User {
     Call<Void> request_phonerequest(@Query("phonenum") String phonenum);
 
     @GET("/logout_bus.php") // 로그아웃
-    Call<Void> request_logout(@Query("bus_num")String bus_num);
+    Call<JsonObject> request_logout(@Query("bus_num")String bus_num);
+
+    @GET("/overlap_confirm.php") // 로그아웃
+    Call<JsonObject> request_get_overlap_confirm(@Query("bus_num")String bus_num);
+
 
     // splash 말고 진짜 로그인해서 메인 넘어갈때 넘기는 부분
     @GET("/login_bus.php") //login 레이아웃에서 다음 화면으로 넘어갈때, 인증번호 맞는지 여부, 푸쉬용 토큰
@@ -52,10 +56,13 @@ public interface Retrofit_User {
     Call<Rental_List> request_delete_tender(@Query("bus_num")String bus_num, @Query("rental_num") int rental_num);
 
     @GET("/notice_searchregion.php") // 영업지역에 해당하는 매물 찾아서 알림받기
-    Call<JsonObject> request_notice_region(@Query("bus_num")String bus_num, @Query("region")String bus_workArea);
+    Call<Notice_List> request_notice_region(@Query("bus_num")String bus_num, @Query("region")String bus_workArea);
 
     @GET("/send_notice_onoff.php") // 알림 켜기, 끄기 여부 보내기
     Call<Void> request_send_notice_onoff(@Query("bus_num")String bus_num, @Query("notice")int notice_onoff);
+
+    @GET("/get_notice_onoff.php") // 알림 켜기, 끄기 여부 보내기
+    Call<JsonObject> request_get_notice_onoff(@Query("bus_num")String bus_num);
 
     @GET("/get_rental_region.php") //지역 스피너
     Call<Rental_List> request_get_rental_region(@Query("region")String region);

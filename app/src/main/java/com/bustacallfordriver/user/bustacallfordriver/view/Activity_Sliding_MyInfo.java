@@ -1,5 +1,6 @@
 package com.bustacallfordriver.user.bustacallfordriver.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -24,7 +25,7 @@ public class Activity_Sliding_MyInfo extends BaseActivity implements View.OnClic
     AppController app;
     RecyclerView recyclerView;
     ImageView iv_backBtn, iv_profile;
-    TextView tv_nickname, tv_type, tv_career, tv_carnum;
+    TextView tv_nickname, tv_type, tv_career, tv_carnum, tv_btnModify;
     MyInfoAdapter adapter;
 
     @Override
@@ -43,7 +44,9 @@ public class Activity_Sliding_MyInfo extends BaseActivity implements View.OnClic
         tv_type = (TextView) findViewById(R.id.activity_sliding_myinfo_tv_type);
         tv_career = (TextView) findViewById(R.id.activity_sliding_myinfo_tv_career);
         tv_carnum = (TextView) findViewById(R.id.activity_sliding_myinfo_tv_carnum);
+        tv_btnModify = (TextView) findViewById(R.id.activity_sliding_myinfo_tv_btnModify);
         iv_backBtn.setOnClickListener(this);
+        tv_btnModify.setOnClickListener(this);
 
         initImage();
         initText();
@@ -81,6 +84,11 @@ public class Activity_Sliding_MyInfo extends BaseActivity implements View.OnClic
             case R.id.activity_sliding_myinfo_iv_back:
                 finish();
                 break;
+            case R.id.activity_sliding_myinfo_tv_btnModify:
+                Intent intent = new Intent(this, Activity_Signin.class);
+                startActivity(intent);
+                break;
+
         }
     }
 }

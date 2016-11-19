@@ -91,7 +91,7 @@ public class TenderAdapter extends BaseAdapter {
                 viewHoder.twoway_endTime.setText(tender.getTime_two());
                 viewHoder.twoway_startPlace.setText(tender.getStart_point_one());
                 viewHoder.twoway_endPlace.setText(tender.getEnd_point_one());
-                viewHoder.twoway_price.setText(tender.getRental_money());
+                viewHoder.twoway_price.setText(tender.getLent_money());
                 viewHoder.twoway_btnCancle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -106,7 +106,7 @@ public class TenderAdapter extends BaseAdapter {
                 viewHoder.oneway_startTime.setText(tender.getTime_one());
                 viewHoder.oneway_startPlace.setText(tender.getStart_point_one());
                 viewHoder.oneway_endPlace.setText(tender.getEnd_point_one());
-                viewHoder.oneway_price.setText(tender.getRental_money());
+                viewHoder.oneway_price.setText(tender.getLent_money());
                 viewHoder.oneway_btnCancle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -121,7 +121,7 @@ public class TenderAdapter extends BaseAdapter {
                 viewHoder.oneway_startTime.setText(tender.getTime_one());
                 viewHoder.oneway_startPlace.setText(tender.getStart_point_one());
                 viewHoder.oneway_endPlace.setText(tender.getEnd_point_one());
-                viewHoder.oneway_price.setText(tender.getRental_money());
+                viewHoder.oneway_price.setText(tender.getLent_money());
                 viewHoder.oneway_btnCancle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

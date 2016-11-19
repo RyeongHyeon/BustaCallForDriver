@@ -106,7 +106,7 @@ public class RentalAdapter extends BaseAdapter {
                 viewHoder.oneway_together_startPlace.setText(rental.getStart_point_one());
                 viewHoder.oneway_together_endPlace.setText(rental.getEnd_point_one());
                 viewHoder.oneway_together_goal.setText(rental.getRental_reason());
-                viewHoder.oneway_together_price.setText(rental.getTogether().getMoney());
+                viewHoder.oneway_together_price.setText(rental.getRental_money());
                 break;
         }
 

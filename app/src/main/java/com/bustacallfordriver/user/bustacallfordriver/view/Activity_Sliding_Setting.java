@@ -2,6 +2,8 @@ package com.bustacallfordriver.user.bustacallfordriver.view;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -43,6 +45,7 @@ public class Activity_Sliding_Setting extends BaseActivity implements View.OnCli
         tv_logout = (TextView) findViewById(R.id.activity_sliding_setting_tv_logout);
         tv_setting = (TextView) findViewById(R.id.activity_sliding_setting_tv_enter);
         et_accountNum = (EditText) findViewById(R.id.activity_sliding_setting_et_accountnum);
+        et_accountNum.addTextChangedListener(tw_account);
         iv_back.setOnClickListener(this);
         tv_logout.setOnClickListener(this);
         tv_setting.setOnClickListener(this);
@@ -52,6 +55,7 @@ public class Activity_Sliding_Setting extends BaseActivity implements View.OnCli
         bankAdapter.setDropDownViewResource(android.R.layout.simple_list_item_1);
         sp_bank.setAdapter(bankAdapter);
 
+        setEnableTextView_Rect(tv_setting,false);
     }
 
     @Override
@@ -79,7 +83,6 @@ public class Activity_Sliding_Setting extends BaseActivity implements View.OnCli
             @Override
             public void onClick(View v) {
                 //로그아웃
-                app.setSavedId("0");
                 presenter.request_logout(app.getBus().getBus_num());
                 //TODO 통신
             }
@@ -96,4 +99,26 @@ public class Activity_Sliding_Setting extends BaseActivity implements View.OnCli
     public void set_accountNumEmpty() {
         et_accountNum.setText("");
     }
+
+    TextWatcher tw_account = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String str = et_accountNum.getText().toString();
+            if(!str.equals("")){
+                setEnableTextView_Rect(tv_setting,true);
+            }else{
+                setEnableTextView_Rect(tv_setting,false);
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
 }

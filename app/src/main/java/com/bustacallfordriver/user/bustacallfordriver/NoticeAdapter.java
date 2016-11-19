@@ -8,17 +8,17 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.bustacallfordriver.user.bustacallfordriver.model.Notice_List;
 
 /**
  * Created by user on 2016-11-13.
  */
 public class NoticeAdapter extends BaseAdapter {
 
-    ArrayList<String> noticeList = new ArrayList<>(); // 알림 리스트
+   Notice_List noticeList; // 알림 리스트
     ViewHoder viewHoder;
 
-    public NoticeAdapter(ArrayList<String> notice_list) {
+    public NoticeAdapter(Notice_List notice_list) {
         this.noticeList = notice_list;
     }
 
@@ -28,7 +28,8 @@ public class NoticeAdapter extends BaseAdapter {
         final Context context = parent.getContext();
         View v = convertView;
 
-        String msg = noticeList.get(pos);
+        String msg = noticeList.getNotice_list().get(pos).getMsg();
+        String time = noticeList.getNotice_list().get(pos).getTime();
 
         if (v == null) {
             viewHoder = new ViewHoder();
@@ -41,22 +42,23 @@ public class NoticeAdapter extends BaseAdapter {
         }
 
         viewHoder.tv_msg.setText(msg);
-
+        viewHoder.tv_time.setText(time);
         return v;
     }
 
     private void init(View v) {
         viewHoder.tv_msg = (TextView)v.findViewById(R.id.listview_notice_msg);
+        viewHoder.tv_time = (TextView)v.findViewById(R.id.listview_notice_time);
     }
 
     @Override
     public int getCount() {
-        return noticeList.size();
+        return noticeList.getNotice_list().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return noticeList.get(position);
+        return noticeList.getNotice_list().get(position);
     }
 
     @Override
@@ -64,18 +66,17 @@ public class NoticeAdapter extends BaseAdapter {
         return position;
     }
 
-//    @Override
-//    public int getViewTypeCount() {
-//        return getCount();
-//    }
-//
-//    @Override
-//    public int getItemViewType(int position) {
-//        return position;
-//    }
+    @Override
+    public int getViewTypeCount() {
+        return getCount();
+    }
 
+    @Override
+    public int getItemViewType(int position) {
+        return position;
+    }
 
     class ViewHoder {
-        TextView tv_msg;
+        TextView tv_msg, tv_time;
     }
 }

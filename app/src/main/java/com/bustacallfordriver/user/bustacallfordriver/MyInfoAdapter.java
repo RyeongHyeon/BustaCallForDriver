@@ -39,7 +39,6 @@ public class MyInfoAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder userViewHolder = (ViewHolder) holder;
         Glide.with(context).load(profile.get(position)).into(userViewHolder.iv_image);
-        //Glide.with(context).load(rental.getBus_list().get(position).getBus_url().get(0)).into(viewHoder.iv_profile);
     }
 
     @Override

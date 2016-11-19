@@ -61,7 +61,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     style="@style/listviewText"
-                    android:text="2016년 6월 30일"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" />
 
@@ -69,7 +68,6 @@
                     android:id="@+id/listview_two_way_startTime"
                     android:layout_marginLeft="10dp"
                     style="@style/listviewText"
-                    android:text="오전 9시"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -91,7 +89,6 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="10dp"
                     style="@style/listviewText"
-                    android:text="2016년 6월 30일"
                     android:layout_width="wrap_content"
                     android:layout_height="20dp" />
 
@@ -99,7 +96,6 @@
                     android:id="@+id/listview_two_way_endTime"
                     android:layout_marginLeft="10dp"
                     style="@style/listviewText"
-                    android:text="오전 9시"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
 
@@ -136,8 +132,7 @@
                     android:id="@+id/listview_two_way_startPlace"
                     style="@style/listviewPlaceText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ERROR" />
+                    android:layout_height="wrap_content"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -147,8 +142,7 @@
                     android:id="@+id/listview_two_way_endPlace"
                     style="@style/listviewPlaceText"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="ERROR" />
+                    android:layout_height="wrap_content"/>
             </LinearLayout>
 
 
@@ -178,8 +172,7 @@
                         style="@style/listviewText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="ERROR" />
+                        android:layout_weight="1"/>
 
                 </LinearLayout>
 
@@ -204,8 +197,7 @@
                         style="@style/listviewText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="30" />
+                        android:layout_weight="1" />
 
                     <TextView
                         style="@style/listviewText"

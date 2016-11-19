@@ -19,11 +19,9 @@ public class BaseActivity extends AppCompatActivity {
         //super.onBackPressed();
     }
 
-    public void onClick_backButton(View v)
-    {
+    public void onClick_backButton(View v) {
         finish();
     }
-
     public void setEnableTextView(TextView tv, boolean b) {
         if (b) {
             tv.setEnabled(true);
@@ -33,7 +31,28 @@ public class BaseActivity extends AppCompatActivity {
             tv.setEnabled(false);
             tv.setBackgroundResource(R.drawable.roundbutton_gray);
             final int version = Build.VERSION.SDK_INT;
-                tv.setTextColor(Color.parseColor("#616060"));
+            if (version >= Build.VERSION_CODES.M) {
+                tv.setTextColor(getColor(R.color.AppColorWhite));
+            } else {
+                tv.setTextColor(getResources().getColor(R.color.AppColorWhite));
+            }
+        }
+    }
+
+    public void setEnableTextView_Rect(TextView tv, boolean b) {
+        if (b) {
+            tv.setEnabled(true);
+            tv.setBackgroundResource(R.drawable.rectbutton_blue);
+            tv.setTextColor(Color.parseColor("#FFFFFF"));
+        } else {
+            tv.setEnabled(false);
+            tv.setBackgroundResource(R.drawable.rectbutton_gray);
+            final int version = Build.VERSION.SDK_INT;
+            if (version >= Build.VERSION_CODES.M) {
+                tv.setTextColor(getColor(R.color.AppColorWhite));
+            } else {
+                tv.setTextColor(getResources().getColor(R.color.AppColorWhite));
+            }
         }
     }
 }

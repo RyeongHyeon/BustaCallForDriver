@@ -192,23 +192,6 @@
                             android:textColor="@color/AppColorBlack" />
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/sliding_menu_ll_logout"
-                        style="@style/sliding_menu_layout"
-                        android:layout_marginLeft="20dp"
-                        android:gravity="center_vertical"
-                        android:onClick="onClick"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            style="@style/slide_menu_icon"
-                            android:background="@drawable/logout_icon" />
-
-                        <TextView
-                            style="@style/sliding_menu_text"
-                            android:text="로그아웃"
-                            android:textColor="@color/AppColorBlack" />
-                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

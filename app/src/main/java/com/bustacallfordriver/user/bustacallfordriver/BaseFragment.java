@@ -21,9 +21,9 @@ public class BaseFragment extends Fragment{
             tv.setBackgroundResource(R.drawable.roundbutton_gray);
             final int version = Build.VERSION.SDK_INT;
             if (version >= Build.VERSION_CODES.M) {
-                tv.setTextColor(Color.parseColor("#616060"));
+                tv.setTextColor(getActivity().getColor(R.color.AppColorWhite));
             } else {
-                tv.setTextColor(Color.parseColor("#616060"));
+                tv.setTextColor(getResources().getColor(R.color.AppColorWhite));
             }
         }
     }

@@ -202,8 +202,7 @@ public class Fragment_RentalDetail_OneWay  extends BaseFragment implements View.
                 money_list.add(isExcludeMotel);
                 money_list.add(isExcludeVol);
                 money_list.add(isExcludeTax);
-                presenter.request_send_bus(rental.getRental_num(),app.getBus().getBus_num(),et_money.getText().toString(),money_list);
-                getActivity().finish();
+                presenter.request_send_bus(rental.getRental_num(),app.getBus().getBus_num(),et_money.getText().toString().trim(),money_list);
                 break;
         }
     }

@@ -84,7 +84,7 @@ public class ScheduleAdapter extends BaseAdapter {
                 viewHoder.twoway_endTime.setText(schedule.getTime_two());
                 viewHoder.twoway_startPlace.setText(schedule.getStart_point_one());
                 viewHoder.twoway_endPlace.setText(schedule.getEnd_point_one());
-                viewHoder.twoway_price.setText(schedule.getRental_money());
+                viewHoder.twoway_price.setText(schedule.getLent_money());
                 viewHoder.twoway_btn_showUser.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -103,7 +103,7 @@ public class ScheduleAdapter extends BaseAdapter {
                 viewHoder.oneway_startTime.setText(schedule.getTime_one());
                 viewHoder.oneway_startPlace.setText(schedule.getStart_point_one());
                 viewHoder.oneway_endPlace.setText(schedule.getEnd_point_one());
-                viewHoder.oneway_price.setText(schedule.getRental_money());
+                viewHoder.oneway_price.setText(schedule.getLent_money());
                 viewHoder.oneway_btn_showUser.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -123,7 +123,7 @@ public class ScheduleAdapter extends BaseAdapter {
                 viewHoder.oneway_startTime.setText(schedule.getTime_one());
                 viewHoder.oneway_startPlace.setText(schedule.getStart_point_one());
                 viewHoder.oneway_endPlace.setText(schedule.getEnd_point_one());
-                viewHoder.oneway_price.setText(schedule.getRental_money());
+                viewHoder.oneway_price.setText(schedule.getLent_money());
                 viewHoder.oneway_btn_showUser.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

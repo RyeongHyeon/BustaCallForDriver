@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.bustacallfordriver.user.bustacallfordriver.AppController;
 import com.bustacallfordriver.user.bustacallfordriver.R;
-import com.bustacallfordriver.user.bustacallfordriver.dialog.Dialog_base_two_button;
 import com.bustacallfordriver.user.bustacallfordriver.presenter.SlidingMenuFragment_Presenter;
 
 /**
@@ -21,7 +20,7 @@ import com.bustacallfordriver.user.bustacallfordriver.presenter.SlidingMenuFragm
 
 public class SlidingMenuFragment extends Fragment implements View.OnClickListener{
     TextView tv_nickname;
-    ViewGroup ll_tender,ll_schedule, ll_myInfo, ll_myPoint,ll_inqulry,ll_setting,ll_logout;
+    ViewGroup ll_tender,ll_schedule, ll_myInfo, ll_myPoint,ll_inqulry,ll_setting;
     AppController app;
 
     SlidingMenuFragment_Presenter presenter;
@@ -52,14 +51,12 @@ public class SlidingMenuFragment extends Fragment implements View.OnClickListene
         ll_myPoint = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_mypoint);
         ll_inqulry = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_inqulry);
         ll_setting = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_setting);
-        ll_logout = (LinearLayout)v.findViewById(R.id.sliding_menu_ll_logout);
         ll_tender.setOnClickListener(this);
         ll_schedule.setOnClickListener(this);
         ll_myInfo.setOnClickListener(this);
         ll_myPoint.setOnClickListener(this);
         ll_inqulry.setOnClickListener(this);
         ll_setting.setOnClickListener(this);
-        ll_logout.setOnClickListener(this);
 
         tv_nickname.setText(app.getBus().getNickname());
     }
@@ -78,8 +75,6 @@ public class SlidingMenuFragment extends Fragment implements View.OnClickListene
             goToInqulry();
         }else if(v.getId()==R.id.sliding_menu_ll_setting){
             goToSetting();
-        }else if(v.getId()==R.id.sliding_menu_ll_logout){
-            goToLogout();
         }
     }
 
@@ -111,27 +106,5 @@ public class SlidingMenuFragment extends Fragment implements View.OnClickListene
     public void goToSetting() {
         Intent intent = new Intent(getContext(), Activity_Sliding_Setting.class);
         startActivity(intent);
-    }
-
-    public void goToLogout() {
-        //다이알로그
-        final Dialog_base_two_button dialog_base_two_button = new Dialog_base_two_button(getContext(), getActivity().getString(R.string.logout_content));
-        dialog_base_two_button.show();
-        dialog_base_two_button.getTv_enter().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //로그아웃
-                app.setSavedId("0");
-                presenter.request_logout(app.getBus().getBus_num());
-                //TODO 통신
-            }
-        });
-        dialog_base_two_button.getTv_cancel().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //로그아웃 취소
-                dialog_base_two_button.dismiss();
-            }
-        });
     }
 }

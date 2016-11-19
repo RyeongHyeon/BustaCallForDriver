@@ -34,6 +34,15 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <!--중복 확인 버튼-->
+    <style name="overlap">
+        <item name="android:background">@drawable/roundbutton_blue</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_width">80dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/AppColorWhite</item>
+        <item name="android:gravity">center</item>
+    </style>
 
     <!--아래 로그인 및 하단 버튼-->
     <style name="bottombutton">
@@ -71,9 +80,10 @@
 
     <!--회원가입 입력텍스트-->
     <style name="signineEditText">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">200dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_centerVertical">true</item>
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_marginLeft">13dp</item>
         <item name="android:layout_marginRight">13dp</item>
@@ -120,6 +130,7 @@
 
     <!--매물리스트 > 출발지, 도착지 텍스트-->
     <style name="listviewPlaceText">
+        <item name="android:singleLine">true</item>
         <item name="android:textAlignment">textStart</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:textSize">18sp</item>
