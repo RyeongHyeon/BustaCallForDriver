@@ -1,7 +1,6 @@
 package com.bustacallfordriver.user.bustacallfordriver;
 
 import android.graphics.Color;
-import android.os.Build;
 import android.support.v4.app.Fragment;
 import android.widget.TextView;
 
@@ -19,12 +18,7 @@ public class BaseFragment extends Fragment{
         } else {
             tv.setEnabled(false);
             tv.setBackgroundResource(R.drawable.roundbutton_gray);
-            final int version = Build.VERSION.SDK_INT;
-            if (version >= Build.VERSION_CODES.M) {
-                tv.setTextColor(getActivity().getColor(R.color.AppColorWhite));
-            } else {
-                tv.setTextColor(getResources().getColor(R.color.AppColorWhite));
-            }
+            tv.setTextColor(Color.parseColor("#FFFFFF"));
         }
     }
 
