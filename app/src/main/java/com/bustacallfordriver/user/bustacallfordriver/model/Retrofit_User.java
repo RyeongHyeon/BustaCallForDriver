@@ -76,6 +76,6 @@ public interface Retrofit_User {
     @GET("/send_exchange.php") // 환전 신청
     Call<Void> request_send_exchange(@Query("nickname") String nickname, @Query("bus_num") String busNum, @Query("point") int exchangePoint);
 
-    @GET("/setting_driver.php") // 환전 신청
+    @GET("/setting_driver.php") // 설정
     Call<Void> request_set_setting(@Query("bus_num") String busNum, @Query("account_bank")String bank, @Query("account_num")String accountNum);
 }

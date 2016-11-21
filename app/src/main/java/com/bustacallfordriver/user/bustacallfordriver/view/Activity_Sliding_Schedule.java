@@ -24,7 +24,7 @@ public class Activity_Sliding_Schedule extends BaseActivity implements View.OnCl
     ListView listView;
     LinearLayout noExistLayer;
     ScheduleAdapter adapter;
-   Rental_List scheduleList;
+    Rental_List scheduleList;
     Activity_Sliding_Schedule_Presenter presenter;
 
     @Override
@@ -66,7 +66,7 @@ public class Activity_Sliding_Schedule extends BaseActivity implements View.OnCl
                 break;
         }
     }
-    
+
     public Rental_List getScheduleList() {
         return scheduleList;
     }
@@ -74,5 +74,5 @@ public class Activity_Sliding_Schedule extends BaseActivity implements View.OnCl
     public void setScheduleList(Rental_List scheduleList) {
         this.scheduleList = scheduleList;
     }
-    
+
 }

@@ -102,7 +102,7 @@ public class Activity_Sliding_MyPoint extends BaseActivity implements View.OnCli
     private boolean checkMyPoint() {
         int point = 0;
         if(!Integer.valueOf(tv_point.getText().toString().trim()).equals("")){
-            Integer.valueOf(tv_point.getText().toString().trim());
+            point = Integer.valueOf(tv_point.getText().toString().trim());
         }
         int changePoint = 0;
         String changePointStr= et_exchange.getText().toString().trim();

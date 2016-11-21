@@ -67,7 +67,7 @@ public class Fragment_Booked_UserInfo_Default extends BaseFragment implements Vi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.fragment_booked_userinfo_default_tv_call:
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + tv_phoneNum.getText().toString().trim()));
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + tv_phoneNum.getText().toString().trim()));
                 startActivity(intent);
                 break;
         }
